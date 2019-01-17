@@ -9,7 +9,7 @@ A problem we've identified is that people don't form habits that reward them in 
 
 
 Hobby Tracker is not built for any specific thing, but aimed to let anyone practice something regularly, and
-track their progress. For eaxmple, in a case of playing Go, you have to practice almost everyday to improve our skills by solving life and death problems. 
+track their progress. For eaxmple, in a case of playing Go, you have to practice almost everyday to improve skills by solving life and death problems. 
 The more you practice, the more likely you win a game.
 
 ## Team Mermber Roles
@@ -22,6 +22,8 @@ Engineer/Flex - Drew Scotton
 
 Engineer/Flex - Anthony Bean
 
+Marketing - Li Sa
+
 ##### Sign Here
 Benjamin Onwenu
 
@@ -30,5 +32,7 @@ Drew Scotton
 Matthew Coon
 
 Anthony Bean
+
+Li  Sa
 
 
