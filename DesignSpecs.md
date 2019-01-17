@@ -5,7 +5,7 @@
 ## Design Specifications
 
 #### Mandatory Requirements:
-		- *The app must track how often, and for how long, the user wants to work on the interest.*
+		- _The app must track how often, and for how long, the user wants to work on the interest._
 		- *The app must have a timer.*
 		- *The app must have a notification manager.*
 		- *App needs to connect to the phone’s clock, and update when different time zones come in.*
