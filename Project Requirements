@@ -1,13 +1,24 @@
-*1.	The app must track how often, and for how long, the user wants to work on the interest.*
-*2.	The app must have a timer.*
-*3.	The app must have a notification manager. *
-4.	Ideally, the first three features can be done by the user in three minutes or less.
-*5.	Progress can be tracked on a day-by-day basis, and users can comment on their progress on a certain day, if desired.*
-*6.	Users should be able to track multiple interests for different purposes.*
-7.	Users can track the time of day, and the time spent, on an interest.
-8.	Ideally, we would port it to Apple.
-9.	The user can enter their commitment levels, and build a plan to fit their desires.
-10.	Users could upload guides/project to an optional forum of guides meant to be compatible with the app.
-11.	Users can create a priority list for their interests^.
-*12.	App needs to connect to the phone’s clock, and update when different time zones come in.*
-13.	The app can upload times for interests onto external calendar apps, like powerplanner or google calendar.
+#### Mandatory Requirements:
+*1. A user can use the Android app to customize their interest needs in three minutes or less.*\
+*2. Users can have multiple 'interests'.*\
+*3. An interest has three elements for the user to customize:* 
+- How many times a day, week, month, or year a user wants to practice an interest.
+- How frequently, if at all, a user wants to be notified from the app to work on their interest.
+- A timer, that a user can use to time themselves working on a task. Alternatively, they can\
+simply enter that they accomplished their goal. 
+
+*4. A user can track their progress, showing how much time daily they practiced an interest.*
+- After practicing an interest, users can make a comment on their practice session. This is good\
+for recording things like milestones, accomplishments, etc.. 
+- Users can see their "streaks", showing how many days/weeks/years they've kept their practice.
+- Line graphs ranging in weeks, months, or years shows practice length per day.
+
+*5. A support page is available that allows the user to send feedback and provides the user with our contact information.*
+
+
+#### Desirable Requirements:
+1. Users can track the time of day, and the time spent, on an interest.
+2. App needs to connect to the phone’s clock, and update when different time zones come in.
+3. Users could upload guides/project to an optional forum of guides meant to be compatible with the app.
+4. Users can create a priority list for their interests.
+5. Ideally, we would port it to Apple.
