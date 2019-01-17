@@ -13,6 +13,11 @@ track their progress. For eaxmple, in a case of playing Go, you have to practice
 The more you practice, the more likely you win a game.
 
 ## Team Mermber Roles
+- Mathew Coon
+- Anthony Bean
+- Drew Scotton
+- Li Sa 
+- Jonathon Woodring 
 Support- Benjamin Onwenu
 
 
