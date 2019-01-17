@@ -13,14 +13,15 @@ Our solution is create some kind of app that allows the user to keep track of ho
 ![introp](https://user-images.githubusercontent.com/45779417/51298114-35af3b80-19f1-11e9-9c4a-a09cc4479712.png)
 
 #### Mandatory Requirements:
-*A user can use the Android app to customize their interest needs in three minutes or less.*\
-*Users can have multiple 'interests'.*\
-*An interest has three elements for the user to customize:* 
+*1. A user can use the Android app to customize their interest needs in three minutes or less.*\
+*2. Users can have multiple 'interests'.*\
+*3. An interest has three elements for the user to customize:* 
 - How many times a day, week, month, or year a user wants to practice an interest.
 - How frequently, if at all, a user wants to be notified from the app to work on their interest.
-- A timer, that a user can use to time themselves working on a task. Alternatively, they can simply enter that they accomplished their goal. 
+- A timer, that a user can use to time themselves working on a task. Alternatively, they can\
+simply enter that they accomplished their goal. 
 
-*A user can track their progress, showing how much time daily they practiced an interest.*
+*4. A user can track their progress, showing how much time daily they practiced an interest.*
 - After practicing an interest, users can make a comment on their practice session. This is good\
 for recording things like milestones, accomplishments, etc.. 
 - Users can see their "streaks", showing how many days/weeks/years they've kept their practice.
@@ -28,8 +29,8 @@ for recording things like milestones, accomplishments, etc..
 
 
 #### Desirable Requirements:
-- Users can track the time of day, and the time spent, on an interest.
-- App needs to connect to the phone’s clock, and update when different time zones come in.
-- Users could upload guides/project to an optional forum of guides meant to be compatible with the app.
-- Users can create a priority list for their interests.
-- Ideally, we would port it to Apple.
+1. Users can track the time of day, and the time spent, on an interest.
+2. App needs to connect to the phone’s clock, and update when different time zones come in.
+3. Users could upload guides/project to an optional forum of guides meant to be compatible with the app.
+4. Users can create a priority list for their interests.
+5. Ideally, we would port it to Apple.
