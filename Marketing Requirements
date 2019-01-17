@@ -3,7 +3,8 @@ The software product we’ll develop is an Android app named Hobby Tracker.
 The target customers are those who have some hobbies and try to track their progress using cellphones.
 
 Products are in competition with Hobby Tracker: Such as WeChat Sports, which  is made by Tencent, the biggest IT company in China. 
-WeChat Sports only counts your steps, so it doesn’t reveal more sensitive info like your locations or specific times that you’re moving.
+Hobby Tracker only counts what you have finished each day, and shows a cumulative total, so it doesn’t reveal more sensitive info 
+like your locations or specific times that you’re moving.
 
 Customers are likely to use this kind of product for:
 1 – Your profile shows your daily achievement as well as a cumulative total, 
