@@ -1,10 +1,10 @@
 # Hobby Tracker
 
-#####Team: 	Anthony Bean, Benjamin Onwenu, Drew Scotton, Li Sa, Jonathon Woodring, Mathew Coon
+##### Team: 	Anthony Bean, Benjamin Onwenu, Drew Scotton, Li Sa, Jonathon Woodring, Mathew Coon
 
 ## Design Specifications
 
-	#### Mandatory Requirements:
+#### Mandatory Requirements:
 		- *The app must track how often, and for how long, the user wants to work on the interest.*
 		- *The app must have a timer.*
 		- *The app must have a notification manager.*
@@ -12,7 +12,7 @@
 		- *Progress can be tracked on a day-by-day basis, and users can comment on their progress on a certain day, if desired.*
 		- *Users should be able to track multiple interests for different purposes.*
 		
-	#### Desirable Requirements:
+#### Desirable Requirements:
 		- *Ideally, the first three features under mandatory can be done by the user in three minutes or less.*
 		- *Users can track the time of day, and the time spent, on an interest.*
 		- *The user can enter their commitment levels, and build a plan to fit their desires.*
