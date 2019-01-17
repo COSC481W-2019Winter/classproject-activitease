@@ -1,7 +1,9 @@
 # Hobby Tracker
 
-## Our Mission
+## Problem Statement
 A problem we've identified is that people don't form habits that reward them in ways they want to.
+
+## Mission Statement
 * Our goal is to encourage people to follow their interests to their end.
 * Another goal is to allow people to create goals for themselves and giving them a way to accomplish those on a day by day basis. 
 
