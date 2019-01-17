@@ -14,7 +14,7 @@ The more you practice, the more likely you win a game.
 
 ## Team Mermber Roles
 
-Team manager - Matthew Coon
+Project manager - Matthew Coon
 
 Support- Benjamin Onwenu
 
