@@ -15,7 +15,7 @@ The more you practice, the more likely you win a game.
 ## Team Mermber Roles
 - Mathew Coon
 - Anthony Bean
-- Drew Scotton
+K- Drew Scotton
 - Li Sa 
 - Jonathon Woodring 
 Support- Benjamin Onwenu
