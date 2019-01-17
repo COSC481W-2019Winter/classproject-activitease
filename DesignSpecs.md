@@ -13,7 +13,7 @@
 - *	Users should be able to track multiple interests for different purposes.*
 		
 #### Desirable Requirements:
-- *	Ideally, the first three features under mandatory can be done by the user in three minutes or less.*
+*	*Ideally, the first three features under mandatory can be done by the user in three minutes or less.*
 - *	Users can track the time of day, and the time spent, on an interest.*
 - *	The user can enter their commitment levels, and build a plan to fit their desires.*
 - *	Users could upload guides/project to an optional forum of guides meant to be compatible with the app.*
