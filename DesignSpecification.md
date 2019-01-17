@@ -7,7 +7,7 @@
 #### Mandatory Requirements:
 *1. A user can use the Android app to customize their interest needs in three minutes or less.*\
 *2. Users can have multiple 'interests'.*\
-*3. An interest has three elements for the user to customize:*
+*3. An interest has three elements for the user to customize:* \
 ..- How many times a day, week, month, or year a user wants to practice an interest.
 ..- How frequently, if at all, a user wants to be notified from the app to work on their interest.
 ..- A timer, that a user can use to time themselves working on a task. Alternatively, they can\
