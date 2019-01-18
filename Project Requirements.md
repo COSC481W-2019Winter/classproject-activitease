@@ -13,7 +13,7 @@ for recording things like milestones, accomplishments, etc..
 - Users can see their "streaks", showing how many days/weeks/years they've kept their practice.
 - Line graphs ranging in weeks, months, or years shows practice length per day.
 
-*5. A support page is available that allows the user to send feedback and provides the user with our contact information.*
+*5. A support page that allows the user to send feedback and provides the user with our contact information.*
 
 
 #### Desirable Requirements:
