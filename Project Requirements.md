@@ -22,3 +22,6 @@ for recording things like milestones, accomplishments, etc..
 3. Users could upload guides/project to an optional forum of guides meant to be compatible with the app.
 4. Users can create a priority list for their interests.
 5. Ideally, we would port it to Apple.
+6. User can create an account, with an account username and password, that can:
+- store their progress and activity history.
+- have a linked email and/or phone number that will receive text and email alerts from notifications
