@@ -31,9 +31,9 @@
 - Users can enter in the number of notifications they want for an interest.
 - The user can customize the time they want the notification to go off, or have the app default to times, given the number of notifications they want.
 - Default notification times are calculated to be sensible, in that:
-⋅⋅⋅ They will not go off too early (before 9 am)
-⋅⋅⋅ They will not go off too late (after 10:30 pm)
-⋅⋅⋅ They will be an event amount of time between one notification to the next
+   - They will not go off too early (before 9 am)
+   - They will not go off too late (after 10:30 pm)
+   - They will be an event amount of time between one notification to the next
 - Users can customize the message of the push notification(s), if and only if that notification has a custom set time.
 - Notifications can be quickly added, deleted, or changed easily in each interest’s settings.
 ## Timer
