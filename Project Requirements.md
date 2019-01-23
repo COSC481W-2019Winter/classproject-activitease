@@ -50,7 +50,7 @@
 - The FAQ page will also have at least 3 questions we often hear pertaining to how and why to use the app.
 - The help page will have contact information for a support email page, which we will respond to and check frequently.
 ## Desirables
--Notifications
+- Notifications
    -Allow the user multiple options for notification customizability, like custom notification times and custom notification messages.
    -Allow the user to choose default notification times based on the number of notifications they’d like to receive within a 24 hour span
 -Interest Fundamentals
