@@ -37,8 +37,14 @@
 - Users can customize the message of the push notification(s), if and only if that notification has a custom set time.
 - Notifications can be quickly added, deleted, or changed easily in each interest’s settings.
 ## Timer
-
-
+- At 12:00 AM at the end of each period (day, week, month, or year), the timer is reset, and has the time required for that day is shown.
+- The timer has a circular clock display, which shows the time completed and the time remaining for an activity.
+   - The total time to complete a cycle on the clock is the time required for that period’s activity.
+   - The total time is divided into segments, per the number of times a period an activity is to be done.
+      - For example, if there is an activity that is done 3 times a day for five minutes, there are three segments of five minutes, totaling for fifteen minutes.
+- The timer can be easily started and paused below the analog clock.
+- If a user has to log an activity more than once per period, it will divide the analog clock display n times.
+- The number of times per period, as well as the length of these times, can be easily customized in each interest’s settings.*
 ## Help / FAQ
 - The FAQ page will have at least 5 questions and answers on how to add in interest, how to use the timer, and how to customize notifications to fit each individual need.
 - The FAQ page will also have at least 3 questions we often hear pertaining to how and why to use the app.
