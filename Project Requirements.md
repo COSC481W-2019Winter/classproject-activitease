@@ -49,3 +49,19 @@
 - The FAQ page will have at least 5 questions and answers on how to add in interest, how to use the timer, and how to customize notifications to fit each individual need.
 - The FAQ page will also have at least 3 questions we often hear pertaining to how and why to use the app.
 - The help page will have contact information for a support email page, which we will respond to and check frequently.
+## Desirables
+-Notifications
+   -Allow the user multiple options for notification customizability, like custom notification times and custom notification messages.
+   -Allow the user to choose default notification times based on the number of notifications they’d like to receive within a 24 hour span
+-Interest Fundamentals
+   -Allow the user to change the time they wish to spend on their interest
+   -Allow the user to choose either a timer or stopwatch for each interest
+   -Allow the user to delete an interest they’ve either completed or no longer wish to continue.
+   -Allow the user to modify their settings for each individual interest.
+-Friends List
+   -Allow the user to add friends to a friends list
+   -Allow the user to compare their Interest and interest time spent with their friends
+-Minutes Currency System
+   -Incorporate a reward system to incentivize users to pursue their interest goals.
+   -The time spent on interest will earn user’s time currency, which can be used to purchase rewards from the Interest Rewards Store
+   -If the user selects the “Done” button, the user will complete their interest for the day. However, the time left of the interest for the period of time will then be deducted from their current time currency.
