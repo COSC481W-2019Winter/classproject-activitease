@@ -66,7 +66,7 @@
 - Allow the user multiple options for notification customizability, like custom notification times and custom notification messages.
 - Allow the user to choose default notification times based on the number of notifications they’d like to receive within a 24 hour span.
 ## Timer
-
+- Timer has the option to automatically proceed after an activity, so users can practice longer than they intended, if they are making critical progress.
 ## Interest Fundamentals
 - Allow the user to change the time they wish to spend on their interest
 - Allow the user to choose either a timer or stopwatch for each interest
