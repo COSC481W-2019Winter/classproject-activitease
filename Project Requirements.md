@@ -1,19 +1,21 @@
-# Manditory requirements:
+# Mandatory requirements:
 
 ## General
 - Users can use our app with no prior experience to initialize an interest to fit their needs in three minutes or less.
 - All non-home pages have a home button to quickly return to the home page.
 ## The Home page
 - The home page is the starting page when the app is opened.
-- The home page shows all interests, their streak counts, how much time is needed for each interest, and how many hours/minutes/seconds - the user has to complete them.
+- The home page shows all interests, their streak counts, how much time is needed for each interest, and how many hours/minutes/seconds the user has to complete them.
 - Users can swipe up and down to view all of their interests.
 - Users can click on an interest from the home page to go to that interest’s page.
 - At the bottom of the home page is an add interest button. This takes the user to an add interest page.
+- In the top left corner of the home page is the menu button. When pressed this takes the user to the menu page.
 - The menu button, as well as the add interest button, are always viewable if the user is scrolling through interests.
 - The home page also has a side menu button.
 - The side menu can be toggled on and off by pressing the side menu button.
 ## The Add Interest Page
 - The add interest page will require several critical elements to form an interest, such as:
+   - The name of the interest they will be participating in
    - The number of times (>=1), and how often (days, weeks, months, years) an activity is done
    - How long they will be doing an activity
       - The length of an activity multiplied by the number of times it's done cannot exceed the span of the practice period.
@@ -21,7 +23,8 @@
    - The number of notifications the user wants for an activity
 ## The Interest Page
 - The interest page will have a timer, an interest tracker, and notification and timer settings on one page.
-- Users can swipe up and down on an interest page to view the timer, tracker, or settings.
+- There will be a pause button directly below the timer that the user can press to pause their activity. Once pressed, the button will display resume, and will start the timer once pressed again.
+- Users can swipe up and down on an interest page to view the timer, tracker, or settings. Timer and tracker will be displayed on the inital page view with settings requiring you to swipe down.
 - Users can swipe left and right to see other interests.
 ## Tracking Interest Activity
 - Logging timed activities is incentivized by a streak-based system. Each interest’s streak will be displayed on the homescreen, and on an interest page.
@@ -53,14 +56,21 @@
    - The total time to complete a cycle on the clock is the time required for that period’s activity.
    - The total time is divided into segments, per the number of times a period an activity is to be done.
       - For example, if there is an activity that is done 3 times a day for five minutes, there are three segments of five minutes, totaling for fifteen minutes.
-- The timer can be easily started and paused below the analog clock.
+- The timer can be easily started and paused by pressing a button below the analog clock.
 - If a user has to log an activity more than once per period, it will divide the analog clock display n times.
 - The number of times per period, as well as the length of these times, can be easily customized in each interest’s settings.*
+## Menu
+- Once the menu button is pressed it will open up the menu, which will contain a list of opions to press.
+- The first button will display "Help/FAQ" take the user to the Help/FAQ page.
+- The 2nd button will display "About this app" and once pressed will take the user to a page with a description of our app, our problem statement, and a list of the developers of ActivitEase.
 ## Help / FAQ
 - The FAQ page will have at least 5 questions and answers on how to add in interest, how to use the timer, and how to customize notifications to fit each individual need.
 - The FAQ page will also have at least 3 questions we often hear pertaining to how and why to use the app.
 - The help page will have contact information for a support email page, which we will respond to and check frequently.
-
+## About this app
+- The about this app page will have our problem statement and solution displayed at the top. The first paragraph will read "A problem we've identified is that people don't form habits that reward them in ways they want to. People tend to not realize sometimes how little effort they're putting in to certain activities they might find of interest and want to become better at."
+- Below our problem statement our solution will be displayed "Our solution is create some kind of app that allows the user to keep track of how much time the're putting into specified hobby/ies. It also helps to encourage/alert the user that they planned to do this certain thing at this certain point in time. Our goal is to encourage people to follow their interests to their end. We want to encourage people to create goals for themselves and give them a way to accomplish those goals on a day by day basis"
+- Below our solution will be a list of the developers with a brief description of each of us and our roles in creating this app.
 # Desirable Requirements
 ## Notifications
 - Allow the user multiple options for notification customizability, like custom notification times and custom notification messages.
