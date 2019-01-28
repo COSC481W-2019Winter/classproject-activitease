@@ -4,6 +4,10 @@
 - Users can use our app with no prior experience to initialize an interest to fit their needs in three minutes or less.
 - All non-home pages have a home button to quickly return to the home page.
 ## The Home page
+<p align="center"> 
+<img src="![picprototype](https://user-images.githubusercontent.com/45779417/51870531-dff85e80-2321-11e9-9b0b-fa861f917066.png)">
+</p>
+ 
 - The home page is the starting page when the app is opened.
 - The home page shows all interests, their streak counts, how much time is needed for each interest, and how many hours/minutes/seconds the user has to complete them.
 - Users can swipe up and down to view all of their interests.
