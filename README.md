@@ -20,9 +20,9 @@ Support- Benjamin Onwenu
 
 Engineer/Flex - Drew Scotton
 
-Engineer/Flex - Anthony Bean
+Marketing/Flex - Anthony Bean
 
-Marketing/Flex - Li Sa
+Engineer/Flex - Li Sa
 
 Design/Engineer - Jon Woodring
 
