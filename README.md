@@ -22,7 +22,7 @@ Engineer/Flex - Drew Scotton
 
 Engineer/Flex - Anthony Bean
 
-Marketing - Li Sa
+Marketing/Flex - Li Sa
 
 Design/Engineer - Jon Woodring
 
