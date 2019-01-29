@@ -58,11 +58,11 @@
 - Notifications can be quickly added, deleted, or changed easily in each interest’s settings.
 ## Timer
 - At 12:00 AM at the end of each period (day, week, month, or year), the timer is reset, and has the time required for that day is shown.
-- The timer has a circular clock display, which shows the time completed and the time remaining for an activity.
-   - The total time to complete a cycle on the clock is the time required for that period’s activity.
+- The timer has a circular display, which shows the time completed and the time remaining for an activity.
+   - The total time to complete a cycle on the circular clock is the time required for that period’s activity.
    - Each time a timer period is finished, another period comes up, until the user has completed all the required periods for that day.
       - For example, if there is an activity that is done 3 times a day for five minutes, the clock will go three times for five minutes each, totaling for fifteen minutes.
-- The timer can be easily started and paused by pressing a button below the analog clock.
+- The timer can be easily started and paused by pressing a button below the circular timer display.
 - By clicking the start button, users get a pop-up dialog box, which asks the user to confirm that they want to start the timer for an interest.
    - Ex, for an interest 'homework': "Would you really like to start the timer for Homework? Y/N".
    - This feature prevents users from accidentially starting an interest's timer.
