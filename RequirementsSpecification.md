@@ -7,13 +7,12 @@
 ![picprototype](https://user-images.githubusercontent.com/45779417/51870531-dff85e80-2321-11e9-9b0b-fa861f917066.png)
  
 - The home page is the starting page when the app is opened.
-- The home page shows all interests, their streak counts, how much time is needed for each interest, and how many hours/minutes/seconds the user has to complete them.
+- The home page shows all interests, their streak counts, and how much time is needed for each interest.
 - Users can swipe up and down to view all of their interests.
 - Users can click on an interest from the home page to go to that interest’s page.
 - At the bottom of the home page is an add interest button. This takes the user to an add interest page.
-- In the top left corner of the home page is the menu button. When pressed this takes the user to the menu page.
-- The menu button, as well as the add interest button, are always viewable if the user is scrolling through interests.
-- The home page also has a side menu button.
+- The home page has a side menu button.
+- The menu button, as well as the add in- The home page also has a side menu button.terest button, are always viewable if the user is scrolling through interests.
 - The side menu can be toggled on and off by pressing the side menu button.
 ## The Add Interest Page
 - The add interest page will require several critical elements to form an interest, such as:
@@ -24,17 +23,23 @@
         For example, a user cannot have six sessions of five hour practices in one day (30 > 24). 
    - The number of notifications the user wants for an activity
 ## The Interest Page
-- The interest page will have a timer, an interest tracker, and notification and timer settings on one page.
+- The interest page will have a timer and notification and timer settings on one page.
 - There will be a pause button directly below the timer that the user can press to pause their activity. Once pressed, the button will display resume, and will start the timer once pressed again.
 - Users can swipe up and down on an interest page to view the timer, tracker, or settings. Timer and tracker will be displayed on the inital page view with settings requiring you to swipe down.
 - Users can swipe left and right to see other interests.
+- In an Interest's settings, users have a button to remove an interest,
+   - which deletes:
+      - An interest's notifications,
+      - It's timer settings,
+      - the interest's history
+      - And any derivitive information from these variables (exluding a user's total time practiced).
+- By clicking the 'remove interest' button, users get a pop-up dialog box, which asks the user to confirm that they want to delete the interest.
+   - EX; for an interest 'homework': "Would you really like to remove your Homework interest? Y/N".
+   - This feature prevents users from accidentially deleting an interest.
 ## Tracking Interest Activity
 - Logging timed activities is incentivized by a streak-based system. Each interest’s streak will be displayed on the homescreen, and on an interest page.
 - Users can see the total amount of time (in days, hours, and minutes) spent on an interest.
-- After finishing an interest, users can comment on an activity period to record things such as milestones or interesting experiences.
-- These comments have the total time logged as well as the day matched with them.
 - On an interest page, the user can see the previous days in the week, and their corresponding activity completion.
-- Users can monitor their activity completion time on a bar graph, over the span of days, months, and years.
 ## Interest Time settings
 - Users can enter how many times per day, week, month, or even year, a user wants to do an action.
 - Users must easily be able to set and change the amount of time they commit to an interest.
@@ -50,15 +55,17 @@
    - They will not go off too early (before 9 am)
    - They will not go off too late (after 10:30 pm)
    - They will be an event amount of time between one notification to the next
-- Users can customize the message of the push notification(s), if and only if that notification has a custom set time.
 - Notifications can be quickly added, deleted, or changed easily in each interest’s settings.
 ## Timer
 - At 12:00 AM at the end of each period (day, week, month, or year), the timer is reset, and has the time required for that day is shown.
 - The timer has a circular clock display, which shows the time completed and the time remaining for an activity.
    - The total time to complete a cycle on the clock is the time required for that period’s activity.
-   - The total time is divided into segments, per the number of times a period an activity is to be done.
-      - For example, if there is an activity that is done 3 times a day for five minutes, there are three segments of five minutes, totaling for fifteen minutes.
+   - Each time a timer period is finished, another period comes up, until the user has completed all the required periods for that day.
+      - For example, if there is an activity that is done 3 times a day for five minutes, the clock will go three times for five minutes each, totaling for fifteen minutes.
 - The timer can be easily started and paused by pressing a button below the analog clock.
+- By clicking the start button, users get a pop-up dialog box, which asks the user to confirm that they want to start the timer for an interest.
+   - Ex, for an interest 'homework': "Would you really like to start the timer for Homework? Y/N".
+   - This feature prevents users from accidentially starting an interest's timer.
 - If a user has to log an activity more than once per period, it will divide the analog clock display n times.
 - The number of times per period, as well as the length of these times, can be easily customized in each interest’s settings.*
 ## Menu
@@ -74,6 +81,16 @@
 - Below our problem statement our solution will be displayed "Our solution is create some kind of app that allows the user to keep track of how much time the're putting into specified hobby/ies. It also helps to encourage/alert the user that they planned to do this certain thing at this certain point in time. Our goal is to encourage people to follow their interests to their end. We want to encourage people to create goals for themselves and give them a way to accomplish those goals on a day by day basis"
 - Below our solution will be a list of the developers with a brief description of each of us and our roles in creating this app.
 # Desirable Requirements
+
+## The Home Page
+- Show the total time remaining to complete each activity on the home screen.
+## The Interest Page
+- Users will have an interest tracker, which shows completion times over weeks, months or years, in a line graph format.
+## Tracking Interest Activity
+- After finishing an interest, users can comment on an activity period to record things such as milestones or interesting experiences.
+- These comments have the total time logged as well as the day matched with them.
+## Interest Notification Settings
+- Users can customize the message of the push notification(s), if and only if that notification has a custom set time.
 ## Notifications
 - Allow the user multiple options for notification customizability, like custom notification times and custom notification messages.
 - Allow the user to choose default notification times based on the number of notifications they’d like to receive within a 24 hour span.
