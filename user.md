@@ -1,4 +1,6 @@
-##Properties
+# User Interface
+
+## Properties
 
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
@@ -13,7 +15,7 @@
 | checkFri | boolean  | True if user selects Friday. Otherwise, default state is false
 | checkSat | boolean  | True if user selects Saturday. Otherwise, default state is false
 
-##Functionality
+## Functionality
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
