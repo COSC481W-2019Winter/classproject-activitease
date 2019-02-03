@@ -10,6 +10,7 @@
 ##Functionality
 
 | Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
 | displayDays()  | None  | None  | Shows a list of the 7 days of the week
 | clear()  | None  | None  | Clears data and returns interface to default state.
 
