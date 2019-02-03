@@ -4,7 +4,7 @@
 - Users can use our app with no prior experience to initialize an interest to fit their needs in three minutes or less.
 - All non-home pages have a home button to quickly return to the home page.
 ## Context Model
-![untitled diagram](https://user-images.githubusercontent.com/45779417/52173938-14717d80-275b-11e9-8b99-b106c3c392c7.jpg)
+![untitled diagram 1](https://user-images.githubusercontent.com/45779417/52181979-3b18ce00-27c6-11e9-8d7b-7ae475883f38.jpg)
 
 ## The Home page
 ![picprototype](https://user-images.githubusercontent.com/45779417/51870531-dff85e80-2321-11e9-9b0b-fa861f917066.png)
