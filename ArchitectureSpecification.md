@@ -14,6 +14,9 @@
 | deleteInterest()  | string, interestName  | None  | Deletes an interest by searching for its name in interest class.
 | updateInterest()  | None  | None  | Updates a user's interest settings.
 
+## Connections 
+| Input or Output  | Function | Description
+| Input            | Main     | Takes user to addInterest page when Add Interest button is clicked. 
 
 
 # Interest Class
@@ -45,5 +48,5 @@
 | ----------  | ---------- |  -----------							
 | Output |	submitInterest() |	Submits the interest's updated settings to the user class.
 | Output |      timerRunning()   |      Increments timer when running. 
-| Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
-| Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
+| Input  |      Main             |      Starts timer object when user clicks Start Activity button. 
+| Input  |      Main             |      Stops timer object when user clicks stop Activity button. 
