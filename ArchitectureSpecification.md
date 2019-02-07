@@ -5,6 +5,7 @@
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
 | userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays.  
+| addInterest             |  View        | View object for specifing button clicks           
 
 ## Functionality
 
@@ -13,7 +14,7 @@
 | addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest.
 | deleteInterest()  | string, interestName  | None  | Deletes an interest by searching for its name in interest class.
 | updateInterest()  | None  | None  | Updates a user's interest settings.
-| onAddActivity()   | View v | None | Takes user to add activity page. 
+| onAddActivity()   | View addInterest | None | Takes user to add activity page. 
 
 ## Connections 
 | Input or Output  | Function | Description
@@ -26,8 +27,8 @@
 ## Properties:														
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 										
-| startTimer | boolean | boolean for whether the start button was pushed.												
-| stopTimer	| boolean |	boolean for whether the stop button was pushed.												
+| startTimer | view | Specifies view for Start button.												
+| stopTimer	| view |	Specifies view for done button.												
 | interestName |	String |	Name of the User's Interest.												
 | periodFreq |	int	| How frequent the user would like to practice their interest per period.												
 | basePeriodSpan |	int |	How often the user wants to reset the period.												
@@ -42,8 +43,8 @@
 | editInterest() |	String interestName, int periodFreq, int basePeriodSpan, int activityLength, int numNotifications | none | Edits the interest to change any of the parameters.
 | submitInterest() |	none | none	| submits the interest's information back to the user class.
 | displayTimer() |	none(?) |	none |	Instantiates timer object specific to interest. 
-| startTimer() |	boolean startTimer | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
-| stopTimer() |	boolean stopTimer | none |	stops the timer and saves the progress.
+| startTimer() |	view startTimer  | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
+| stopTimer() |	        view stopTimer | none |	        stops the timer. 
 | timerRunning() |	int updateTimer | none |	Continuously being reduced in seconds until 0 seconds remain or stopTimer() is called.
 														
 ## Connections:
