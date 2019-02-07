@@ -4,22 +4,21 @@
 
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
-| userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays, and a button to access their page.  
-| nInterests  | int | A size integer for the interest array.
+| userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays.  
 
 ## Functionality
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
-| addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest, and increments 
-| searchInterest()  | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.
-| deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.
-| displayInterest()  | int arrayPos  | None  | Accesses a user's interest.
+| addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest.
+| deleteInterest()  | string, interestName  | None  | Deletes an interest by searching for its name in interest class.
+| updateInterest()  | None  | None  | Updates a user's interest settings.
+| onAddActivity()   | View v | None | Takes user to add activity page. 
 
 ## Connections 
 | Input or Output  | Function | Description
 | -------------    | ---------- | ---------- 
-| Input            | Main     | Takes user to addInterest page when Add Interest button is clicked. 
+| Input            | onAddActivity   | Takes user to addInterest page when Add Interest button is clicked. 
 
 
 # Interest Class
@@ -52,5 +51,5 @@
 | ----------  | ---------- |  -----------							
 | Output |	submitInterest() |	Submits the interest's updated settings to the user class.
 | Output |      timerRunning()   |      Increments timer when running. 
-| Input  |      Main             |      Starts timer object when user clicks Start Activity button. 
-| Input  |      Main             |      Stops timer object when user clicks stop Activity button. 
+| Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
+| Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
