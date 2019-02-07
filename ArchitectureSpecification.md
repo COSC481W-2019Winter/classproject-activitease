@@ -32,7 +32,8 @@
 | basePeriodSpan |	int |	How often the user wants to reset the period.												
 | activityLength |	int |	How long the user wants to practice their interest per period.												
 | numNotifications |	int |	The number of notifications the user would like tor receive on a daily basis.
-| updateTimer |	int |	Updates the timer based on how much time remains.												
+| updateTimer |	int |	Updates the timer based on how much time remains.
+| timer       | Timer | Instance of Timer API. 
 														
 ## Functionality											
 | Name  | Parameters | Return | Description
