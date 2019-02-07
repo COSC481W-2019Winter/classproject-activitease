@@ -35,12 +35,15 @@
 | ----------  | ---------- | --------- | -----------					
 | editInterest() |	String interestName, int periodFreq, int basePeriodSpan, int activityLength, int numNotifications | none | Edits the interest to change any of the parameters.
 | submitInterest() |	none | none	| submits the interest's information back to the user class.
-| displayTimer() |	none(?) |	none |	Continuously being called until the updateTimer reaches 0 or stopTimer() is called.
+| displayTimer() |	none(?) |	none |	Instantiates timer object specific to interest. 
 | startTimer() |	boolean startTimer | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
 | stopTimer() |	boolean stopTimer | none |	stops the timer and saves the progress.
 | timerRunning() |	int updateTimer | none |	Continuously being reduced in seconds until 0 seconds remain or stopTimer() is called.
 														
 ## Connections:
 | Input or Output  | Function | Description
-| ----------  | ---------- |  -----------									
+| ----------  | ---------- |  -----------							
 | Output |	submitInterest() |	Submits the interest's updated settings to the user class.
+| Output |      timerRunning()   |      Increments timer when running. 
+| Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
+| Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
