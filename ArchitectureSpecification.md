@@ -57,8 +57,8 @@
 | editInterest() |	String interestName, int periodFreq, int basePeriodSpan, int activityLength, int numNotifications | none | Edits the interest to change any of the parameters.
 | submitInterest() |	none | none	| submits the interest's information back to the user class.
 | displayTimer() |	none(?) |	none |	Instantiates timer object specific to interest. 
-| startTimer() |	boolean startTimer | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
-| stopTimer() |	boolean stopTimer | none |	stops the timer and saves the progress.
+| startTimer() |	view V | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
+| stopTimer() |	view V | none |	stops the timer and saves the progress.
 | timerRunning() |	int updateTimer | none |	Continuously being reduced in seconds until 0 seconds remain or stopTimer() is called.
 														
 ## Connections:
