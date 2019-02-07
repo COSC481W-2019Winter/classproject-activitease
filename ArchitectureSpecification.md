@@ -13,10 +13,8 @@
 | ----------  | ---------- | --------- | -----------
 | addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest, and increments 
 | searchInterest()  | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.
-| ----------  | ---------- | --------- | -----------
 | deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.
 | displayInterest()  | int arrayPos  | None  | Accesses a user's interest.
-| ----------  | ---------- | --------- | -----------
 
 ## Connections 
 | Input or Output  | Function | Description
