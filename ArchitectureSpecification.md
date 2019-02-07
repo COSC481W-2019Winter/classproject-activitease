@@ -16,6 +16,8 @@
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
+| loadInterests()  | None | None | Loads up interest buttons/previews when the app is opened.
+
 | addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest.
 | searchInterest()  | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.	
 | deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.	
