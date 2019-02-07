@@ -16,6 +16,7 @@
 
 ## Connections 
 | Input or Output  | Function | Description
+| -------------    | ---------- | ---------- 
 | Input            | Main     | Takes user to addInterest page when Add Interest button is clicked. 
 
 
