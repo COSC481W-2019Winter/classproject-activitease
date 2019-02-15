@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homePage"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home Page" />
+        <item
+            android:id="@+id/FAQ"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="FAQ" />
+        <item
+            android:id="@+id/addInterest"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Add Interest" />
+        <item
+            android:id="@+id/Interest"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Interest Page" />
+    </group>
+
+</menu>
