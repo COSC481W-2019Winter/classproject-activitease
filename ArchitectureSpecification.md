@@ -30,10 +30,10 @@
 ## Connections 
 | Input or Output  | Function | Description
 | -------------    | ---------- | ---------- 
-| Input            | onSupport   | Takes user to the support page page when the support button is clicked. 
-| Input            | onFAQ   | Takes user to the FAQ page when the FAQ button is clicked. 
-| Input            | onSettings   | Takes user to the settings page when the settings button is clicked. 
-| Input            | onAddActivity   | Takes user to addInterest page when Add Interest button is clicked. 
+| Input            | onSupport()   | Takes user to the support page when the support button is clicked. 
+| Input            | onFAQ()   | Takes user to the FAQ page when the FAQ button is clicked. 
+| Input            | onSettings()   | Takes user to the settings page when the settings button is clicked. 
+| Input            | onAddActivity()   | Takes user to addInterest page when Add Interest button is clicked. 
 
 
 # Interest Class
@@ -69,5 +69,16 @@
 | Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
 | Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
 
+# About_Us Fragment
 
+## Functionality
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView()  | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState  | inflater.inflate(R.layout.add_interest_page, container, false)  | Returns the layout format for the About us Page
+
+## Connections 
+| Input or Output  | Function | Description
+| -------------    | ---------- | ---------- 
+| Input            | onHome()   | Takes user to the home page when the home button is clicked. 
 
