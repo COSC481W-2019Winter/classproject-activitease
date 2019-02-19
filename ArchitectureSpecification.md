@@ -75,7 +75,7 @@
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
-| onCreateView()  | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState  | inflater.inflate(R.layout.add_interest_page, container, false)  | Returns the layout format for the About us Page
+| onCreateView()  | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState  | inflater.inflate(R.layout.about_us_page, container, false)  | Returns the layout format for the About us Page
 
 ## Connections 
 | Input or Output  | Function | Description
