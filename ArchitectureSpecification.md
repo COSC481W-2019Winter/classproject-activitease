@@ -82,3 +82,16 @@
 | -------------    | ---------- | ---------- 
 | Input            | onHome()   | Takes user to the home page when the home button is clicked. 
 
+
+# FAQ Fragment
+													
+## Functionality:								
+| Name | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView(); | LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState | inflator.inflate() | Creates the view of the FAQ page	
+								
+## Connections:								
+|Input or Output | Function | Description
+| -------------    | ---------- | ---------- 
+| Input | onHome() | returns to the user to the home page when the home button is clicked					
+
