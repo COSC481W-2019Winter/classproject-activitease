@@ -111,7 +111,7 @@
 ## Functionality:								
 | Name | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
-| onCreateView(); | @NonNull LayoutInflater inflater, @Nullable ViewGroup container,  @Nullable Bundle savedInstanceState | inflator.inflate(R.layout.faq_page, container, false) | Returns the layout format of the FAQ page	|postButton();|@ArrayList<String>,|None|Creates and registers a clicked button for posting the content.
+| onCreateView(); | @NonNull LayoutInflater inflater, @Nullable ViewGroup container,  @Nullable Bundle savedInstanceState | inflator.inflate(R.layout.faq_page, container, false) | Returns the layout format of the FAQ page	|postButton();|@ArrayList<String>,|None|Creates and registers a clicked button for posting the content
 								
 ## Connections:								
 |Input or Output | Function | Description
