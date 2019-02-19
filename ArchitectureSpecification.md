@@ -88,10 +88,10 @@
 ## Functionality:								
 | Name | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
-| onCreateView(); | LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState | inflator.inflate() | Creates the view of the FAQ page	
+| onCreateView(); | @NonNull LayoutInflater inflater, @Nullable ViewGroup container,  @Nullable Bundle savedInstanceState | inflator.inflate(R.layout.faq_page, container, false) | Returns the layout format of the FAQ page	
 								
 ## Connections:								
 |Input or Output | Function | Description
 | -------------    | ---------- | ---------- 
-| Input | onHome() | returns to the user to the home page when the home button is clicked					
+| Input | onHome() | Returns to the user to the home page when the home button is clicked					
 
