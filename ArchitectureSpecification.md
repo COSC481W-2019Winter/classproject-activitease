@@ -7,8 +7,8 @@
 | userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays, and a button to access their page.  	
 | nInterests  | int | A size integer for the interest array.
 | sidebar | Button | A button to display the sidebar.
-| support | Button | A button to take the user to the support page.
-| faq | Button | A button to take the user to the FAQ page.
+| about_us | Button | A button to take the user to the About Us page.
+| faq | Button | A button to take the user to the FAQ page along with support.
 | settings | Button | A button to take the user to the settings page.
 
 
@@ -68,3 +68,6 @@
 | Output |      timerRunning()   |      Increments timer when running. 
 | Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
 | Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
+
+
+
