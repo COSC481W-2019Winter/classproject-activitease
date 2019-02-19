@@ -69,6 +69,29 @@
 | Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
 | Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
 
+-------------------------------------------------------------------------
+
+# Home_Page Fragment
+
+## Functionality
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
+
+# MainActivity 
+
+## Functionality / Connections
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreate | Bundle savedInstanceState| void | Pulls up a saved state of the app, opens the home page, and pulls open all necessary components for the app. 
+| onBackPressed | N/A | void | Sets up actions for when the user presses the back button.
+| onCreateOptionsMenu | Menu menu | boolean | Adds items to the action bar, if it is present.
+| onOptionsItemSelected | MenuItem item | boolean | Sends settings from the options menu*.
+| onNavigationItemSelected | @NonNull MenuItem item | boolean | Generates fragments for pages given a page input.
+| openAddInterest | View view | void | Pulls up a new AddInterest fragment, which is not in the navigation menu.
+
 # About_Us Fragment
 
 ## Functionality
