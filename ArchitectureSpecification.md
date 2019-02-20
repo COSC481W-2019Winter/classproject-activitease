@@ -105,7 +105,7 @@
 | basePeriodSpan |	int |	How often the user wants to reset the period.												
 | activityLength |	int |	How long the user wants to practice their interest per period.	
 
-| Num Notifications | int   |   How many notifications the user wants a day.
+| numNotifications |    int |	How many notifications the user wants a day. 
 
 ## Functionality
 
