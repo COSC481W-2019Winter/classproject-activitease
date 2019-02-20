@@ -96,6 +96,15 @@
 
 # Add_Interest
 
+## Properties 
+
+| Name  | Type | Description
+| ------------- | ------------- | ------------- 
+| | interestName |	String |	Name of the User's Interest.												
+| periodFreq |	int	| How frequent the user would like to practice their interest per period.												
+| basePeriodSpan |	int |	How often the user wants to reset the period.												
+| activityLength |	int |	How long the user wants to practice their interest per period.	
+
 ## Functionality
 
 | Name  | Parameters | Return | Description
