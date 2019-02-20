@@ -94,6 +94,20 @@
 | onInterestClick | View view |        | On interest click interest page opens to clicked activity.
 | onLeftSwipe     | View view |        | On left swipe opens interest page.
 
+# Add_Interest
+
+## Functionality
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| addInterest | View view |        | Calls instance of user to store form data and opens up homepage with updated interest info. 
+| CheckData   |           |        | Checks to make sure that data is in correct format, if not indicates with red dots which fields are incorrect. 
+
+## Connections 
+|Input or Output | Function | Description
+|Input           | User.addInterest     | Calls instance of user and stores all necessary info related to interest. 
+
+
 
 # Interest_Fragment
 
@@ -133,7 +147,7 @@
 | Input            | onHome()   | Takes user to the home page when the home button is clicked. 
 
 
-# FAQ Fragment
+# FAQ_Fragment
 													
 ## Functionality:								
 | Name | Parameters | Return | Description
