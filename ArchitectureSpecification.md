@@ -84,9 +84,18 @@
 | onNavigationItemSelected | @NonNull MenuItem item | boolean | Generates fragments for pages given a page input.
 | openAddInterest | View view | void | Pulls up a new AddInterest fragment, which is not in the navigation menu.
 
+# Home_Page
+
+## Functionality/Connections 
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| openAddInterest | View view |        | Opens add interest page.
+| onInterestClick | View view |        | On interest click interest page opens to clicked activity.
+| onLeftSwipe     | View view |        | On left swipe opens interest page.
 
 
-# Home_Page Fragment
+# Interest_Fragment
 
 ## Functionality
 
@@ -94,7 +103,15 @@
 | ----------  | ---------- | --------- | -----------
 | onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
 
-# Interest_Fragment
+# Add_Interest_Fragment 
+
+## Functionality
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
+
+# Home_Page Fragment
 
 ## Functionality
 
