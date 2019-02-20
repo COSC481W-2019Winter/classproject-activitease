@@ -79,6 +79,14 @@
 | ----------  | ---------- | --------- | -----------
 | onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
 
+# Interest_Fragment
+
+## Functionality
+
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
+
 # MainActivity 
 
 ## Functionality / Connections
