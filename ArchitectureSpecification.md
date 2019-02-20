@@ -105,9 +105,11 @@
 
 ## Connections 
 
+## Connections:								
 |Input or Output | Function | Description
-| ----------  | ---------- | --------- | -----------
-|Input           |   User.addInterest     | Calls instance of user and stores all necessary info related to interest. 
+| -------------    | ---------- | ---------- 
+| Input | User.addInterest() | Calls instance of user add interest method to store interest data 				
+
 
 
 
