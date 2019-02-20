@@ -104,8 +104,10 @@
 | CheckData   |           |        | Checks to make sure that data is in correct format, if not indicates with red dots which fields are incorrect. 
 
 ## Connections 
+
 |Input or Output | Function | Description
-|Input           | User.addInterest     | Calls instance of user and stores all necessary info related to interest. 
+| ----------  | ---------- | --------- | -----------
+|Input           |   User.addInterest     | Calls instance of user and stores all necessary info related to interest. 
 
 
 
