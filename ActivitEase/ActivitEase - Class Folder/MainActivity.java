@@ -77,7 +77,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (id == R.id.action_settings) {
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home_Page()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FAQ_Fragment()).commit();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
