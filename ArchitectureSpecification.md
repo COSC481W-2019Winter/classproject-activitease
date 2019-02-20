@@ -100,10 +100,12 @@
 
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
-| | interestName |	String |	Name of the User's Interest.												
+| interestName | String | Name of the User's Interest.												
 | periodFreq |	int	| How frequent the user would like to practice their interest per period.												
 | basePeriodSpan |	int |	How often the user wants to reset the period.												
 | activityLength |	int |	How long the user wants to practice their interest per period.	
+
+| Num Notifications | int   |   How many notifications the user wants a day.
 
 ## Functionality
 
@@ -112,14 +114,10 @@
 | addInterest | View view |        | Calls instance of user to store form data and opens up homepage with updated interest info. 
 | CheckData   |           |        | Checks to make sure that data is in correct format, if not indicates with red dots which fields are incorrect. 
 
-## Connections 
-
 ## Connections:								
 |Input or Output | Function | Description
 | -------------    | ---------- | ---------- 
 | Input | User.addInterest() | Calls instance of user add interest method to store interest data 				
-
-
 
 
 # Interest_Fragment
