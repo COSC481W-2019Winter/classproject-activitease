@@ -60,6 +60,8 @@
 | startTimer() |	view V | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
 | stopTimer() |	view V | none |	stops the timer and saves the progress.
 | timerRunning() |	int updateTimer | none |	Continuously being reduced in seconds until 0 seconds remain or stopTimer() is called.
+| setInterestName |      | Gets interest name from user class for edit interest and interest title. 
+
 														
 ## Connections:
 | Input or Output  | Function | Description
