@@ -41,7 +41,7 @@
 ## Properties:														
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 										
-| startTimer | boolean | boolean for whether the start button was pushed.												
+| startTimer | boolean | boolean for whether the start button was pushed.										
 | stopTimer	| boolean |	boolean for whether the stop button was pushed.												
 | interestName |	String |	Name of the User's Interest.												
 | periodFreq |	int	| How frequent the user would like to practice their interest per period.												
@@ -82,17 +82,8 @@
 | onCreateOptionsMenu | Menu menu | boolean | Adds items to the action bar, if it is present.
 | onOptionsItemSelected | MenuItem item | boolean | Sends settings from the options menu*.
 | onNavigationItemSelected | @NonNull MenuItem item | boolean | Generates fragments for pages given a page input.
-| openAddInterest | View view | void | Pulls up a new AddInterest fragment, which is not in the navigation menu.
-
-# Home_Page
-
-## Functionality/Connections 
-
-| Name  | Parameters | Return | Description
-| ----------  | ---------- | --------- | -----------
 | openAddInterest | View view |        | Opens add interest page.
 | onInterestClick | View view |        | On interest click interest page opens to clicked activity.
-| onLeftSwipe     | View view |        | On left swipe opens interest page.
 
 # Add_Interest
 
@@ -155,7 +146,6 @@
 ## Connections 
 | Input or Output  | Function | Description
 | -------------    | ---------- | ---------- 
-| Input            | onHome()   | Takes user to the home page when the home button is clicked. 
 
 
 # FAQ_Fragment
@@ -168,5 +158,4 @@
 ## Connections:								
 |Input or Output | Function | Description
 | -------------    | ---------- | ---------- 
-| Input | onHome() | Returns to the user to the home page when the home button is clicked					
 
