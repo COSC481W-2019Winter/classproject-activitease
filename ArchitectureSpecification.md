@@ -10,6 +10,7 @@
 | about_us | Button | A button to take the user to the About Us page.
 | faq | Button | A button to take the user to the FAQ page along with support.
 | settings | Button | A button to take the user to the settings page.
+| streakCounter | int | Number of days in a row you have completed your activity. 
 
 
 ## Functionality
