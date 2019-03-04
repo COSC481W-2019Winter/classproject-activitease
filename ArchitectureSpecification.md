@@ -1,5 +1,7 @@
 # User class
 
+![](https://i.imgur.com/XlSgKrl.png)
+
 ## Properties
 
 | Name  | Type | Description
