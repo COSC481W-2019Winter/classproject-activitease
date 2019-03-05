@@ -4,18 +4,163 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context = ".MainActivity">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="123dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginRight="152dp"
-        android:text="Interest Page"
-        android:textSize="30sp"
+        android:id="@+id/EditInterestName"
+        android:layout_width="166dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="44dp"
+        android:background="@color/design_default_color_primary"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="125dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="136dp"
+        android:text="Edit: "
+        android:textColor="@color/Black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/startStop"
+        android:layout_width="147dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="20dp"
+        android:text="Start Activity"
+        android:onClick="startStopTimer"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="366dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/InterestNameText"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:text="Interest Name" />
+
+            <EditText
+                android:id="@+id/interestName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/PeriodFrequencyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Period Frequency" />
+
+            <EditText
+                android:id="@+id/periodFrequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/BasePeriodSpanText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Base Period Span" />
+
+            <EditText
+                android:id="@+id/basePeriodSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/ActivityLengthText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity Length" />
+
+            <EditText
+                android:id="@+id/activityLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/NumNotificationsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notifications Daily" />
+
+            <EditText
+                android:id="@+id/numNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/SubmitEditInterest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="submitEditInterest"
+                android:text="Submit Interest" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="369dp"
+        android:layout_height="319dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Interest Page" />
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 </android.support.constraint.ConstraintLayout>
