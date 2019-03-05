@@ -1,6 +1,6 @@
 package com.example.activitease;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,23 +8,33 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
-
+    EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
+    interest interest = new interest();
+    String startStopTimerText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
-        hp.replace(R.id.fragment_container, new Home_Page());
+        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
         hp.commit();
+
+
+
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -77,11 +87,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.action_settings) {
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home_Page()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FAQ_Fragment()).commit();
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,10 +97,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.homePage)
-        {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home_Page()).commit();
-
+        if(id == R.id.homePage) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home_Page_Fragment()).commit();
         }
         else if (id == R.id.FAQ) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FAQ_Fragment()).commit();
@@ -103,17 +107,61 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Add_Interest_Fragment()).commit();
 
         } else if (id == R.id.Interest) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
 
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void openAddInterest(View view)
+    {
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Add_Interest_Fragment());
+        hp.commit();
+    }
+    public void submitEditInterest(View view)
+    {
+        //Throw error if in invalid format
+        //Call instance of user to store data
+        //From user call function to store data
+        //Then return next page with updated content
+        interestName = findViewById(R.id.interestName);
+        String theInterestName = interestName.getText().toString();
+        interest.setInterestName(theInterestName);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
+    }
+    public void setButtonText(String buttonText)
+    {
+        Button b = findViewById(R.id.startStop);
+        b.setText(buttonText);
 
-    public void openAddInterest(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Add_Interest_Fragment()).commit();
+    }
+
+    public void startStopTimer(View view) {
+        Button b = (Button)view;
+        startStopTimerText = b.getText().toString();
+        if(startStopTimerText.equals("Start Activity")) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Start Activity")
+                    .setMessage("Are you sure you want to start this activity?")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startStopTimerText = "Done";
+                            setButtonText(startStopTimerText);
+                        }
+
+                    })
+                    .setNegativeButton("no", null)
+                    .show();
+        }
+        else if(startStopTimerText.equals("Done")) {
+            startStopTimerText = "Start Activity";
+            setButtonText(startStopTimerText);
+            //Update timer. Update DB with new interest data
+        }
 
     }
 }
