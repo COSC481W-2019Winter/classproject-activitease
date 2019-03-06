@@ -8,35 +8,35 @@
 | ------------- | ------------- | ------------- 
 | userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays, and a button to access their page.  	
 | nInterests  | int | A size integer for the interest array.
-| sidebar | Button | A button to display the sidebar.
-| about_us | Button | A button to take the user to the About Us page.
-| faq | Button | A button to take the user to the FAQ page along with support.
-| settings | Button | A button to take the user to the settings page.
+
 | streakCounter | int | Number of days in a row you have completed your activity. 
+
 
 
 ## Functionality
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
-| loadInterests()  | None | None | Loads up interest buttons/previews when the app is opened.
-| addInterest()  | String interestname, int activityAmount, String activityPeriod, int activityLength, int numNotifications  | None  | Initializes an interest.
-| searchInterest()  | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.	
+| addInterest()  | String interestname, int activityLength, String basePeriodSpan, int activityLength, int numNotifications  | None  | Initializes an interest from add interest form.
+| setInterestName() | String interestName | none | Sets interest name in User DB. Edit Interest form
+| setActivityLength() | String activityLength | none | Sets the length of an activity.  
+| setPeriodFreq() |  activityPeriod  | none | Sets the frequency of an interest. Daily/weekly/monthly. 
+| setNumNotifications() | int numNotifications | none | Sets the number of notifications that you want.
+| setNotificationSpan() | String notificationSpan | none | Sets the notification span. Daily/weekly/monthly. 
+| setStreakCounter() | int streakCounter | none | Sets the streak of an interest 
+| getInterestName() | none | interestName| Retrieves the interestName
+| getActivityLength() | none | activityLength| Retrieves the activity length. 
+| getPeriodFreq() | none | periodFreq | Retrieves the period frequency. 
+| getNumNotifications() | none | numNotifications | Retrieves the number of notifications 
+| getNotificationSpan() | none | notificationSpan | Retrieves the span of notifications 
+| getStreakCounter() | none | streakCounter | Returns the streak of a specific interest 
+
+| searchInterest() | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.	
 | deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.	
-| displayInterest()  | int arrayPos, View v  | None  | Accesses a user's interest.
-| displaySidebar()  | None* | None | Pulls up the sidebar display, which shows the settings, FAQ, and contact us buttons.
-| onSupport()  |  View v | None | Takes user to the support page. 
-| onFAQ()  |  View v | None | Takes user to the FAQ page. 
-| onSettings()  |  View v | None | Takes user to the Settings page. 
-| onAddActivity()   | View v | None | Takes user to the add activity page. 
 
 ## Connections 
 | Input or Output  | Function | Description
 | -------------    | ---------- | ---------- 
-| Input            | onSupport()   | Takes user to the support page when the support button is clicked. 
-| Input            | onFAQ()   | Takes user to the FAQ page when the FAQ button is clicked. 
-| Input            | onSettings()   | Takes user to the settings page when the settings button is clicked. 
-| Input            | onAddActivity()   | Takes user to addInterest page when Add Interest button is clicked. 
 
 
 # Timer Class
@@ -131,7 +131,6 @@
 | -------------    | ---------- | ---------- 
 | input   |  User.setInterestName() | Creates new interest name
 | input   |  User.setPeriodFreq()  | Creates new period frequency
-| input   |  User.setBasePeriodSpan() | Creates new base period span  
 | input   |  User.setActivityLength() | Creates new activity length 
 | input   |  User.setNumNotifications() | creates new number of notifications
 | input   |  User.setNumNotificationSpan() | Creates new number of notification span 
