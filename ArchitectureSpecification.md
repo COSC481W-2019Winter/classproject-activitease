@@ -8,7 +8,12 @@
 | ------------- | ------------- | ------------- 
 | userInterests  | Interest[]  | An array of Interest objects with accessable variables and displays, and a button to access their page.  	
 | nInterests  | int | A size integer for the interest array.
-
+| interestName | String | Stores the name of an interest. 
+| activityLength | int  | Stores the length of activity - seconds. 
+| numNotifications | int | Stores the number of notifications app will have 
+| numNotificationSpan | String | Stores the span that you want notifications through 
+| streakCounter | int | Stores the streak of an interest 
+| periodFreq | String | Stores the frequency of the activity 
 | streakCounter | int | Number of days in a row you have completed your activity. 
 
 
@@ -30,7 +35,6 @@
 | getNumNotifications() | none | numNotifications | Retrieves the number of notifications 
 | getNotificationSpan() | none | notificationSpan | Retrieves the span of notifications 
 | getStreakCounter() | none | streakCounter | Returns the streak of a specific interest 
-
 | searchInterest() | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.	
 | deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.	
 
