@@ -82,6 +82,7 @@
 | onInterestClick | View view |        | On interest click interest page opens to clicked activity.
 | submitEditInterest | View view |      | Submits the editted interest and updates instance of interest page with new data. 
 | startStopTimer | View view |      |  Starts and stops the timer, displays text message on start activity to confirm starting, changes button text on click. 
+| 
 
 # Add_Interest
 
@@ -111,12 +112,27 @@
 
 # Interest_Fragment
 
+## Functionality 
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| onCreateView() |  @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState | view | Creates interest view, populates with interest data. 
 ## Properties 
 
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
 | interestName | TextView | Displays the name of the interest in the edit Interest container and on top of the Timer.
 | activityLength | Timer | Sets the timer to the length of the activity. 
+
+## Connections:
+| Input or Output | Function | Description 
+| -------------    | ---------- | ---------- 
+| output   |  User.getInterestName() | Populates interest name text box and interest title text view.
+| output   |  User.getPeriodFreq()  | Populates period freq text box with current data 
+| output   |  User.getBasePeriodSpan() | Populates period span container 
+| output   |  User.getActivityLength() | Populates activity length text box and activity length text view
+| output   |  User.getNumNotifications() | Populates number of notification text box. 
+| output   |  User.getNumNotificationSpan() | Populates num notification span text box. 
+
 
 ## Functionality
 
