@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class Add_Interest_Fragment extends Fragment {
+
     /**
      * Variables which are input from the add interest page/form.
      * Example: My interest is pitching practice, and I would like to practice four times a week in one hour sessions.
@@ -19,6 +22,8 @@ public class Add_Interest_Fragment extends Fragment {
      * activityLength = 60.0;
      * periodSpanStr = "week". This String is matched with a double from the getPeriodSpan method.
      */
+
+    /*
     String interestName;
     int periodFreq;
     double activityLength;
@@ -59,10 +64,10 @@ public class Add_Interest_Fragment extends Fragment {
     public int getNumNotifications() { return numNotifications; }
 
 
-    /*
-        This method takes an input string period (day, week, month, or year)
-        and returns a corresponding double in minutes of that length.
-     */
+
+     //   This method takes an input string period (day, week, month, or year)
+     //   and returns a corresponding double in minutes of that length.
+
     public double getPeriodSpan (String periodSpanStr)
     {
         switch (periodSpanStr)
@@ -83,9 +88,22 @@ public class Add_Interest_Fragment extends Fragment {
         }
     }
 
+    */
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_interest_page, container, false);
+        View v = inflater.inflate(R.layout.add_interest_page, container, false);
+
+        String[] periodSpanTypes =
+                {"Days", "Weeks", "Months", "Years"};
+        Spinner periodSpanSpinner = (Spinner) v.findViewById(R.id.periodSpanInput);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        periodSpanSpinner.setAdapter(adapter);
+
+        return v;
+
     }
 }
