@@ -82,48 +82,26 @@
 | onInterestClick | View view |        | On interest click interest page opens to clicked activity.
 | submitEditInterest | View view |      | Submits the editted interest and updates instance of interest page with new data. 
 | startStopTimer | View view |      |  Starts and stops the timer, displays text message on start activity to confirm starting, changes button text on click. 
-| 
-
-# Add_Interest
-
-## Properties 
-
-| Name  | Type | Description
-| ------------- | ------------- | ------------- 
-| interestName | String | Name of the User's Interest.												
-| periodFreq |	int	| How frequent the user would like to practice their interest per period.												
-| basePeriodSpan |	int |	How often the user wants to reset the period.												
-| activityLength |	int |	How long the user wants to practice their interest per period.	
-
-| numNotifications |    int |	How many notifications the user wants a day. 
-
-## Functionality
-
-| Name  | Parameters | Return | Description
-| ----------  | ---------- | --------- | -----------
-| addInterest | View view |        | Calls instance of user to store form data and opens up homepage with updated interest info. 
-| CheckData   |           |        | Checks to make sure that data is in correct format, if not indicates with red dots which fields are incorrect. 
-
-## Connections:								
-|Input or Output | Function | Description
-| -------------    | ---------- | ---------- 
-| Input | User.addInterest() | Calls instance of user add interest method to store interest data 				
-
-
+| 				
 # Interest_Fragment
 
 ## Functionality 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
 | onCreateView() |  @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState | view | Creates interest view, populates with interest data. 
+
 ## Properties 
 
 | Name  | Type | Description
 | ------------- | ------------- | ------------- 
 | interestName | TextView | Displays the name of the interest in the edit Interest container and on top of the Timer.
-| activityLength | Timer | Sets the timer to the length of the activity. 
+| periodFreq   | TextView | Text view object to set periodFreq in edit interest container
+| basePeriodSpan| TextView | Text view object to set base period span in edit interest container
+| activityLength | TextView | Text view object to set activityLength in edit interest container
+| numNotifications | TextView | Text view object to set number of notifications in edit interest container
+| numNotificationsSpan |  TextView | Text view object to set num notifications span in edit interest container
 
-## Connections:
+## Connections
 | Input or Output | Function | Description 
 | -------------    | ---------- | ---------- 
 | output   |  User.getInterestName() | Populates interest name text box and interest title text view.
@@ -148,15 +126,34 @@
 | ----------  | ---------- | --------- | -----------
 | onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
 
+## Connections
+| Input or Output | Function | Description 
+| -------------    | ---------- | ---------- 
+| input   |  User.setInterestName() | Creates new interest name
+| input   |  User.setPeriodFreq()  | Creates new period frequency
+| input   |  User.setBasePeriodSpan() | Creates new base period span  
+| input   |  User.setActivityLength() | Creates new activity length 
+| input   |  User.setNumNotifications() | creates new number of notifications
+| input   |  User.setNumNotificationSpan() | Creates new number of notification span 
+
+
 # Home_Page Fragment
 
 ## Properties 
+| Name  | Type | Description
+| ------------- | ------------- | ------------- 
+| interestName1 - interestName10 | textView | textView objects to store interest names in interest container, max 10 interest.
 
 ## Functionality
 
 | Name  | Parameters | Return | Description
 | ----------  | ---------- | --------- | -----------
 | onCreateView() | @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState| View |
+
+## Connections 
+| Input or Output | Function | Description 
+| -------------    | ---------- | ---------- 
+| Output  | User.getInterestName() | Populates interest container with interest name. 
 
 # About_Us Fragment
 
