@@ -1,5 +1,11 @@
 package com.example.databasefucking;
 
+/*
+Found a youtube tutorial and followed it. Once I finished it, I realized it was close to what I needed.
+ So I modified the code to what we need. The video can be found at the following link;
+ https://www.google.com/url?q=https://www.youtube.com/watch?v%3DK6cYSNXb9ew&sa=D&ust=1551724256967000&usg=AFQjCNHxZrvyV34V3A4RDjcORVgYKXne9w
+ */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,8 +18,11 @@ import java.util.List;
 public class User extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "InterestsManager";
-    private static final String TABLE_INTERESTS = "Interests ";
+    private static final String DATABASE_NAME = "InterestManager";
+
+    //The following were private, but made public for the testing.
+    private static final String TABLE_INTERESTS = "Interests";
+    private static final String KEY_ID = "id";
     private static final String KEY_NAME = "interestName";
     private static final String KEY_AMOUNT = "amount";
     private static final String KEY_PERIOD = "period";
@@ -29,9 +38,11 @@ public class User extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_INTERESTS_TABLE = "CREATE TABLE " + TABLE_INTERESTS + "(" + KEY_NAME
-                + " INTEGER PRIMARY KEY," + KEY_AMOUNT + " TEXT," + KEY_PERIOD + " TEXT, "
-                + KEY_LENGTH + " TEXT, " + KEY_NOTIFICATIONS + " TEXT "+ ")";
+//        String CREATE_INTERESTS_TABLE = "CREATE TABLE " + TABLE_INTERESTS + "(" + KEY_ID
+//                + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_AMOUNT + " TEXT," + KEY_PERIOD + " TEXT, "
+//                + KEY_LENGTH + " TEXT, " + KEY_NOTIFICATIONS + " TEXT "+ ")";
+        String CREATE_INTERESTS_TABLE = "CREATE TABLE " + TABLE_INTERESTS +
+                " (id INTEGER PRIMARY KEY AUTOINCREMENT, " + " interestName TEXT, amount TEXT, period TEXT, length TEXT, numNotifications TEXT)";
         db.execSQL(CREATE_INTERESTS_TABLE);
     }
 
@@ -53,19 +64,17 @@ public class User extends SQLiteOpenHelper {
         values.put(KEY_NOTIFICATIONS, interest.getNumNotifications());
 
         db.insert(TABLE_INTERESTS, null, values);
-        db.close();
+//        db.close();
     }
 
-    Interest getInterest(String interestName){
+    public Interest getInterest(String interestName){
         SQLiteDatabase db = this.getReadableDatabase();
 
 
         //Originally, Cursor was an error. At the end, verify that the user imported the Cursor class.
 
 
-        Cursor cursor = db.query(TABLE_INTERESTS, new String[]{KEY_NAME, KEY_AMOUNT, KEY_PERIOD,
-                KEY_LENGTH, KEY_NOTIFICATIONS}, KEY_NAME + "=?",
-                new String[]{String.valueOf(interestName)}, null, null, null, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_INTERESTS, null);
 
         if(cursor != null){
             cursor.moveToFirst();
@@ -88,11 +97,11 @@ public class User extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do {
                 Interest interest = new Interest();
-                interest.setInterestName(cursor.getString(0));
-                interest.setActivityAmount(Integer.parseInt(cursor.getString(1)));
-                interest.setActivityPeriod(cursor.getString(2));
-                interest.setActivityLength(Integer.parseInt(cursor.getString(3)));
-                interest.setNumNotifications(Integer.parseInt(cursor.getString(4)));
+                interest.setInterestName(cursor.getString(1));
+                interest.setActivityAmount(Integer.parseInt(cursor.getString(2)));
+                interest.setActivityPeriod(cursor.getString(3));
+                interest.setActivityLength(Integer.parseInt(cursor.getString(4)));
+                interest.setNumNotifications(Integer.parseInt(cursor.getString(5)));
 
                 interestList.add(interest);
             }
