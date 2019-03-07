@@ -57,6 +57,7 @@ to null, the pulling all subsequent interests in the array down to fill in, and 
 | onInterestClick | View view |        | On interest click interest page opens to clicked activity.
 | submitEditInterest | View view |      | Submits the editted interest and updates instance of interest page with new data. 
 | startStopTimer | View view |      |  Starts and stops the timer, displays text message on start activity to confirm starting, changes button text on click. 
+| openActivity | View view | 
 			
 ## WebGLTimer
 
