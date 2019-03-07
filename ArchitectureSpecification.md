@@ -75,7 +75,7 @@
 | activityLength | TextView | Text view object to set activityLength in edit interest container
 | numNotifications | TextView | Text view object to set number of notifications in edit interest container
 | numNotificationsSpan |  TextView | Text view object to set num notifications span in edit interest container
-| timer                | WebView   | Webview that holds context of webgl timer
+| timer                | GLSurfaceView   | GLSurfaceView that holds context of openGL timer class
 
 ## Connections
 | Input or Output | Function | Description 
