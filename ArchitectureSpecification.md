@@ -1,6 +1,5 @@
 # User class
 
-![](https://i.imgur.com/XlSgKrl.png)
 
 ## Properties
 
@@ -36,11 +35,12 @@
 | getNotificationSpan() | none | notificationSpan | Retrieves the span of notifications 
 | getStreakCounter() | none | streakCounter | Returns the streak of a specific interest 
 | searchInterest() | String interestName | int arrayPos | Given an interest name, this function searches through the userInterest array and finds the array position of that interest.	
-| deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.	
-
-## Connections 
-| Input or Output  | Function | Description
-| -------------    | ---------- | ---------- 
+| deleteInterest()  | int arrayPos  | None  | Deletes an interest by initializing the constructor array position t
+to null, the pulling all subsequent interests in the array down to fill in, and subtracts one from nInterests if the interest is found.
+|onCreate() | | SQLLiteDatabase db| none | Creates the database tables
+| onUpgrade() | SQLLiteDatabase db, int i, int i1| | none | Calls onCreate method to update database 
+| updateInterest() | Interest interest | db.update() | Updates an interest 
+| getInterestCount() | Interest interest | cursor.getCount() | Gets number of user interest 
 
 # MainActivity 
 
