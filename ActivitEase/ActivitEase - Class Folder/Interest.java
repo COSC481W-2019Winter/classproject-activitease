@@ -19,13 +19,8 @@ public class Interest {
         this.activityLength = activityLength;
         this.numNotifications = numNotifications;
     }
-
-//    public Interest(int id, String string, String cursorString){
-//        this.id = id;
-//        this.name = name;
-//        this.phone_number = phone_number;
-//    }
-
+    
+    
     public Interest() {
 
     }
