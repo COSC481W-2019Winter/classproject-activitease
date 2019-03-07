@@ -42,35 +42,6 @@
 | Input or Output  | Function | Description
 | -------------    | ---------- | ---------- 
 
-
-# Timer Class
-
-## Properties:														
-| Name  | Type | Description
-| ------------- | ------------- | ------------- 										
-| startTimer | boolean | boolean for whether the start button was pushed.
-| stopTimer  | boolean |	boolean for whether the stop button was pushed.
-|updateTimer |	int |	Updates the timer based on how much time remains.
-| timer      | Timer | Instance of Timer API. 
-														
-## Functionality											
-| Name  | Parameters | Return | Description
-| ----------  | ---------- | --------- | -----------					
-| displayTimer() |	none(?) |	none |	Instantiates timer object specific to interest. 
-| startTimer() |	view V | none |	starts the timer for the interest. Also calls displayTime() and will do so until stopTimer() is called.	
-| stopTimer() |	view V | none |	stops the timer and saves the progress.
-| timerRunning() |	int updateTimer | none |	Continuously being reduced in seconds until 0 seconds remain or stopTimer() is called.
-
-														
-## Connections:
-| Input or Output  | Function | Description
-| ----------  | ---------- |  -----------							
-| Output |      timerRunning()   |      Increments timer when running. 
-| Input  |      startTimer()     |      Starts timer object when user clicks Start Activity button. 
-| Input  |      stopTimer()      |      Stops timer object when user clicks stop Activity button. 
-
--------------------------------------------------------------------------
-
 # MainActivity 
 
 ## Functionality / Connections
@@ -104,6 +75,7 @@
 | activityLength | TextView | Text view object to set activityLength in edit interest container
 | numNotifications | TextView | Text view object to set number of notifications in edit interest container
 | numNotificationsSpan |  TextView | Text view object to set num notifications span in edit interest container
+| timer                | WebView   | Webview that holds context of webgl timer
 
 ## Connections
 | Input or Output | Function | Description 
