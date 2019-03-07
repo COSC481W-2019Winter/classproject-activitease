@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/colorPrimary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@mipmap/ic_launcher_round"
+        tools:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
         android:layout_width="match_parent"
@@ -27,6 +28,8 @@
         android:contentDescription="ActivitEase"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="ActivitEase"
+        android:textColor="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="ActivitEase" />
 
