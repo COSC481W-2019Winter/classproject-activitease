@@ -96,7 +96,7 @@ public class Add_Interest_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.add_interest_page, container, false);
 
         String[] periodSpanTypes =
-                {"Days", "Weeks", "Months", "Years"};
+                {"Day", "Week", "Month", "Year"};
         Spinner periodSpanSpinner = (Spinner) v.findViewById(R.id.periodSpanInput);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);

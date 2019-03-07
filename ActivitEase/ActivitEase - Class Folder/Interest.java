@@ -1,73 +1,26 @@
 package com.example.activitease;
 
-import android.view.View;
-// Will be deleted and methods will move to user, see
-// architecture design
 public class Interest {
+    // Will be deleted and methods will move to user, see
+    // architecture design
 
-    String interestName;
-    int activityAmount;
-    String activityPeriod;
-    int activityLength;
-    int numNotifications;
+    boolean startTimer;
+    boolean stopTimer;
+    private String interestName;
+    private int periodFreq;
     private int basePeriodSpan;
+    private int activityLength;
+    private int numNotifications;
+    private int updateTimer;
 
-    public Interest(String interestName, int activityAmount, String activityPeriod,
-                    int activityLength, int numNotifications) {
-
-        this.interestName = interestName;
-        this.activityAmount = activityAmount;
-        this.activityPeriod = activityPeriod;
-        this.activityLength = activityLength;
-        this.numNotifications = numNotifications;
-    }
-
-    public Interest() {
-
-    }
-
-    public String getInterestName() {
-        return interestName;
-    }
-
-    public void setInterestName(String interestName) {
+    public void setInterestName(String interestName)
+    {
         this.interestName = interestName;
     }
-
-    public int getActivityAmount() {
-        return activityAmount;
+    public String getInterestName()
+    {
+        return this.interestName;
     }
-
-    public void setActivityAmount(int activityAmount) {
-        this.activityAmount = activityAmount;
-    }
-
-    public String getActivityPeriod() {
-        return activityPeriod;
-    }
-
-    public void setActivityPeriod(String activityPeriod) {
-        this.activityPeriod = activityPeriod;
-    }
-
-    public int getActivityLength() {
-        return activityLength;
-    }
-
-    public void setActivityLength(int activityLength) {
-        this.activityLength = activityLength;
-    }
-
-    public int getNumNotifications() {
-        return numNotifications;
-    }
-
-    public void setNumNotifications(int numNotifications) {
-        this.numNotifications = numNotifications;
-    }
-
-    public void setBasePeriodSpan(int bps){this.basePeriodSpan = bps;}
-    /*
     public void loadInterest(String interestName, int periodFreq, int basePeriodSpan, int activityLength, int numNotifications)
     {
         this.interestName = interestName;
@@ -76,7 +29,7 @@ public class Interest {
         this.activityLength = activityLength;
         this.numNotifications = numNotifications;
     }
-    */
+
 
 
 }

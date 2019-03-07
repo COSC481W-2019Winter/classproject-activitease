@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -91,9 +90,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.Interest) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
-        } else if (id == R.id.Settings) {
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_Fragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
