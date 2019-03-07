@@ -24,7 +24,7 @@ Marketing/Flex - Anthony Bean
 
 Engineer/Flex - Li Sa
 
-Design/Engineer - Jon Woodring
+Lead Design/Engineer - Jon Woodring
 
 ##### Sign Here
 Benjamin Onwenu
