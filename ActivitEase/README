@@ -1,10 +1,15 @@
 How to install project
 1. Create new Android Studio project with Navigation drawer activity 
 2. Put class files in class folder (Folder contains MainActivity on startup)
-3. Put menu layouts in Menu folder 
-4. Put res files in their respective folders:
+3. Put res files in their respective folders:
+    - res files in the res folder
     - layout files in the layout folder
     - values files in the values folder
     - create a new folder called color, and put it in the res folder
+    
+Note: the following docs are still under development. If you want a compiling project, delete these from your directory:
+- User.java
+- Settings_Fragment.java
+- settings_page.xml
 
 Build -> Run 
