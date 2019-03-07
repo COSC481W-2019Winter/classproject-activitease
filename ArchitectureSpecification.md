@@ -58,6 +58,25 @@ to null, the pulling all subsequent interests in the array down to fill in, and 
 | submitEditInterest | View view |      | Submits the editted interest and updates instance of interest page with new data. 
 | startStopTimer | View view |      |  Starts and stops the timer, displays text message on start activity to confirm starting, changes button text on click. 
 			
+## WebGLTimer
+
+| Name  | Type | Description
+| ------------- | ------------- | ------------- 
+| activityLength | int | Gets length of activity for analog timer 
+
+## Functionality 
+| Name  | Parameters | Return | Description
+| ----------  | ---------- | --------- | -----------
+| Render() | none | none | Draws the clock animation to the screen 
+
+## Connections 
+
+## Connections
+| Input or Output | Function | Description 
+| -------------    | ---------- | ---------- 
+| Output | user.getActivityLength | Gets the activity length of the clicked activity for analog timer 
+## Properties 
+
 # Interest_Fragment
 
 ## Functionality 
