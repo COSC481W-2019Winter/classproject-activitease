@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
-    interest interest = new interest();
+    Interest interest = new Interest();
     String startStopTimerText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,20 +76,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -103,12 +89,11 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.FAQ) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FAQ_Fragment()).commit();
 
-        } else if (id == R.id.addInterest) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Add_Interest_Fragment()).commit();
-
         } else if (id == R.id.Interest) {
-
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
+        } else if (id == R.id.Settings) {
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_Fragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -121,17 +106,28 @@ public class MainActivity extends AppCompatActivity
         hp.replace(R.id.fragment_container, new Add_Interest_Fragment());
         hp.commit();
     }
+    /*
     public void submitEditInterest(View view)
     {
         //Throw error if in invalid format
         //Call instance of user to store data
         //From user call function to store data
         //Then return next page with updated content
-        interestName = findViewById(R.id.interestName);
+        interestName = findViewById(R.id.editText);
         String theInterestName = interestName.getText().toString();
         interest.setInterestName(theInterestName);
+        periodFrequency = findViewById(R.id.periodFreq);
+        String periodFreq = periodFrequency.getText().toString();
+        interest.setPeriodFreq(periodFreq);
+        activityLength = findViewById(R.id.activityLength);
+        String theActivityLength = activityLength.getText().toString();
+        interest.setActivityLength(theActivityLength);
+        basePeriodSpan = findViewById(R.id.basePeriodSpan);
+        String thePeriodSpan = basePeriodSpan.getText().toString();
+        interest.setBasePeriodSpan(thePeriodSpan);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
     }
+    */
     public void setButtonText(String buttonText)
     {
         Button b = findViewById(R.id.startStop);

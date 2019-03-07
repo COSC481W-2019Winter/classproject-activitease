@@ -13,6 +13,12 @@ public class Home_Page_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.content_main, container, false);
+        View view = inflater.inflate(R.layout.interest_page, container, false);
+        /*
+        TextView mytextview = view.findViewById(R.id.interestName);
+        interest theInterest = new interest();
+        mytextview.setText(theInterest.getInterestName());
+        */
+        return view;
     }
 }

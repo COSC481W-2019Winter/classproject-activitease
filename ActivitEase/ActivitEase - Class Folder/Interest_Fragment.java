@@ -19,7 +19,7 @@ public class Interest_Fragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.interest_page, container, false);
         TextView mytextview = view.findViewById(R.id.EditInterestName);
-        interest theInterest = new interest();
+        Interest theInterest = new Interest();
         mytextview.setText(theInterest.getInterestName());
 
         return view;
