@@ -67,22 +67,30 @@ public class User extends SQLiteOpenHelper {
 //        db.close();
     }
 
+
+    //Intended to be a User's interest search, currently only pulls the first interest
     public Interest getInterest(String interestName){
         SQLiteDatabase db = this.getReadableDatabase();
 
-
-        //Originally, Cursor was an error. At the end, verify that the user imported the Cursor class.
-
-
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_INTERESTS, null);
+        cursor.moveToFirst();
 
-        if(cursor != null){
-            cursor.moveToFirst();
+        while(cursor != null){
+            if(interestName != cursor.getString(1))
+                break;
+            else
+                cursor.moveToNext();
         }
 
-        Interest interest = new Interest(cursor.getString(0),
-                Integer.parseInt(cursor.getString(1)), cursor.getString(2),
-                Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+//        if(cursor != null){
+//            cursor.moveToFirst();
+//        }
+
+        Interest interest = new Interest(cursor.getString(1),
+                Integer.parseInt(cursor.getString(2)), cursor.getString(3),
+                Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
+
+        db.close();
         return interest;
     }
 
