@@ -1,0 +1,71 @@
+package com.example.databasefucking;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
+
+    String text = "";
+
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.textView);
+
+        User db = new User(this);
+        Interest x = new Interest("TryToSleep", 30, "Week", 10, 4);
+
+        db.addInterest(x);
+//        db.addInterest(new Interest("Hate", 10, "Hella amount", 20, 1));
+//        db.addInterest(new Interest("Angst", 30, "Forever.", 100, 1));
+//        db.addInterest(new Interest("An", 40, "Forever and a half", 120, 1));
+
+        List<Interest> interests = db.getAllInterests();
+
+        for(Interest c : interests){
+            String log = "Interest: " + c.getInterestName() + ", AMOUNT: " + c.getActivityAmount() + ", PERIOD: " + c.getActivityPeriod() + ", LENGTH: " + c.getActivityLength() + ", NOTIFICATIONS: " + c.getNumNotifications() +"\n";
+            text = text + log;
+        }
+
+        textView.setText(text);
+    }
+
+
+// Causes crash
+    public void getInterest(View view){
+        text = null;
+        EditText et = findViewById(R.id.editText);
+        String str = et.getText().toString();
+        User db = new User(this);
+
+
+        Interest interest = db.getInterest(str);
+
+
+//        List<Interest> interests = db.getAllInterests();
+//
+//        for(Interest c : interests){
+//            String log = "Interest: " + c.getInterestName() + ", AMOUNT: " + c.getActivityAmount() + ", PERIOD: " + c.getActivityPeriod() + ", LENGTH: " + c.getActivityLength() + ", NOTIFICATIONS: " + c.getNumNotifications() +"\n";
+//            text = text + log;
+//        }
+        String log = "Interest: " + interest.getInterestName() + ", AMOUNT: " + interest.getActivityAmount() + ", PERIOD: " + interest.getActivityPeriod() + ", LENGTH: " + interest.getActivityLength() + ", NOTIFICATIONS: " + interest.getNumNotifications() +"\n";
+        text = log;
+        textView.setText(text);
+    }
+
+
+
+    //Call instance of user to store data
+    //From user call function to get data
+    //Then return updated content to xml page
+
+}
