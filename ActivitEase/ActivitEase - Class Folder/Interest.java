@@ -1,29 +1,38 @@
-package com.example.databasefucking;
+package com.example.activitease;
 
 public class Interest {
 
-
-
+    int id;
     String interestName;
-    int activityAmount;
-    String activityPeriod;
+    int periodFreq;
+    int basePeriodSpan;
     int activityLength;
     int numNotifications;
 
-    public Interest(String interestName, int activityAmount, String activityPeriod,
+    public Interest(String interestName, int periodFreq, int basePeriodSpan,
                     int activityLength, int numNotifications) {
 
+        this.id = id;
         this.interestName = interestName;
-        this.activityAmount = activityAmount;
-        this.activityPeriod = activityPeriod;
+        this.periodFreq = periodFreq;
+        this.basePeriodSpan = basePeriodSpan;
         this.activityLength = activityLength;
         this.numNotifications = numNotifications;
     }
-    
-    
+
+//    public Interest(int id, String string, String cursorString){
+//        this.id = id;
+//        this.name = name;
+//        this.phone_number = phone_number;
+//    }
+
     public Interest() {
 
     }
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
 
     public String getInterestName() {
         return interestName;
@@ -33,20 +42,20 @@ public class Interest {
         this.interestName = interestName;
     }
 
-    public int getActivityAmount() {
-        return activityAmount;
+    public int getPeriodFreq() {
+        return periodFreq;
     }
 
-    public void setActivityAmount(int activityAmount) {
-        this.activityAmount = activityAmount;
+    public void setPeriodFreq(int activityAmount) {
+        this.periodFreq = activityAmount;
     }
 
-    public String getActivityPeriod() {
-        return activityPeriod;
+    public int getBasePeriodSpan() {
+        return basePeriodSpan;
     }
 
-    public void setActivityPeriod(String activityPeriod) {
-        this.activityPeriod = activityPeriod;
+    public void setBasePeriodSpan(int basePeriodSpan) {
+        this.basePeriodSpan = basePeriodSpan;
     }
 
     public int getActivityLength() {
