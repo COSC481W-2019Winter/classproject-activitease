@@ -1,10 +1,4 @@
-package com.example.databasefucking;
-
-/*
-Found a youtube tutorial and followed it. Once I finished it, I realized it was close to what I needed.
- So I modified the code to what we need. The video can be found at the following link;
- https://www.google.com/url?q=https://www.youtube.com/watch?v%3DK6cYSNXb9ew&sa=D&ust=1551724256967000&usg=AFQjCNHxZrvyV34V3A4RDjcORVgYKXne9w
- */
+package com.example.activitease;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,38 +11,34 @@ import java.util.List;
 
 public class User extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+//    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "InterestManager";
-
-    //The following were private, but made public for the testing.
-    private static final String TABLE_INTERESTS = "Interests";
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "interestName";
-    private static final String KEY_AMOUNT = "amount";
-    private static final String KEY_PERIOD = "period";
-    private static final String KEY_LENGTH = "length";
-    private static final String KEY_NOTIFICATIONS = "numNotifications";
+    private static final String TABLE_NAME = "Interestss";
+    private static final String Id = "id";
+    private static final String Col1 = "interestName";
+    private static final String Col2 = "amount";
+    private static final String Col3 = "period";
+    private static final String Col4 = "length";
+    private static final String Col5 = "numNotifications";
 
 
 
     public User(Context context){
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, 1);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        String CREATE_INTERESTS_TABLE = "CREATE TABLE " + TABLE_INTERESTS + "(" + KEY_ID
-//                + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_AMOUNT + " TEXT," + KEY_PERIOD + " TEXT, "
-//                + KEY_LENGTH + " TEXT, " + KEY_NOTIFICATIONS + " TEXT "+ ")";
-        String CREATE_INTERESTS_TABLE = "CREATE TABLE " + TABLE_INTERESTS +
-                " (id INTEGER PRIMARY KEY AUTOINCREMENT, " + " interestName TEXT, amount TEXT, period TEXT, length TEXT, numNotifications TEXT)";
-        db.execSQL(CREATE_INTERESTS_TABLE);
+        String createInterestsTable = "CREATE TABLE " + TABLE_NAME + "(" + Id
+                + " INTEGER PRIMARY KEY," + Col1 + " TEXT," + Col2 + " TEXT," + Col3 + " TEXT, "
+                + Col4 + " TEXT, " + Col5 + " TEXT "+ ")";
+        db.execSQL(createInterestsTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INTERESTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
         onCreate(db);
     }
@@ -57,47 +47,44 @@ public class User extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, interest.getInterestName());
-        values.put(KEY_AMOUNT, interest.getActivityAmount());
-        values.put(KEY_PERIOD, interest.getActivityPeriod());
-        values.put(KEY_LENGTH, interest.getActivityLength());
-        values.put(KEY_NOTIFICATIONS, interest.getNumNotifications());
+//        values.put(Id, interest.getId());
+        values.put(Col1, interest.getInterestName());
+        values.put(Col2, interest.getPeriodFreq());
+        values.put(Col3, interest.getBasePeriodSpan());
+        values.put(Col4, interest.getActivityLength());
+        values.put(Col5, interest.getNumNotifications());
 
-        db.insert(TABLE_INTERESTS, null, values);
-//        db.close();
+        db.insert(TABLE_NAME, null, values);
+        db.close();
     }
 
 
-    //Intended to be a User's interest search, currently only pulls the first interest
-    public Interest getInterest(String interestName){
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_INTERESTS, null);
-        cursor.moveToFirst();
-
-        while(cursor != null){
-            if(interestName != cursor.getString(1))
-                break;
-            else
-                cursor.moveToNext();
-        }
-
+    //Wait Anthony you didn't have this public, so you added that to this function
+//    public Interest getInterest(String interestName){
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//
+//        //Originally, Cursor was an error. At the end, verify that the user imported the Cursor class.
+//
+//
+//        Cursor cursor = db.query(TABLE_NAME, new String[]{Col1, Col2, Col3,
+//                        Col4, Col5}, Col1 + "=?",
+//                new String[]{String.valueOf(interestName)}, null, null, null, null);
+//
 //        if(cursor != null){
 //            cursor.moveToFirst();
 //        }
-
-        Interest interest = new Interest(cursor.getString(1),
-                Integer.parseInt(cursor.getString(2)), cursor.getString(3),
-                Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
-
-        db.close();
-        return interest;
-    }
+//
+//        Interest interest = new Interest(cursor.getString(0),
+//                Integer.parseInt(cursor.getString(1)), cursor.getString(2),
+//                Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+//        return interest;
+//    }
 
     public List<Interest> getAllInterests(){
         List<Interest> interestList = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_INTERESTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -105,11 +92,11 @@ public class User extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do {
                 Interest interest = new Interest();
-                interest.setInterestName(cursor.getString(1));
-                interest.setActivityAmount(Integer.parseInt(cursor.getString(2)));
-                interest.setActivityPeriod(cursor.getString(3));
-                interest.setActivityLength(Integer.parseInt(cursor.getString(4)));
-                interest.setNumNotifications(Integer.parseInt(cursor.getString(5)));
+                interest.setInterestName(cursor.getString(0));
+                interest.setPeriodFreq(Integer.parseInt(cursor.getString(1)));
+                interest.setBasePeriodSpan(Integer.parseInt(cursor.getString(2)));
+                interest.setActivityLength(Integer.parseInt(cursor.getString(3)));
+                interest.setNumNotifications(Integer.parseInt(cursor.getString(4)));
 
                 interestList.add(interest);
             }
@@ -119,28 +106,28 @@ public class User extends SQLiteOpenHelper {
         return interestList;
     }
 
-    public int updateInterest(Interest interest){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_AMOUNT, interest.getActivityAmount());
-        values.put(KEY_PERIOD, interest.getActivityPeriod());
-        values.put(KEY_LENGTH, interest.getActivityLength());
-        values.put(KEY_NOTIFICATIONS, interest.getNumNotifications());
-
-        return db.update(TABLE_INTERESTS, values, KEY_NAME + "=?",
-                new String[]{String.valueOf(interest.getInterestName())});
-    }
+//    public int updateInterest(Interest interest){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(Col2, interest.getActivityAmount());
+//        values.put(Col3, interest.getActivityPeriod());
+//        values.put(Col4, interest.getActivityLength());
+//        values.put(Col5, interest.getNumNotifications());
+//
+//        return db.update(TABLE_NAME, values, Col1 + "=?",
+//                new String[]{String.valueOf(interest.getInterestName())});
+//    }
 
     public void deleteInterest(Interest interest){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_INTERESTS, KEY_NAME + "=?",
-                new String[]{String.valueOf(interest.getInterestName())});
+        db.delete(TABLE_NAME, Id + "=?",
+                new String[]{String.valueOf(interest.getId())});
         db.close();
     }
 
-    public int getInterestCount(Interest interest){
-        String countQuery = "Select  * FROM " + TABLE_INTERESTS;
+    public int getInterestCount(){
+        String countQuery = "Select  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
@@ -148,4 +135,25 @@ public class User extends SQLiteOpenHelper {
         return cursor.getCount();
 
     }
+
+
+/* The following is the original code*/
+
+//
+//    public void deleteInterest(Interest interest){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        db.delete(TABLE_NAME, Col1 + "=?",
+//                new String[]{String.valueOf(interest.getInterestName())});
+//        db.close();
+//    }
+//
+//    public int getInterestCount(Interest interest){
+//        String countQuery = "Select  * FROM " + TABLE_NAME;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(countQuery, null);
+//        cursor.close();
+//
+//        return cursor.getCount();
+//
+//    }
 }
