@@ -10,11 +10,11 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="116dp"
         android:text="(times)"
-        app:layout_constraintStart_toEndOf="@+id/activityLength"
+        app:layout_constraintStart_toEndOf="@+id/periodFreq"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
@@ -33,39 +33,40 @@
         android:id="@+id/periodSpanInput"
         android:layout_width="96dp"
         android:layout_height="39dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginLeft="96dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="92dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"></Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/periodFreq"></Spinner>
 
     <EditText
         android:id="@+id/periodFreq"
         android:layout_width="39dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginRight="152dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="84dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/activityLength"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interestName"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/activityLength" />
 
     <EditText
         android:id="@+id/activityLength"
         android:layout_width="43dp"
         android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="148dp"
         android:layout_marginRight="148dp"
-        android:layout_marginBottom="84dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/periodSpanInput"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/interestName" />
 
     <Button
         android:id="@+id/submitNewInterestButton"
@@ -89,8 +90,8 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="124dp"
         android:text="Activity frequency:"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,11 +101,11 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="96dp"
         android:text="Activity length:"
-        app:layout_constraintEnd_toStartOf="@+id/periodFreq"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
