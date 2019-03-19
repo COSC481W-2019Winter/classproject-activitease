@@ -1,4 +1,4 @@
-package com.example.activitease;
+package com.example.activitease20;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 public class Add_Interest_Fragment extends Fragment {
@@ -22,73 +25,9 @@ public class Add_Interest_Fragment extends Fragment {
      * activityLength = 60.0;
      * periodSpanStr = "week". This String is matched with a double from the getPeriodSpan method.
      */
+    private Button addInterestBn;
+    private EditText interestName, periodSpan, periodFreq, numNotifications, activityLength;
 
-    /*
-    String interestName;
-    int periodFreq;
-    double activityLength;
-    String periodSpanStr;
-
-    double basePeriodSpan;
-
-    int numNotifications;
-
-    //Setter methods
-    public void setInterestName(String interestName) {
-        this.interestName = interestName;
-    }
-
-    public void setPeriodFreq(int periodFreq) {
-        this.periodFreq = periodFreq;
-    }
-
-    public void setActivityLength(double activityLength) {
-        this.activityLength = activityLength;
-    }
-    public void setPeriodSpanStr(String periodSpanStr) {
-        this.periodSpanStr = periodSpanStr;
-    }
-
-    public void setNumNotifications(int numNotifications) {
-        this.numNotifications = numNotifications;
-    }
-
-    //Getter methods
-    public String getInterestName() { return interestName; }
-    public int getPeriodFreq() { return periodFreq; }
-    public double getActivityLength() { return activityLength; }
-
-    public String getPeriodSpanStr() { return periodSpanStr; }
-    public double getBasePeriodSpan() { return basePeriodSpan; }
-
-    public int getNumNotifications() { return numNotifications; }
-
-
-
-     //   This method takes an input string period (day, week, month, or year)
-     //   and returns a corresponding double in minutes of that length.
-
-    public double getPeriodSpan (String periodSpanStr)
-    {
-        switch (periodSpanStr)
-        {
-            case "day":
-                return 1440;
-            case "week":
-                return 10080;
-            case "month":
-                return 43800;
-            case "year":
-                return 525960;
-            default: {
-                System.out.println("Error; periodSpanStr not recognized. Invalid input.");
-                System.exit(0);
-                return 0;
-            }
-        }
-    }
-
-    */
 
     @Nullable
     @Override
@@ -102,6 +41,56 @@ public class Add_Interest_Fragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanSpinner.setAdapter(adapter);
+
+        interestName = v.findViewById(R.id.interestName);
+        activityLength = v.findViewById(R.id.activityLength);
+        periodFreq = v.findViewById(R.id.periodFreq);
+        periodSpan = v.findViewById(R.id.periodSpanInput);
+        numNotifications = v.findViewById(R.id.numNotifications);
+
+        addInterestBn = v.findViewById(R.id.submitNewInterestButton);
+
+        addInterestBn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newInterestName  = interestName.getText().toString();
+
+                int newActivityLength = Integer.parseInt(activityLength.getText().toString());
+                int newPeriodFreq = Integer.parseInt(periodFreq.getText().toString());
+                String newPeriodSpan = periodSpan.getText().toString();
+                int newNumNotifications = Integer.parseInt(periodSpan.getText().toString());
+
+                int basePeriodSpan = 0;
+
+                /**
+                 * Temporary values of basePeriodSpan, which will have to be revised for later.
+                 */
+                switch (newPeriodSpan) {
+                    case "Day":
+                        basePeriodSpan = 1;
+                        break;
+                    case "Week":
+                        basePeriodSpan = 7;
+                        break;
+                    case "Month":
+                        basePeriodSpan = 30;
+                        break;
+                    case "Year":
+                        basePeriodSpan = 365;
+                        break;
+                }
+                Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
+                                                newActivityLength, newNumNotifications);
+
+                MainActivity.myDB.myDao().addInterest(interest);
+                Toast.makeText(getActivity(), "Interest added successfully", Toast.LENGTH_LONG).show();
+
+                interestName.setText("");
+                activityLength.setText("");
+                periodFreq.setText("");
+                numNotifications.setText("");
+            }
+        });
 
         return v;
 
