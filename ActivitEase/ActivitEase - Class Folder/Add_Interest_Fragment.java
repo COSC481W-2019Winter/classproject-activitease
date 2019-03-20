@@ -84,6 +84,7 @@ public class Add_Interest_Fragment extends Fragment {
                                                 newActivityLength, newNumNotifications);
 
                 MainActivity.myDB.myDao().addInterest(interest);
+                MainActivity.myDB.myDao().getInterests();
                 Toast.makeText(getActivity(), "Interest added successfully", Toast.LENGTH_LONG).show();
 
                 interestName.setText("");
