@@ -20,5 +20,5 @@ This file may contain multiple tables required for its processing, so if the tab
     toolbar click the Table: dropdown menu and select the table in question. That should pull up the contents of our populated table.
 
 
-For Development purposes and as of 3/20, our database contains android_metadata, interests, and root_master_table.
+For Development purposes and as of 3/20/19, our database contains android_metadata, interests, and root_master_table.
     A user's interests will be located in the interests table.
