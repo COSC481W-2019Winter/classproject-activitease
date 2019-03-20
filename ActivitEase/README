@@ -6,6 +6,8 @@ How to install project
     - layout files in the layout folder
     - values files in the values folder
     - create a new folder called color, and put it in the res folder
+    - Add openGl dependency to Manifest folder -     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
     
 Note: the following docs are still under development. If you want a compiling project, delete these from your directory:
 - User.java
