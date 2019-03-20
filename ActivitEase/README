@@ -7,7 +7,7 @@ How to install project
     - values files in the values folder
     - create a new folder called color, and put it in the res folder
     
-Under 'Gradle Scripts' (Module: app), add in these dependencies:
+Under 'Gradle Scripts' (Module: app), add in these dependencies in the dependencies section:
 implementation "android.arch.persistence.room:runtime:1.1.1"
 annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     
