@@ -1,4 +1,4 @@
-﻿package com.example.activitease;
+package com.example.activitease;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
