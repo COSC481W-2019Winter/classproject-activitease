@@ -1,4 +1,4 @@
-package com.example.activitease;
+package com.example.activiteaseroomdb;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -1,8 +1,9 @@
-package com.example.activitease20;
+package com.example.activiteaseroomdb;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 
 @Entity(tableName = "interests")
@@ -11,6 +12,7 @@ public class Interest {
     // architecture design
 
     @PrimaryKey
+    @NonNull
     private String interestName;
 
     @ColumnInfo()

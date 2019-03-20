@@ -1,4 +1,4 @@
-package com.example.activitease20;
+package com.example.activiteaseroomdb;
 
 import android.arch.persistence.room.Room;
 import android.content.DialogInterface;

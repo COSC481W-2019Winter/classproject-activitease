@@ -1,4 +1,4 @@
-package com.example.activitease20;
+package com.example.activiteaseroomdb;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;

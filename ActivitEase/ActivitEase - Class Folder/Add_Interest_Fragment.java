@@ -1,4 +1,4 @@
-package com.example.activitease20;
+package com.example.activiteaseroomdb;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Button;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 
@@ -26,8 +27,8 @@ public class Add_Interest_Fragment extends Fragment {
      * periodSpanStr = "week". This String is matched with a double from the getPeriodSpan method.
      */
     private Button addInterestBn;
-    private EditText interestName, periodSpan, periodFreq, numNotifications, activityLength;
-
+    private EditText interestName, periodFreq, numNotifications, activityLength;
+    private Spinner periodSpan;
 
     @Nullable
     @Override
@@ -57,8 +58,8 @@ public class Add_Interest_Fragment extends Fragment {
 
                 int newActivityLength = Integer.parseInt(activityLength.getText().toString());
                 int newPeriodFreq = Integer.parseInt(periodFreq.getText().toString());
-                String newPeriodSpan = periodSpan.getText().toString();
-                int newNumNotifications = Integer.parseInt(periodSpan.getText().toString());
+                String newPeriodSpan = periodSpan.getSelectedItem().toString();
+                int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
 
                 int basePeriodSpan = 0;
 
