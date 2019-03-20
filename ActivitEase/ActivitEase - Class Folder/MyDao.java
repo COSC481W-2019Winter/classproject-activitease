@@ -7,8 +7,8 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface MyDao {
     @Insert
-    public void addInterest(Interest i);
+    void addInterest(Interest i);
 
     @Query("select * from interests")
-    public Interest getInterests();
+    Interest getInterests();
 }

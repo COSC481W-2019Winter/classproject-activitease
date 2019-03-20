@@ -35,6 +35,7 @@ public class Add_Interest_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_interest_page, container, false);
 
+        // String array populates the spinner (dropdown menu) for the add_interest_page.xml page.
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
         Spinner periodSpanSpinner = (Spinner) v.findViewById(R.id.periodSpanInput);
@@ -43,19 +44,27 @@ public class Add_Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanSpinner.setAdapter(adapter);
 
+        /*
+         * Copies all of the new interest data. All are EditText, except for period span.
+         */
         interestName = v.findViewById(R.id.interestName);
         activityLength = v.findViewById(R.id.activityLength);
         periodFreq = v.findViewById(R.id.periodFreq);
         periodSpan = v.findViewById(R.id.periodSpanInput);
         numNotifications = v.findViewById(R.id.numNotifications);
 
+        // Finds the submit button, and an onClick method submits the data into the database.
         addInterestBn = v.findViewById(R.id.submitNewInterestButton);
-
         addInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Sets the interestName, which is the key for the database.
                 String newInterestName  = interestName.getText().toString();
 
+                /*
+                 * Finds the raw values of the EditTexts and the Spinner, and saves them in
+                 * int and String variables.
+                 */
                 int newActivityLength = Integer.parseInt(activityLength.getText().toString());
                 int newPeriodFreq = Integer.parseInt(periodFreq.getText().toString());
                 String newPeriodSpan = periodSpan.getSelectedItem().toString();
@@ -63,8 +72,10 @@ public class Add_Interest_Fragment extends Fragment {
 
                 int basePeriodSpan = 0;
 
-                /**
+                /*
                  * Temporary values of basePeriodSpan, which will have to be revised for later.
+                 * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                 * and year are.
                  */
                 switch (newPeriodSpan) {
                     case "Day":
@@ -80,13 +91,18 @@ public class Add_Interest_Fragment extends Fragment {
                         basePeriodSpan = 365;
                         break;
                 }
+
+                // Creates a new Interest object of the given int variables.
                 Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
                                                 newActivityLength, newNumNotifications);
 
+                // The database adds a new interest to the interests table.
                 MainActivity.myDB.myDao().addInterest(interest);
-                MainActivity.myDB.myDao().getInterests();
+
+                // Announces that an interest was successfully added.
                 Toast.makeText(getActivity(), "Interest added successfully", Toast.LENGTH_LONG).show();
 
+                // Resets the AddInterest form.
                 interestName.setText("");
                 activityLength.setText("");
                 periodFreq.setText("");

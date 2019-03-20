@@ -6,15 +6,22 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 
+/**
+ * This class constructs the table for the MyDB class, and can serve as an interest object.
+ */
 @Entity(tableName = "interests")
 public class Interest {
     // Will be deleted and methods will move to user, see
     // architecture design
 
+    // This is the primary retrieval column for the 'interests' table.
     @PrimaryKey
     @NonNull
     private String interestName;
 
+    /*
+        The rest are columns of the 'interests' table.
+     */
     @ColumnInfo()
     private int periodFreq;
     @ColumnInfo()
@@ -30,6 +37,10 @@ public class Interest {
 
     }
 
+    /*
+    Constructor for Interest objects, which can easily be added to the 'interests' table,
+    and then into the database.
+     */
     public Interest(String interestName, int periodFreq, int basePeriodSpan,
                          int activityLength, int numNotifications) {
         this.interestName = interestName;
