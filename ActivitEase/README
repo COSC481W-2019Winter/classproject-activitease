@@ -8,7 +8,7 @@ Build -> Run
 
 
 How to view the Database from a Developer's standpoint
-1. Download and install DB Browser for SQLite fromhttps://sqlitebrowser.org/dl/ 
+1. Download and install DB Browser for SQLite from    https://sqlitebrowser.org/dl/ 
 2. In Android Studio, open the Device File Explorer on the right side bar (lower corner)
 3. With your device explorer open, find the following folders:
     data > user > 0 > com.example.activitEase > databases
