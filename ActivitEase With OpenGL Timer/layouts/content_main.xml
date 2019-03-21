@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/AddInterest"
+        android:layout_width="311dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/side_nav_bar"
+        android:onClick="openAddInterest"
+        android:text="+ Add Interest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/goToAct"
+        android:layout_width="257dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/side_nav_bar"
+        android:text="Go to Activity"
+        android:onClick="openActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="420dp"
+        android:layout_height="454dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="100dp">
+
+            <TextView
+                android:id="@+id/activity1"
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:textColor="@color/text_color"
+                android:textSize="35dp" />
+
+            <TextView
+                android:id="@+id/activity2"
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:textColor="@color/text_color"
+                android:textSize="35dp"
+                tools:layout_editor_absoluteX="17dp"
+                tools:layout_editor_absoluteY="213dp" />
+
+            <TextView
+                android:id="@+id/activity3"
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:textColor="@color/text_color"
+                android:textSize="35dp" />
+
+            <TextView
+                android:id="@+id/activity4"
+                android:layout_width="360dp"
+                android:layout_height="99dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:textColor="@color/text_color"
+                android:textSize="35dp" />
+
+            <TextView
+                android:id="@+id/activity5"
+                android:layout_width="356dp"
+                android:layout_height="69dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:textColor="@color/text_color"
+                android:textSize="35dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
