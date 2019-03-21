@@ -12,7 +12,7 @@ How to view the Database from a Developer's standpoint
 2. In Android Studio, open the Device File Explorer on the right side bar (lower corner)
 3. With your device explorer open, find the following folders:
 
-     - data > user (if user doesn’t exist, skip to the following bullet point) > 0 > com.example.activitEase > databases
+     - data > user (if user doesn’t exist, skip to the following bullet point) > 0 > com.example.*NAME_OF_PACKAGE* > databases
      - data > data > com.example.*NAME_OF_PACKAGE* > databases
 
 4. Right-click on databases and select save as. Save the files in an easy to find location (like Desktop or Downloads)
