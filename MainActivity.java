@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         notification.setTicker("Activitease notification");
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle("Activitease alarm");
-        notification.setContentText("It's to time to do your favorite stuff");
+        notification.setContentText("It's time to do your favorite stuff");
 
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
