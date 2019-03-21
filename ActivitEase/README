@@ -1,5 +1,6 @@
 How to install project
-1. Create new Android Studio project with Navigation drawer activity 
+1. Create new Android Studio project with Navigation drawer activity. MAKE SURE YOU NAME THE PROJECT 'AcitivitEase' AND NOTHING ELSE!
+Other names will disorganize the package storage.
 2. Put class files in class folder (Folder contains MainActivity on startup)
 3. Put res files in their respective folders:
     - res files in the res folder
