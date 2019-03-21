@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         notification.setSmallIcon(icon);
         notification.setTicker("Activitease notification");
         notification.setWhen(System.currentTimeMillis());
-        notification.setContentTitle("Here is the title");
-        notification.setContentText("Notification test");
+        notification.setContentTitle("Activitease alarm");
+        notification.setContentText("It's to time to do your favorite stuff");
 
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
