@@ -13,13 +13,5 @@ Other names will disorganize the package storage.
     - Under 'Gradle Scripts' (Module: app), add in these dependencies in  dependencies {}:
         - implementation "android.arch.persistence.room:runtime:1.1.1"
         - annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
- 
-
-
-    
-Note: the following docs are still under development. If you want a compiling project, delete these from your directory:
-- User.java
-- Settings_Fragment.java
-- settings_page.xml
 
 Build -> Run 
