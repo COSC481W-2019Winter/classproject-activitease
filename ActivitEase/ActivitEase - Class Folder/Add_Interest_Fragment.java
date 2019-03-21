@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Button;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 
@@ -58,55 +57,69 @@ public class Add_Interest_Fragment extends Fragment {
         addInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Sets the interestName, which is the key for the database.
-                String newInterestName  = interestName.getText().toString();
+                String newInterestName = interestName.getText().toString();
 
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
                  * int and String variables.
                  */
-                int newActivityLength = Integer.parseInt(activityLength.getText().toString());
-                int newPeriodFreq = Integer.parseInt(periodFreq.getText().toString());
+                String newActivityLengthTemp = activityLength.getText().toString();
+                String newPeriodFreqTemp = periodFreq.getText().toString();
                 String newPeriodSpan = periodSpan.getSelectedItem().toString();
-                int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
+                String newNumNotificationsTemp = numNotifications.getText().toString();
 
-                int basePeriodSpan = 0;
+                if (newInterestName.equals(""))
+                    interestName.setError("Please enter an interest name");
+                else if (newActivityLengthTemp.equals(""))
+                    activityLength.setError("Please enter an activity length");
+                else if (newPeriodFreqTemp.equals(""))
+                    periodFreq.setError("Please enter a period frequency");
+                else if (newNumNotificationsTemp.equals(""))
+                    numNotifications.setError("Please enter a number of notifications");
+                else {
+                    int basePeriodSpan = 0;
+                    int newActivityLength = Integer.parseInt(newActivityLengthTemp);
+                    int newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
+                    int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
 
-                /*
-                 * Temporary values of basePeriodSpan, which will have to be revised for later.
-                 * basePeriodSpan serves as a numeric representation of how long a day, week, month,
-                 * and year are.
-                 */
-                switch (newPeriodSpan) {
-                    case "Day":
-                        basePeriodSpan = 1;
-                        break;
-                    case "Week":
-                        basePeriodSpan = 7;
-                        break;
-                    case "Month":
-                        basePeriodSpan = 30;
-                        break;
-                    case "Year":
-                        basePeriodSpan = 365;
-                        break;
+                    /*
+                     * Temporary values of basePeriodSpan, which will have to be revised for later.
+                     * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                     * and year are.
+                     */
+                    switch (newPeriodSpan) {
+                        case "Day":
+                            basePeriodSpan = 1;
+                            break;
+                        case "Week":
+                            basePeriodSpan = 7;
+                            break;
+                        case "Month":
+                            basePeriodSpan = 30;
+                            break;
+                        case "Year":
+                            basePeriodSpan = 365;
+                            break;
+                    }
+
+                    // Creates a new Interest object of the given int variables.
+                    Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
+                            newActivityLength, newNumNotifications);
+
+                    // The database adds a new interest to the interests table.
+                    MainActivity.myDB.myDao().addInterest(interest);
+
+                    // Announces that an interest was successfully added.
+                    Toast.makeText(getActivity(), "Interest added successfully", Toast.LENGTH_LONG).show();
+
+                    // Resets the AddInterest form.
+                    interestName.setText("");
+                    activityLength.setText("");
+                    periodFreq.setText("");
+                    numNotifications.setText("");
                 }
-
-                // Creates a new Interest object of the given int variables.
-                Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
-                                                newActivityLength, newNumNotifications);
-
-                // The database adds a new interest to the interests table.
-                MainActivity.myDB.myDao().addInterest(interest);
-
-                // Announces that an interest was successfully added.
-                Toast.makeText(getActivity(), "Interest added successfully", Toast.LENGTH_LONG).show();
-
-                // Resets the AddInterest form.
-                interestName.setText("");
-                activityLength.setText("");
-                periodFreq.setText("");
-                numNotifications.setText("");
             }
         });
 
