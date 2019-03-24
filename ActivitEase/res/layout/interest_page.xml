@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context = ".MainActivity">
+    tools:context = ".Interest_Fragment">
+
 
     <TextView
         android:id="@+id/EditInterestName"
@@ -89,78 +90,108 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/PeriodFrequencyText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Period Frequency" />
-
-            <EditText
-                android:id="@+id/periodFrequency"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/BasePeriodSpanText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Base Period Span" />
-
-            <EditText
-                android:id="@+id/basePeriodSpan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" />
-
-            <TextView
                 android:id="@+id/ActivityLengthText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activity Length" />
+                android:text="Activity Length (Minutes)" />
 
             <EditText
                 android:id="@+id/activityLength"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType= "number" />
+
+            <TextView
+                android:id="@+id/PeriodFrequencyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Period Frequency" />
+
+            <Spinner
+                android:id="@+id/periodSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/ActivityAmountText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity Amount (Times/period) " />
+
+            <EditText
+                android:id="@+id/activityAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/NumNotificationSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification Period" />
+
+            <Spinner
+                android:id="@+id/numNotificationSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:spinnerMode="dropdown"
+                 />
 
             <TextView
                 android:id="@+id/NumNotificationsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Notifications Daily" />
+                android:text="Notifications" />
 
             <EditText
                 android:id="@+id/numNotifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="number" />
 
             <Button
                 android:id="@+id/SubmitEditInterest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
                 android:onClick="submitEditInterest"
                 android:text="Submit Interest" />
         </LinearLayout>
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="369dp"
-        android:layout_height="319dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+    <com.example.activitease.MyGLSurfaceView
+        android:id="@+id/openGLView"
+        android:layout_width="360dp"
+        android:layout_height="249dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "00:00"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="@+id/openGLView"
+        app:layout_constraintEnd_toEndOf="@+id/openGLView"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/openGLView"
+        app:layout_constraintTop_toTopOf="@+id/openGLView"
+        app:layout_constraintVertical_bias="0.514" />
+
 </android.support.constraint.ConstraintLayout>
