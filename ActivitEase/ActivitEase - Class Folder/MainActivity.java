@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -149,4 +150,10 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+    public void openContactPage(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), ContactManager.class));
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Contact()).commit();
+    }
+
 }

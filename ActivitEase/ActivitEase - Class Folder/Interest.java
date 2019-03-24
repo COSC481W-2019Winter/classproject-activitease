@@ -2,6 +2,7 @@ package com.example.activitease;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -32,7 +33,10 @@ public class Interest {
     private int numNotifications;
     @ColumnInfo()
     private int streakCt;
+    @ColumnInfo()
+    private boolean timerRunning = true;
 
+    @Ignore
     public Interest() {
 
     }
@@ -79,6 +83,9 @@ public class Interest {
     public void setStreakCt(int streakCt)
     { this.streakCt = streakCt;  }
 
+    public void setTimerRunning(boolean timerRunning )
+    { this.timerRunning = timerRunning; }
+
     public String getInterestName() { return this.interestName; }
 
     public int getPeriodFreq() { return periodFreq; }
@@ -86,4 +93,5 @@ public class Interest {
     public int getActivityLength() { return activityLength; }
     public int getNumNotifications() { return numNotifications; }
     public int getStreakCt() {return streakCt; }
+    public boolean getTimerRunning() { return timerRunning; }
 }
