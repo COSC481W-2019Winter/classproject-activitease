@@ -18,6 +18,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private final float[] mViewMatrix = new float[16];
     private circle outerCircle;
     private circle innerCircle;
+    private circle animationCircle;
+    int vertexStart = 0;
+    int vertexStop = 5;
 
     public static int loadShader(int type, String shaderCode){
 
@@ -37,6 +40,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(1, 1, 1, 0);
         innerCircle = new circle(1);
         outerCircle = new circle((float)0.75);
+        animationCircle = new circle((float) 1);
+
+
         //Code to draw geometry of clock
     }
 
@@ -59,9 +65,26 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     }
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        innerCircle.draw(mMVPMatrix);
-        outerCircle.draw(mMVPMatrix);
-        //Calls to do animation of timer
+
+        float colorInnerCircle[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        float colorOuterCircle[] = {.251f, .879f, .816f, 1.0f}; //Turquoise
+        innerCircle.draw(mMVPMatrix, colorOuterCircle);
+        outerCircle.draw(mMVPMatrix, colorInnerCircle);
+        //Animation of timer;
+        synchronized (this) {
+            try {
+                wait(1000);  //Will need to find a formula to calculate amount of millis needed to make any given animation time appear smooth
+            } catch (InterruptedException e) { //Wait for 1 second before continuing, unless there is an exception
+                e.printStackTrace();
+            }
+            outerCircle.animate(mMVPMatrix, colorInnerCircle, vertexStart, vertexStop);
+            vertexStart += 5;
+            vertexStop += 5;
+        }
+
+
+
+
     }
     public class circle
     {
@@ -85,9 +108,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
        private float vertices[];
        private int MVPmatrixhandle;
        int COORDS_PER_VERTEX = 3;
-       private final int vertexCount = 364 * 3 / COORDS_PER_VERTEX;
+       private final int vertexCount = 365 * 3 / COORDS_PER_VERTEX;
        private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
-       float color[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
 
        public circle(float scalingFactor)
        {
@@ -96,12 +118,12 @@ public class GLRenderer implements GLSurfaceView.Renderer {
            int fragmentShader = GLRenderer.loadShader(GLES20.GL_FRAGMENT_SHADER,
                    fragmentShaderCode);
 
-           vertices = new float[364 * 3];
+           vertices = new float[365 * 3];
            vertices[0] = scalingFactor;
-           for(int i = 1; i <364; i++){
-               vertices[(i * 3 + 0)] = (float) (scalingFactor * Math.cos((3.14 / 180) * (float)i));
-               vertices[(i * 3+ 1)] = (float) (scalingFactor * Math.sin((3.14 / 180) * (float)i));
-               vertices[(i * 3+ 2)] = 0;
+           for (int i = 1; i < 365; i++) {
+               vertices[(i * 3 + 0)] = (float) (scalingFactor * Math.cos((3.14 / 180) * (float) i));
+               vertices[(i * 3 + 1)] = (float) (scalingFactor * Math.sin((3.14 / 180) * (float) i));
+               vertices[(i * 3 + 2)] = 0;
            }
 
            Log.v("Thread", "" + vertices[0] + "," + vertices[1] + "," + vertices[2]);
@@ -117,20 +139,19 @@ public class GLRenderer implements GLSurfaceView.Renderer {
            vertexBuffer.position(0);
 
 
+           // create empty OpenGL ES Program
+           mProgram = GLES20.glCreateProgram();
 
-             // create empty OpenGL ES Program
-             mProgram = GLES20.glCreateProgram();
+           // add the vertex shader to program
+           GLES20.glAttachShader(mProgram, vertexShader);
 
-             // add the vertex shader to program
-             GLES20.glAttachShader(mProgram, vertexShader);
+           // add the fragment shader to program
+           GLES20.glAttachShader(mProgram, fragmentShader);
 
-             // add the fragment shader to program
-             GLES20.glAttachShader(mProgram, fragmentShader);
-
-              // creates OpenGL ES program executables
-             GLES20.glLinkProgram(mProgram);
-        }
-        public void draw(float[] mvpMatrix)
+           // creates OpenGL ES program executables
+           GLES20.glLinkProgram(mProgram);
+       }
+        public void draw(float[] mvpMatrix, float[] color)
         {
             // Add program to OpenGL ES environment
             GLES20.glUseProgram(mProgram);
@@ -155,12 +176,41 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             //Apply projection and view transformation
             GLES20.glUniformMatrix4fv(MVPmatrixhandle, 1, false, mvpMatrix, 0);
             // Draw the circle
-            GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, vertexCount);
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vertexCount);
 
             // Disable vertex array
             GLES20.glDisableVertexAttribArray(positionHandle);
         }
+        public void animate(float[] mvpMatrix, float[] color, int vertexStart, int vertexStop) //Draw code but draws percentage of circle at a time
+        {
+            // Add program to OpenGL ES environment
+            GLES20.glUseProgram(mProgram);
 
+            // get handle to vertex shader's vPosition member
+            positionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
+
+            // Enable a handle to the triangle vertices
+            GLES20.glEnableVertexAttribArray(positionHandle);
+
+            // Prepare the triangle coordinate data
+            GLES20.glVertexAttribPointer(positionHandle, COORDS_PER_VERTEX,
+                    GLES20.GL_FLOAT, false,
+                    vertexStride, vertexBuffer);
+
+            // get handle to fragment shader's vColor member
+            colorHandle = GLES20.glGetUniformLocation(mProgram, "vColor");
+
+            // Set color for drawing the circle
+            GLES20.glUniform4fv(colorHandle, 1, color, 0);
+            MVPmatrixhandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
+            //Apply projection and view transformation
+            GLES20.glUniformMatrix4fv(MVPmatrixhandle, 1, false, mvpMatrix, 0);
+            // Draw the circle
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, vertexStart, vertexStop);
+
+            // Disable vertex array
+            GLES20.glDisableVertexAttribArray(positionHandle);
+        }
     }
 
 }

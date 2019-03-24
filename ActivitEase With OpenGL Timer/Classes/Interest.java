@@ -4,14 +4,14 @@ public class Interest {
     // Will be deleted and methods will move to user, see
     // architecture design
 
-    boolean startTimer;
-    boolean stopTimer;
+    static  boolean timerRunning = true;
     private String interestName;
     private String periodFreq;
     private int activityLength;
     private int activityAmount;
     private int numNotifications;
     private String numNotificationSpan;
+
 
     public Interest(String interestName, String periodFreq, int activityLength, int activityAmount, int numNotifications, String numNotificationSpan) {
         this.interestName = interestName;
@@ -73,5 +73,10 @@ public class Interest {
     public void setNumNotificationSpan(String numNotificationSpan)
     {
         this.numNotificationSpan = numNotificationSpan;
+    }
+
+    public static boolean getTimerRunning()
+    {
+        return timerRunning;
     }
 }

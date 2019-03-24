@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity
     Spinner periodFrequency, numNotificationSpan;
     Interest interest = new Interest();
     String startStopTimerText;
-    private TextView textViewCountdown;
     boolean timerRunning;
     private static final long START_TIME_MILLIS = 600000;
-
-    private CountDownTimer countDownTimer;
     private long mTimeLeftInMillis = START_TIME_MILLIS;
+    private TextView textViewCountdown;
+    private CountDownTimer countDownTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         textViewCountdown = findViewById(R.id.text_view_countdown);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -156,33 +157,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void startStopTimer(View view) {
-        Button b = (Button)view;
-        startStopTimerText = b.getText().toString();
-        if(startStopTimerText.equals("Start Activity")) {
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Start Activity")
-                    .setMessage("Are you sure you want to start this activity?")
-                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startStopTimerText = "Done";
-                            setButtonText(startStopTimerText);
-                            startTimer();
-                        }
-
-                    })
-                    .setNegativeButton("no", null)
-                    .show();
-        }
-        else if(startStopTimerText.equals("Done")) {
-            startStopTimerText = "Start Activity";
-            setButtonText(startStopTimerText);
-            pauseTimer();
-            //Update timer. Update DB with new interest data
-        }
-
-    }
     public void openActivity(View view) {
 
 
@@ -208,44 +182,37 @@ public class MainActivity extends AppCompatActivity
 
         db.addInterest(interest);
     }
-    private void startTimer() {
-        countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-            }
 
-            @Override
-            public void onFinish() {
-                timerRunning = false;
+    public void startStopTimer(View view) {
+        Button b = (Button)view;
+        startStopTimerText = b.getText().toString();
+        if(startStopTimerText.equals("Start Activity")) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Start Activity")
+                    .setMessage("Are you sure you want to start this activity?")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startStopTimerText = "Done";
+                            setButtonText(startStopTimerText);
 
-            }
-        }.start();
+                        }
 
-        timerRunning = true;
-
-    }
-    private void pauseTimer()
-    {
-        countDownTimer.cancel();
-        timerRunning = false;
-
-    }
-    private void resetTimer()
-    {
-        mTimeLeftInMillis = START_TIME_MILLIS;
-        updateCountDownText();
-    }
-    private void updateCountDownText() {
-        int minutes = (int) mTimeLeftInMillis / 1000 / 60;
-        int seconds = (int) mTimeLeftInMillis / 1000 % 60;
-
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
-        textViewCountdown.setText(timeLeftFormatted);
+                    })
+                    .setNegativeButton("no", null)
+                    .show();
+        }
+        else if(startStopTimerText.equals("Done")) {
+            startStopTimerText = "Start Activity";
+            setButtonText(startStopTimerText);
+            // pauseTimer();
+            //Update timer. Update DB with new interest data
+        }
 
     }
+
+
+
 }
 
 
