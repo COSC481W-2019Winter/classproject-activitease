@@ -36,6 +36,29 @@ public class Interest {
     @ColumnInfo()
     private boolean timerRunning = true;
 
+    // Large number of notification times. This system may be altered later.
+    @ColumnInfo()
+    private double notifTime1;
+    @ColumnInfo()
+    private double notifTime2;
+    @ColumnInfo()
+    private double notifTime3;
+    @ColumnInfo()
+    private double notifTime4;
+    @ColumnInfo()
+    private double notifTime5;
+    @ColumnInfo()
+    private double notifTime6;
+    @ColumnInfo()
+    private double notifTime7;
+    @ColumnInfo()
+    private double notifTime8;
+    @ColumnInfo()
+    private double notifTime9;
+    @ColumnInfo()
+    private double notifTime10;
+
+
     @Ignore
     public Interest() {
 
@@ -86,6 +109,102 @@ public class Interest {
     public void setTimerRunning(boolean timerRunning )
     { this.timerRunning = timerRunning; }
 
+    public void setNotifTime1 (double notifTime) {notifTime = notifTime1; }
+    public void setNotifTime2 (double notifTime) {notifTime = notifTime2; }
+    public void setNotifTime3 (double notifTime) {notifTime = notifTime3; }
+    public void setNotifTime4 (double notifTime) {notifTime = notifTime4; }
+    public void setNotifTime5 (double notifTime) {notifTime = notifTime5; }
+    public void setNotifTime6 (double notifTime) {notifTime = notifTime6; }
+    public void setNotifTime7 (double notifTime) {notifTime = notifTime7; }
+    public void setNotifTime8 (double notifTime) {notifTime = notifTime8; }
+    public void setNotifTime9 (double notifTime) {notifTime = notifTime9; }
+    public void setNotifTime10 (double notifTime) {notifTime = notifTime10; }
+
+
+    public void setNotifTimes(double[] notifTimes) {
+        int sz = notifTimes.length;
+
+        switch (sz) {
+            case 1:
+                notifTime1 = notifTimes[0];
+                break;
+            case 2:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                break;
+            case 3:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                break;
+            case 4:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                break;
+            case 5:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                break;
+            case 6:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                notifTime6 = notifTimes[5];
+                break;
+            case 7:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                notifTime6 = notifTimes[5];
+                notifTime7 = notifTimes[6];
+                break;
+            case 8:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                notifTime6 = notifTimes[5];
+                notifTime7 = notifTimes[6];
+                notifTime8 = notifTimes[7];
+                break;
+            case 9:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                notifTime6 = notifTimes[5];
+                notifTime7 = notifTimes[6];
+                notifTime8 = notifTimes[7];
+                notifTime9 = notifTimes[8];
+                break;
+            case 10:
+                notifTime1 = notifTimes[0];
+                notifTime2 = notifTimes[1];
+                notifTime3 = notifTimes[2];
+                notifTime4 = notifTimes[3];
+                notifTime5 = notifTimes[4];
+                notifTime6 = notifTimes[5];
+                notifTime7 = notifTimes[6];
+                notifTime8 = notifTimes[7];
+                notifTime9 = notifTimes[8];
+                notifTime10 = notifTimes[9];
+                break;
+            default:
+                break;
+        }
+    }
+
     public String getInterestName() { return this.interestName; }
 
     public int getPeriodFreq() { return periodFreq; }
@@ -94,4 +213,58 @@ public class Interest {
     public int getNumNotifications() { return numNotifications; }
     public int getStreakCt() {return streakCt; }
     public boolean getTimerRunning() { return timerRunning; }
+    public double getNotifTime1() { return notifTime1; }
+    public double getNotifTime2() { return notifTime2; }
+    public double getNotifTime3() { return notifTime3; }
+    public double getNotifTime4() { return notifTime4; }
+    public double getNotifTime5() { return notifTime5; }
+    public double getNotifTime6() { return notifTime6; }
+    public double getNotifTime7() { return notifTime7; }
+    public double getNotifTime8() { return notifTime8; }
+    public double getNotifTime9() { return notifTime9; }
+    public double getNotifTime10() { return notifTime10; }
+
+
+    public double[] getNotifTimes() {
+        double[] notifTimes = new double[numNotifications];
+
+        notifTimes[0] = notifTime1;
+        if (numNotifications > 1) {
+            notifTimes[1] = notifTime2;
+        } if (numNotifications > 2) {
+            notifTimes[2] = notifTime3;
+        } if (numNotifications > 3) {
+            notifTimes[3] = notifTime4;
+        } if (numNotifications > 4) {
+            notifTimes[4] = notifTime5;
+        } if (numNotifications > 5) {
+            notifTimes[5] = notifTime6;
+        } if (numNotifications > 6) {
+            notifTimes[6] = notifTime7;
+        } if (numNotifications > 7) {
+            notifTimes[7] = notifTime8;
+        } if (numNotifications > 8) {
+            notifTimes[8] = notifTime9;
+        } if (numNotifications > 9) {
+            notifTimes[9] = notifTime10;
+        }
+
+        return notifTimes;
+    }
+
+    // static method presets the notification times.
+    public static double[] presetNotifTimes(int numNotifications) {
+        double[] notifTimes = new double[numNotifications];
+
+        // The amount of time (in hours) that passes before another notification goes off.
+        double timeBetweenNotif = 13.5 / (numNotifications + 1);
+        double currentTime = 9; //9AM is the earliest that notifications should go off.
+
+        for (int i = 0; i < numNotifications; i++) {
+            notifTimes[i] = currentTime + timeBetweenNotif;
+            currentTime += timeBetweenNotif;
+        }
+
+        return notifTimes;
+    }
 }

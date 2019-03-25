@@ -108,6 +108,9 @@ public class Add_Interest_Fragment extends Fragment {
                     Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
                             newActivityLength, newNumNotifications);
 
+                    // Presets the notification times, given the number of notifications.
+                    interest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+
                     // The database adds a new interest to the interests table.
                     MainActivity.myDB.myDao().addInterest(interest);
 

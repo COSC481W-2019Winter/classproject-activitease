@@ -26,7 +26,7 @@ public class Home_Page_Fragment extends Fragment {
         TextView populateInterests = view.findViewById(R.id.testDBPopulate);
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
 
-        String info = "Interest Name:   Activity Length:    Period Frequency:   base p. span:   notifications:\n";
+        String info = "Interest Name:   Activity Length:    Period Frequency:   base p. span:   notifications: times for notifs: \n";
 
 
         for(Interest intr : interestList) {
@@ -37,8 +37,15 @@ public class Home_Page_Fragment extends Fragment {
                 int basePeriodSpan = intr.getBasePeriodSpan();
                 int numNotifications = intr.getNumNotifications();
 
+                double[] tempNotifTimes = intr.getNotifTimes();
+
                 info += interestName + "    " + activityLength + "      " + periodFreq + "    " +
-                        basePeriodSpan + "   " + numNotifications + "      \n";
+                        basePeriodSpan + "   " + numNotifications + "      ";
+
+                for (int i = 0; i < numNotifications; i++) {
+                    info += String.format("%.2f", tempNotifTimes[i]) + "   ";
+                }
+                info += "\n";
             }
             else
                 break;
