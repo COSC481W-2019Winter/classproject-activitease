@@ -103,13 +103,13 @@
                 android:inputType= "number" />
 
             <TextView
-                android:id="@+id/PeriodFrequencyText"
+                android:id="@+id/periodFreq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Period Frequency" />
 
             <Spinner
-                android:id="@+id/periodSpan"
+                android:id="@+id/periodSpanInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:spinnerMode="dropdown"
-                 />
+                />
 
             <TextView
                 android:id="@+id/NumNotificationsText"
