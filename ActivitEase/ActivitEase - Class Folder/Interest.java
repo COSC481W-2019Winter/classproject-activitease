@@ -109,16 +109,16 @@ public class Interest {
     public void setTimerRunning(boolean timerRunning )
     { this.timerRunning = timerRunning; }
 
-    public void setNotifTime1 (double notifTime) {notifTime = notifTime1; }
-    public void setNotifTime2 (double notifTime) {notifTime = notifTime2; }
-    public void setNotifTime3 (double notifTime) {notifTime = notifTime3; }
-    public void setNotifTime4 (double notifTime) {notifTime = notifTime4; }
-    public void setNotifTime5 (double notifTime) {notifTime = notifTime5; }
-    public void setNotifTime6 (double notifTime) {notifTime = notifTime6; }
-    public void setNotifTime7 (double notifTime) {notifTime = notifTime7; }
-    public void setNotifTime8 (double notifTime) {notifTime = notifTime8; }
-    public void setNotifTime9 (double notifTime) {notifTime = notifTime9; }
-    public void setNotifTime10 (double notifTime) {notifTime = notifTime10; }
+    public void setNotifTime1 (double notifTime) {notifTime1 = notifTime; }
+    public void setNotifTime2 (double notifTime) {notifTime2= notifTime; }
+    public void setNotifTime3 (double notifTime) {notifTime3 = notifTime; }
+    public void setNotifTime4 (double notifTime) {notifTime4 = notifTime; }
+    public void setNotifTime5 (double notifTime) {notifTime5 = notifTime; }
+    public void setNotifTime6 (double notifTime) {notifTime6 = notifTime; }
+    public void setNotifTime7 (double notifTime) {notifTime7 = notifTime; }
+    public void setNotifTime8 (double notifTime) {notifTime8 = notifTime; }
+    public void setNotifTime9 (double notifTime) {notifTime9 = notifTime; }
+    public void setNotifTime10 (double notifTime) {notifTime10 = notifTime; }
 
 
     public void setNotifTimes(double[] notifTimes) {

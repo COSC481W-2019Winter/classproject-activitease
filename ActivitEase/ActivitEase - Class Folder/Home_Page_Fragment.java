@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static java.lang.String.*;
+
 
 public class Home_Page_Fragment extends Fragment {
     TextView populateInterests;
@@ -43,7 +45,7 @@ public class Home_Page_Fragment extends Fragment {
                         basePeriodSpan + "   " + numNotifications + "      ";
 
                 for (int i = 0; i < numNotifications; i++) {
-                    info += String.format("%.2f", tempNotifTimes[i]) + "   ";
+                    info += format("%.2f", tempNotifTimes[i]) + "   ";
                 }
                 info += "\n";
             }
