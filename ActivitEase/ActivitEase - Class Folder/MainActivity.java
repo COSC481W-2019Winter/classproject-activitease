@@ -184,6 +184,11 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+    public static int getInterestTableSz() {
+        return MainActivity.myDB.myDao().getInterests().size();
+    }
+
     public void openContactPage(View view)
     {
         startActivity(new Intent(getApplicationContext(), ContactManager.class));

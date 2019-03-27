@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,6 +17,18 @@ import static java.lang.String.*;
 
 public class Home_Page_Fragment extends Fragment {
     TextView populateInterests;
+
+    private Button interest1;
+    private Button interest2;
+    private Button interest3;
+    private Button interest4;
+    private Button interest5;
+    private Button interest6;
+    private Button interest7;
+    private Button interest8;
+    private Button interest9;
+    private Button interest10;
+
 
     @Nullable
     @Override
@@ -52,8 +65,15 @@ public class Home_Page_Fragment extends Fragment {
             else
                 break;
         }
+
+        info += "number of interests: " + MainActivity.getInterestTableSz() + "\n";
+
         populateInterests.setText(info);
 
         return view;
+    }
+
+    public void addNewInterest() {
+
     }
 }
