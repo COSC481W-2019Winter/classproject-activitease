@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity
     EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
     Interest interest = new Interest();
     String startStopTimerText;
+    public final String CHANNEL_ID = "Personal Notification";
+    private final int NOTIFICATION_ID = 001;
 
     public static MyDB myDB;
 
@@ -73,6 +75,22 @@ public class MainActivity extends AppCompatActivity
         myDB = Room.databaseBuilder(getApplicationContext(), MyDB.class, "interestdb")
                 .allowMainThreadQueries().build();
     }
+    
+    public void notifyMe(View view) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.act)
+                .setContentTitle("Simple Notification")
+                .setWhen(System.currentTimeMillis())
+                .setContentText("This is a simple notification")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -117,6 +135,19 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
         hp.replace(R.id.fragment_container, new Add_Interest_Fragment());
         hp.commit();
+    }
+    
+    public void openAct1(View view)
+    {
+
+
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Interest_Fragment());
+        hp.commit();
+
+        //myAwesomeTextView = (TextView)findViewById(R.id.actText);
+        //myAwesomeTextView.setText("50 Push-Ups");
+
     }
 
     public void setButtonText(String buttonText)
