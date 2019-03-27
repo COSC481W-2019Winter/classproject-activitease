@@ -1,5 +1,6 @@
 package com.example.activitease;
 
+import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     
     public void notifyMe(View view) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.act)
+                .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Simple Notification")
                 .setWhen(System.currentTimeMillis())
                 .setContentText("This is a simple notification")
