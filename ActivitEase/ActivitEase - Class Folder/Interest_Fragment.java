@@ -85,6 +85,7 @@ public class Interest_Fragment extends Fragment {
 
                 // Sets the interestName, which is the key for the database
                 String newInterestName = interestName.getText().toString();
+             //   String newInterestName = "Bitchin";
 
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
@@ -101,8 +102,11 @@ public class Interest_Fragment extends Fragment {
                     theInterest.setActivityLength(Integer.parseInt(newActivityLengthTemp));
                 if (!newPeriodFreqTemp.equals(""))
                     theInterest.setPeriodFreq(Integer.parseInt(newPeriodFreqTemp));
-                if (!newNumNotificationsTemp.equals(""))
-                    theInterest.setNumNotifications(Integer.parseInt(newNumNotificationsTemp));
+                if (!newNumNotificationsTemp.equals("")) {
+                    int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+                    theInterest.setNumNotifications(newNumNotifications);
+                    theInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+                }
 
 
                 if (!newPeriodSpan.equals("Day")) {
