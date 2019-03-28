@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context = ".Interest_Fragment">
+
+
+    <TextView
+        android:id="@+id/EditInterestName"
+        android:layout_width="166dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="44dp"
+        android:background="@color/design_default_color_primary"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="125dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="136dp"
+        android:text="Edit: "
+        android:textColor="@color/Black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/startStop"
+        android:layout_width="147dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="20dp"
+        android:text="Start Activity"
+        android:onClick="startStopTimer"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="366dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/InterestNameText"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:text="Interest Name" />
+
+            <EditText
+                android:id="@+id/interestName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/ActivityLengthText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity Length (Minutes)" />
+
+            <EditText
+                android:id="@+id/activityLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType= "number" />
+
+            <TextView
+                android:id="@+id/periodFreq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Period Frequency" />
+
+            <Spinner
+                android:id="@+id/periodSpanInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/ActivityAmountText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity Amount (Times/period) " />
+
+            <EditText
+                android:id="@+id/activityAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/NumNotificationSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification Period" />
+
+            <Spinner
+                android:id="@+id/numNotificationSpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:spinnerMode="dropdown"
+                />
+
+            <TextView
+                android:id="@+id/NumNotificationsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notifications" />
+
+            <EditText
+                android:id="@+id/numNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/SubmitEditInterest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:onClick="submitEditInterest"
+                android:text="Submit Interest" />
+
+            <Button
+                android:id="@+id/delete"
+                android:text="Delete Interest"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.example.activitease.MyGLSurfaceView
+        android:id="@+id/openGLView"
+        android:layout_width="360dp"
+        android:layout_height="249dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "00:00"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="@+id/openGLView"
+        app:layout_constraintEnd_toEndOf="@+id/openGLView"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/openGLView"
+        app:layout_constraintTop_toTopOf="@+id/openGLView"
+        app:layout_constraintVertical_bias="0.514" />
+
+</android.support.constraint.ConstraintLayout>

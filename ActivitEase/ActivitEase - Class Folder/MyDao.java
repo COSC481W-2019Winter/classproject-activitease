@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.arch.persistence.room.Delete;
 
 import java.util.List;
 
@@ -20,5 +21,11 @@ interface MyDao {
 
     @Update
     public void updateInterest(Interest i);
+
+    @Delete
+    public void deleteInterest(Interest i);
+
+    @Query("DELETE FROM interests where interestName = :interestName")
+    abstract void deleteByInterestName(String interestName);
 
 }
