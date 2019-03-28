@@ -55,6 +55,7 @@ public class Interest_Fragment extends Fragment {
         updateCountDownText();
         if(Interest.getTimerRunning() == true)
         {
+            GLRenderer.setTimerRunning(true);
             startTimer();
         }
 

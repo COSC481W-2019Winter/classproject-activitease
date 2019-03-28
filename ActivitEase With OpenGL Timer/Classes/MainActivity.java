@@ -34,13 +34,8 @@ public class MainActivity extends AppCompatActivity
 {
     EditText interestName, activityAmount, activityLength, numNotifications;
     Spinner periodFrequency, numNotificationSpan;
-    Interest interest = new Interest();
     String startStopTimerText;
-    boolean timerRunning;
-    private static final long START_TIME_MILLIS = 600000;
-    private long mTimeLeftInMillis = START_TIME_MILLIS;
-    private TextView textViewCountdown;
-    private CountDownTimer countDownTimer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +66,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        textViewCountdown = findViewById(R.id.text_view_countdown);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -214,5 +208,4 @@ public class MainActivity extends AppCompatActivity
 
 
 }
-
 
