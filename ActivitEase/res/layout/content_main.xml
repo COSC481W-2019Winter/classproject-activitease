@@ -16,6 +16,7 @@
         android:layout_marginTop="68dp"
         android:visibility="gone"
         android:text="activity1"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
@@ -27,6 +28,7 @@
         android:layout_marginTop="56dp"
         android:visibility="gone"
         android:text="activity2"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/activity1" />
     <Button
@@ -37,6 +39,7 @@
         android:layout_marginLeft="80dp"
         android:visibility="gone"
         android:text="activity3"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity2" />
 
@@ -49,6 +52,7 @@
         android:layout_marginLeft="80dp"
         android:visibility="gone"
         android:text="activity4"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity3" />
 
@@ -61,6 +65,7 @@
         android:layout_marginTop="12dp"
         android:visibility="gone"
         android:text="activity5"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity4" />
 
@@ -73,6 +78,7 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         android:text="activity6"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity5" />
 
@@ -84,6 +90,7 @@
         android:layout_marginLeft="80dp"
         android:visibility="gone"
         android:text="activity7"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity6" />
 
@@ -96,6 +103,7 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         android:text="activity8"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity7" />
 
@@ -107,11 +115,12 @@
         android:layout_marginLeft="80dp"
         android:visibility="gone"
         android:text="activity9"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity8" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/activity10"
         android:layout_width="244dp"
         android:layout_height="53dp"
         android:layout_marginStart="80dp"
@@ -119,6 +128,7 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         android:text="activity10"
+        android:onClick="openInterest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity9" />
 
