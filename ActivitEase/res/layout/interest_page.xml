@@ -103,10 +103,10 @@
                 android:inputType= "number" />
 
             <TextView
-                android:id="@+id/periodFreq"
+                android:id="@+id/periodSpanText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Period Frequency" />
+                android:text="Period Span" />
 
             <Spinner
                 android:id="@+id/periodSpanInput"
@@ -120,10 +120,10 @@
                 android:id="@+id/ActivityAmountText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activity Amount (Times/period) " />
+                android:text="Period frequency (Times/period) " />
 
             <EditText
-                android:id="@+id/activityAmount"
+                android:id="@+id/periodFreq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

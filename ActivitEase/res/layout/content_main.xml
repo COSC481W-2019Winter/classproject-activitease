@@ -157,9 +157,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-
+        android:visibility="gone"
         android:layout_marginBottom="8dp"
-
         android:text="No interests yet!!"
         app:layout_constraintBottom_toTopOf="@+id/AddInterest"
         app:layout_constraintStart_toStartOf="parent"
