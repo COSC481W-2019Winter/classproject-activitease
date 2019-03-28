@@ -44,21 +44,10 @@ public class MainActivity extends AppCompatActivity
         hp.commit();
 
 
+
+
+
         setContentView(R.layout.activity_main);
-
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 8);
-        calendar.set(Calendar.SECOND, 01);
-
-        Intent intent = new Intent(getApplicationContext(), Notification_receiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -144,10 +133,21 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void openAddInterest(View view)
     {
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
         hp.replace(R.id.fragment_container, new Add_Interest_Fragment());
+        hp.commit();
+    }
+
+    public void openInterest(View view)
+    {
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+
+        Interest_Fragment i = new Interest_Fragment();
+
+        hp.replace(R.id.fragment_container, i);
         hp.commit();
     }
     
@@ -161,38 +161,6 @@ public class MainActivity extends AppCompatActivity
 
         //myAwesomeTextView = (TextView)findViewById(R.id.actText);
         //myAwesomeTextView.setText("50 Push-Ups");
-
-    }
-
-    public void setButtonText(String buttonText)
-    {
-        Button b = findViewById(R.id.startStop);
-        b.setText(buttonText);
-    }
-
-    public void startStopTimer(View view) {
-        Button b = (Button)view;
-        startStopTimerText = b.getText().toString();
-        if(startStopTimerText.equals("Start Activity")) {
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Start Activity")
-                    .setMessage("Are you sure you want to start this activity?")
-                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startStopTimerText = "Done";
-                            setButtonText(startStopTimerText);
-                        }
-
-                    })
-                    .setNegativeButton("no", null)
-                    .show();
-        }
-        else if(startStopTimerText.equals("Done")) {
-            startStopTimerText = "Start Activity";
-            setButtonText(startStopTimerText);
-            //Update timer. Update DB with new interest data
-        }
 
     }
 
