@@ -80,14 +80,16 @@ public class MainActivity extends AppCompatActivity
     }
     
     public void notifyMe(View view) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new
+                NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Simple Notification")
                 .setWhen(System.currentTimeMillis())
                 .setContentText("This is a simple notification")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity
+                (this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
@@ -120,20 +122,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if(id == R.id.homePage) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home_Page_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Home_Page_Fragment()).commit();
         }
         else if (id == R.id.FAQ) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FAQ_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new FAQ_Fragment()).commit();
 
         } else if (id == R.id.Interest) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void openAddInterest(View view)
     {
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
@@ -143,11 +147,35 @@ public class MainActivity extends AppCompatActivity
 
     public void openInterest(View view)
     {
+        //Loads the button that the method was called from.
+        Button interestB = (Button)view;
+
+        // Name of the interest found from the text of the button.
+        String interestName = (String)interestB.getText();
+        // Loads the interest, using the interest name as the key.
+        Interest thisInterest = MainActivity.myDB.myDao().loadInterestByName(interestName);
+
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        Interest_Fragment populatedInterest = new Interest_Fragment();
 
-        Interest_Fragment i = new Interest_Fragment();
+        /*
+            Initializes variables in the Interest_Fragment object, which will then be used
+            once the Interest_Fragment's onCreateView method is activated.
+         */
+        populatedInterest.setiName(thisInterest.getInterestName());
+        populatedInterest.setaLength(thisInterest.getActivityLength());
+        /*
+            pSpanPtr is the pointer for the Spinner selection.
+            0 for day (1), 1 for week (7), 2 for month (30), 3 for year(365, or else in this case).
+         */
+        if (thisInterest.getBasePeriodSpan() == 1) populatedInterest.setpSpanPtr(0);
+        else if (thisInterest.getBasePeriodSpan() == 7) populatedInterest.setpSpanPtr(1);
+        else if (thisInterest.getBasePeriodSpan() == 30) populatedInterest.setpSpanPtr(2);
+        else populatedInterest.setpSpanPtr(3);
 
-        hp.replace(R.id.fragment_container, i);
+        populatedInterest.setNumNotif(thisInterest.getNumNotifications());
+
+        hp.replace(R.id.fragment_container, populatedInterest);
         hp.commit();
     }
     
@@ -164,6 +192,38 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void setButtonText(String buttonText)
+    {
+        Button b = findViewById(R.id.startStop);
+        b.setText(buttonText);
+    }
+
+    public void startStopTimer(View view) {
+        Button b = (Button)view;
+        startStopTimerText = b.getText().toString();
+        if(startStopTimerText.equals("Start Activity")) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Start Activity")
+                    .setMessage("Are you sure you want to start this activity?")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startStopTimerText = "Done";
+                            setButtonText(startStopTimerText);
+                        }
+
+                    })
+                    .setNegativeButton("no", null)
+                    .show();
+        }
+        else if(startStopTimerText.equals("Done")) {
+            startStopTimerText = "Start Activity";
+            setButtonText(startStopTimerText);
+            //Update timer. Update DB with new interest data
+        }
+
+    }
+
     public static int getInterestTableSz() {
         return MainActivity.myDB.myDao().getInterests().size();
     }
@@ -171,7 +231,8 @@ public class MainActivity extends AppCompatActivity
     public void openContactPage(View view)
     {
         startActivity(new Intent(getApplicationContext(), ContactManager.class));
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Contact()).commit();
+        //getSupportFragmentManager().beginTransaction().
+        // replace(R.id.fragment_container, new Contact()).commit();
     }
 
 }

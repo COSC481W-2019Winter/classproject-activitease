@@ -17,7 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Locale;
-
+import android.widget.EditText;
+import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class Interest_Fragment extends Fragment {
     // EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
@@ -25,9 +27,19 @@ public class Interest_Fragment extends Fragment {
     boolean timerRunning;
     private static final long START_TIME_MILLIS = 600000;
     private long mTimeLeftInMillis = START_TIME_MILLIS;
+
     private TextView textViewCountdown;
     private CountDownTimer countDownTimer;
+    private EditText delInterestName;
 
+    Button delete;
+
+    private EditText interestName, activityLength, numNotifications;
+    private Spinner periodSpanInput;
+
+
+    private String iName;
+    private int aLength, numNotif, pSpanPtr;
 
     @Nullable
     @Override
@@ -40,23 +52,61 @@ public class Interest_Fragment extends Fragment {
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
-        Spinner periodSpanSpinner = (Spinner) view.findViewById(R.id.periodSpanInput);
+        // Builds the period Span Spinner.
+        periodSpanInput = (Spinner) view.findViewById(R.id.periodSpanInput);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        periodSpanSpinner.setAdapter(adapter);
+        periodSpanInput.setAdapter(adapter);
 
         Spinner notificationSpan = (Spinner) view.findViewById(R.id.numNotificationSpan);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         notificationSpan.setAdapter(adapter1);
+
+        interestName = view.findViewById(R.id.interestName);
+        activityLength = view.findViewById(R.id.activityLength);
+        numNotifications = view.findViewById(R.id.numNotifications);
+
+        // Initializes the interest page with set variables from the MainActivity call.
+        interestName.setText(iName);
+        activityLength.setText(Integer.toString(aLength));
+        numNotifications.setText(Integer.toString(numNotif));
+        periodSpanInput.setSelection(pSpanPtr);
+
         glSurfaceView = view.findViewById(R.id.openGLView);
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
         if(true)
         {
+            //GLRenderer.setTimerRunning(Interest.getTimerRunning());
             startTimer();
         }
+
+        //Stuff past here is for deleting an interest
+        delete=(Button)view.findViewById(R.id.delete);
+        //finding the name from the edit interest page
+        delInterestName = view.findViewById(R.id.interestName);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //have to put string declaration in here or else it crashes
+                final String delInterestName1 = delInterestName.getText().toString();
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                // this is where the interest is deleted
+                                MainActivity.myDB.myDao().deleteByInterestName(delInterestName1);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
 
 
         return view;
@@ -111,5 +161,12 @@ public class Interest_Fragment extends Fragment {
         updateCountDownText();
     }
 
+    // Getters and setters for the variables that will inflate the interest page.
+    public void setiName (String iName) { this.iName = iName; }
+    public void setaLength (int length) { aLength = length; }
+    // pSpanPtr is the pointer for the Spinner selection.
+    // 0 for day, 1 for week, 2 for month, 3 for year.
+    public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; }
+    public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
 
 }
