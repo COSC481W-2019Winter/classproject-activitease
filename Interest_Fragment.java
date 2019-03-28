@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.Locale;
 import android.widget.EditText;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class Interest_Fragment extends Fragment {
     // EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
@@ -63,13 +64,12 @@ public class Interest_Fragment extends Fragment {
 
         //Stuff past here is for deleting an interest
         delete=(Button)view.findViewById(R.id.delete);
-
-
-        //final Interest delInterest = MainActivity.myDB.myDao().loadInterestByName(delInterestName1);
+        //finding the name from the edit interest page
         delInterestName = view.findViewById(R.id.interestName);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //have to put string declaration in here or else it crashes
                 final String delInterestName1 = delInterestName.getText().toString();
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -77,7 +77,7 @@ public class Interest_Fragment extends Fragment {
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
-                                // and deleting
+                                // this is where the interest is deleted
                                 MainActivity.myDB.myDao().deleteByInterestName(delInterestName1);
                             }
                         });
