@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/ActivityLengthText"
@@ -164,6 +164,13 @@
                 android:layout_marginBottom="0dp"
                 android:onClick="submitEditInterest"
                 android:text="Submit Interest" />
+
+            <Button
+                android:id="@+id/delete"
+                android:text="Delete Interest"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
