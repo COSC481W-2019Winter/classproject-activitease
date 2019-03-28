@@ -19,7 +19,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private float[] colors = new float[2920]; // 2190 vertices and 4 color values per vertice.
     private static boolean timerRunning;
     private int n = 0;
-    int activityLengthMillis;
+    static double activityLengthMillis;
     //double iterationTime = activityLengthMillis/91;   //Activity length divided by total number of iterations
     double iterationTime = 6593.41;
     int millisIterationTime = (int) iterationTime;
@@ -30,9 +30,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     {
         timerRunning = theTimerRunning;
     }
-    public static void setActivityLength(int activityLength)
+    public static void setActivityLength(double activityLength)
     {
-
+        activityLengthMillis  = activityLength;
     }
 
 
