@@ -76,12 +76,12 @@ public class Interest_Fragment extends Fragment {
         periodFreq.setText(Integer.toString(pFreq));
 
         glSurfaceView = view.findViewById(R.id.openGLView);
-
+        GLRenderer.setActivityLength(START_TIME_MILLIS);
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
         if(true)
         {
-            //GLRenderer.setTimerRunning(Interest.getTimerRunning());
+            GLRenderer.setTimerRunning(true);
             startTimer();
         }
 
