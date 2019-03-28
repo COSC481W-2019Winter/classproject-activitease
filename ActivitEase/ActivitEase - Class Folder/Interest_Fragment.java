@@ -34,12 +34,12 @@ public class Interest_Fragment extends Fragment {
 
     Button delete;
 
-    private EditText interestName, activityLength, numNotifications;
+    private EditText interestName, activityLength, numNotifications, periodFreq;
     private Spinner periodSpanInput;
 
 
     private String iName;
-    private int aLength, numNotif, pSpanPtr;
+    private int aLength, numNotif, pSpanPtr, pFreq;
 
     @Nullable
     @Override
@@ -66,12 +66,14 @@ public class Interest_Fragment extends Fragment {
         interestName = view.findViewById(R.id.interestName);
         activityLength = view.findViewById(R.id.activityLength);
         numNotifications = view.findViewById(R.id.numNotifications);
+        periodFreq = view.findViewById(R.id.periodFreq);
 
         // Initializes the interest page with set variables from the MainActivity call.
         interestName.setText(iName);
         activityLength.setText(Integer.toString(aLength));
         numNotifications.setText(Integer.toString(numNotif));
         periodSpanInput.setSelection(pSpanPtr);
+        periodFreq.setText(Integer.toString(pFreq));
 
         glSurfaceView = view.findViewById(R.id.openGLView);
 
@@ -168,5 +170,5 @@ public class Interest_Fragment extends Fragment {
     // 0 for day, 1 for week, 2 for month, 3 for year.
     public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; }
     public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
-
+    public void setpFreq(int pFreq) { this.pFreq = pFreq; }
 }

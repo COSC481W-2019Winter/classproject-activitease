@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity
          */
         populatedInterest.setiName(thisInterest.getInterestName());
         populatedInterest.setaLength(thisInterest.getActivityLength());
+        populatedInterest.setpFreq(thisInterest.getPeriodFreq());
         /*
             pSpanPtr is the pointer for the Spinner selection.
             0 for day (1), 1 for week (7), 2 for month (30), 3 for year(365, or else in this case).
