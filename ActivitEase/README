@@ -9,6 +9,11 @@ Other names will disorganize the package storage.
 4. Add in dependencies: 
     - Add openGl dependency to Manifest folder: 
          <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+         <receiver android:name=".Notification_receiver"/> -----(Place between /activity> and /aplication> like the example below)
+         </activity>
+        <receiver android:name=".Notification_receiver"/>
+    </application>
+    
     - Under 'Gradle Scripts' (Module: app), add in these dependencies in  dependencies {}:
           implementation "android.arch.persistence.room:runtime:1.1.1"
           annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
