@@ -1,8 +1,12 @@
 package com.example.activitease;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -44,21 +49,41 @@ public class MainActivity extends AppCompatActivity
         hp.commit();
 
 
-
-
-
         setContentView(R.layout.activity_main);
+
+        // Code to create notifications for android 8.0+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
+            CharSequence name = "Personal Notifications";
+            String description = "Include all the personal notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+
+        }
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 38);
+        calendar.set(Calendar.SECOND, 01);
+
+        Intent intent = new Intent(getApplicationContext(), Notification_receiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        // End of Notification Code
+        
+        
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,16 +105,15 @@ public class MainActivity extends AppCompatActivity
     }
     
     public void notifyMe(View view) {
-        NotificationCompat.Builder builder = new
-                NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_menu_camera)
                 .setContentTitle("Simple Notification")
                 .setWhen(System.currentTimeMillis())
                 .setContentText("This is a simple notification")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity
-                (this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
@@ -130,8 +154,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, new FAQ_Fragment()).commit();
 
         } else if (id == R.id.Interest) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Interest_Fragment()).commit();
+
+        }else if (id == R.id.Setting) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_Fragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
