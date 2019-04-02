@@ -28,13 +28,12 @@ public class Interest_Fragment extends Fragment {
     private static final long START_TIME_MILLIS = 600000;
     private long mTimeLeftInMillis = START_TIME_MILLIS;
 
-    private TextView textViewCountdown;
+    private TextView textViewCountdown, interestName;
     private CountDownTimer countDownTimer;
     private EditText delInterestName;
 
     Button delete, editInterestBn;
-
-    private EditText interestName, activityLength, numNotifications, periodFreq;
+    private EditText activityLength, numNotifications, periodFreq;
     private Spinner periodSpanInput;
 
 
@@ -63,7 +62,7 @@ public class Interest_Fragment extends Fragment {
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         notificationSpan.setAdapter(adapter1);
 
-        interestName = view.findViewById(R.id.interestName);
+        interestName = view.findViewById(R.id.EditInterestName);
         activityLength = view.findViewById(R.id.activityLength);
         numNotifications = view.findViewById(R.id.numNotifications);
         periodFreq = view.findViewById(R.id.periodFreq);
@@ -88,21 +87,15 @@ public class Interest_Fragment extends Fragment {
 
 
 
-//The following lines are for Editing the Interest.
-        interestName = view.findViewById(R.id.interestName);
-        activityLength = view.findViewById(R.id.activityLength);
-        periodFreq = view.findViewById(R.id.periodFreq);
-        periodSpanInput = view.findViewById(R.id.periodSpanInput);
-        numNotifications = view.findViewById(R.id.numNotifications);
-
+//*** The following lines are for Editing the Interest.
+        
         // Finds the submit button, and an onClick method submits the data into the database.
         editInterestBn = view.findViewById(R.id.SubmitEditInterest);
         editInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Interest updateInterest = theInterest;
-                // Sets the interestName, which is the key for the database
-                String newInterestName = interestName.getText().toString();
+                //Creating an instance of Interest, so that should an error occur our original interest isn't corrupted.
+                Interest updInterest = theInterest;
 
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
@@ -111,57 +104,46 @@ public class Interest_Fragment extends Fragment {
                 String newActivityLengthTemp = activityLength.getText().toString();
                 String newPeriodFreqTemp = periodFreq.getText().toString();
                 String newPeriodSpan = periodSpanInput.getSelectedItem().toString();
-                String newNumNotificationsTemp = numNotifications.getText().toString();
-
-                if (!newInterestName.equals(updateInterest.getInterestName()))
-                    updateInterest.setInterestName(newInterestName);
-                if (!newActivityLengthTemp.equals(updateInterest.getActivityLength()))
-                    updateInterest.setActivityLength(Integer.parseInt(newActivityLengthTemp));
-                if (!newPeriodFreqTemp.equals(updateInterest.getPeriodFreq()))
-                    updateInterest.setPeriodFreq(Integer.parseInt(newPeriodFreqTemp));
-                if (!newNumNotificationsTemp.equals(updateInterest.getNumNotifications())) {
-                    int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
-                    updateInterest.setNumNotifications(newNumNotifications);
-                    updateInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+                int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
+                int basePeriodSpan = 0;
+                
+                
+                // Refreshing the Interest with previously and newly set data
+                updInterest.setInterestName(iName);
+                updInterest.setActivityLength(Integer.parseInt(newActivityLengthTemp));
+                updInterest.setPeriodFreq(Integer.parseInt(newPeriodFreqTemp));
+                updInterest.setNumNotifications(newNumNotifications);
+                updInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+                
+                /*
+                * Temporary values of basePeriodSpan, which will have to be revised for later.
+                * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                * and year are.
+                */
+                switch (newPeriodSpan) {
+                    case "Day":
+                        basePeriodSpan = 1;
+                        break;
+                    case "Week":
+                        basePeriodSpan = 7;
+                        break;
+                    case "Month":
+                        basePeriodSpan = 30;
+                        break;
+                    case "Year":
+                        basePeriodSpan = 365;
+                        break;
                 }
-
-
-                if (!newPeriodSpan.equals("Day")) {
-
-
-                    int basePeriodSpan = 0;
-
-                    /*
-                     * Temporary values of basePeriodSpan, which will have to be revised for later.
-                     * basePeriodSpan serves as a numeric representation of how long a day, week, month,
-                     * and year are.
-                     */
-                    switch (newPeriodSpan) {
-                        case "Day":
-                            basePeriodSpan = 1;
-                            break;
-                        case "Week":
-                            basePeriodSpan = 7;
-                            break;
-                        case "Month":
-                            basePeriodSpan = 30;
-                            break;
-                        case "Year":
-                            basePeriodSpan = 365;
-                            break;
-                    }
-                    updateInterest.setBasePeriodSpan(basePeriodSpan);
-                }
-
-
+                updInterest.setBasePeriodSpan(basePeriodSpan);
+                
+                
                 // The database updates the interest to the interests table.
-                MainActivity.myDB.myDao().updateInterest(updateInterest);
+                MainActivity.myDB.myDao().updateInterest(updInterest);
 
                 // Announces that an interest was successfully edited.
                 Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
 
-                // Resets the AddInterest form.
-                interestName.setText(theInterest.getInterestName());
+                // Resets the EditInterest form to what is saved in the database.
                 activityLength.setText(Integer.toString(theInterest.getActivityLength()));
                 periodFreq.setText(Integer.toString(theInterest.getPeriodFreq()));
                 numNotifications.setText(Integer.toString(theInterest.getNumNotifications()));
