@@ -25,7 +25,7 @@ public class Interest_Fragment extends Fragment {
     // EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
     MyGLSurfaceView glSurfaceView;
     boolean timerRunning;
-    private static final long START_TIME_MILLIS = 600000;
+    private long START_TIME_MILLIS;
     private long mTimeLeftInMillis = START_TIME_MILLIS;
 
     private TextView textViewCountdown, interestName;
@@ -47,6 +47,7 @@ public class Interest_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.interest_page, container, false);
         TextView mytextview = view.findViewById(R.id.EditInterestName);
         final Interest theInterest = new Interest();
+        theInterest.setInterestName(iName);
         mytextview.setText(theInterest.getInterestName());
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
@@ -74,8 +75,14 @@ public class Interest_Fragment extends Fragment {
         periodSpanInput.setSelection(pSpanPtr);
         periodFreq.setText(Integer.toString(pFreq));
 
+
+        /*
+                ANTHONY STARTED FUCKING AROUND HERE!!!
+         */
+        START_TIME_MILLIS = aLength * 60000;
+        mTimeLeftInMillis = START_TIME_MILLIS;
         glSurfaceView = view.findViewById(R.id.openGLView);
-        GLRenderer.setActivityLength(START_TIME_MILLIS);
+        GLRenderer.setActivityLength((int) START_TIME_MILLIS);
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
         if(true)
@@ -88,7 +95,7 @@ public class Interest_Fragment extends Fragment {
 
 
 //*** The following lines are for Editing the Interest.
-        
+
         // Finds the submit button, and an onClick method submits the data into the database.
         editInterestBn = view.findViewById(R.id.SubmitEditInterest);
         editInterestBn.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +113,20 @@ public class Interest_Fragment extends Fragment {
                 String newPeriodSpan = periodSpanInput.getSelectedItem().toString();
                 int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
                 int basePeriodSpan = 0;
-                
-                
+
+
                 // Refreshing the Interest with previously and newly set data
                 updInterest.setInterestName(iName);
                 updInterest.setActivityLength(Integer.parseInt(newActivityLengthTemp));
                 updInterest.setPeriodFreq(Integer.parseInt(newPeriodFreqTemp));
                 updInterest.setNumNotifications(newNumNotifications);
                 updInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
-                
+
                 /*
-                * Temporary values of basePeriodSpan, which will have to be revised for later.
-                * basePeriodSpan serves as a numeric representation of how long a day, week, month,
-                * and year are.
-                */
+                 * Temporary values of basePeriodSpan, which will have to be revised for later.
+                 * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                 * and year are.
+                 */
                 switch (newPeriodSpan) {
                     case "Day":
                         basePeriodSpan = 1;
@@ -135,8 +142,8 @@ public class Interest_Fragment extends Fragment {
                         break;
                 }
                 updInterest.setBasePeriodSpan(basePeriodSpan);
-                
-                
+
+
                 // The database updates the interest to the interests table.
                 MainActivity.myDB.myDao().updateInterest(updInterest);
 
@@ -160,12 +167,12 @@ public class Interest_Fragment extends Fragment {
         //Stuff past here is for deleting an interest
         delete=(Button)view.findViewById(R.id.delete);
         //finding the name from the edit interest page
-        delInterestName = view.findViewById(R.id.interestName);
+//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //have to put string declaration in here or else it crashes
-                final String delInterestName1 = delInterestName.getText().toString();
+                final String delInterestName1 = theInterest.getInterestName();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
