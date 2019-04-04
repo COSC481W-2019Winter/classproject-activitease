@@ -1,4 +1,4 @@
-package com.example.activiteasev5;
+package com.example.activitease;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
