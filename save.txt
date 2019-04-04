@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class Notification_receiver extends BroadcastReceiver {
@@ -29,7 +31,8 @@ public class Notification_receiver extends BroadcastReceiver {
             //System.out.println(interestList.get(i).getInterestName());
        // }
         String[] name = new String[10];
-        name[0] = "";
+        Arrays.fill(name, "");
+        
         int k = 0;
         //String firstInterestName =
         for(Interest intr : interestList) {
@@ -53,11 +56,31 @@ public class Notification_receiver extends BroadcastReceiver {
                 break;
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //createNotificationChannel();
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, NOTIFICATION_ID, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 102, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent3 = PendingIntent.getActivity(context, 103, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent4 = PendingIntent.getActivity(context, 104, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent5 = PendingIntent.getActivity(context, 105, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent6 = PendingIntent.getActivity(context, 106, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent7 = PendingIntent.getActivity(context, 107, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent8 = PendingIntent.getActivity(context, 108, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent9 = PendingIntent.getActivity(context, 109, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent10 = PendingIntent.getActivity(context, 110, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Interest 1
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentIntent(pendingIntent)
+                .setContentIntent(pendingIntent1)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[0])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 2
+        NotificationCompat.Builder builder2 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent2)
                 //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(name[1])
@@ -65,9 +88,108 @@ public class Notification_receiver extends BroadcastReceiver {
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        notificationManager.notify((NOTIFICATION_ID), builder.build());
+        // Interest 3
+        NotificationCompat.Builder builder3 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent3)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[2])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 4
+        NotificationCompat.Builder builder4 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent4)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[3])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 5
+        NotificationCompat.Builder builder5 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent5)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[4])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 6
+        NotificationCompat.Builder builder6 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent6)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[5])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 7
+        NotificationCompat.Builder builder7 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent7)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[6])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 8
+        NotificationCompat.Builder builder8 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent8)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[7])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 9
+        NotificationCompat.Builder builder9 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent9)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[8])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        // Interest 10
+        NotificationCompat.Builder builder10 = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent10)
+                //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(name[9])
+                .setContentText("Hey, you! It's time to get this done!")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        if (name[0] != "")
+            notificationManager.notify((NOTIFICATION_ID), builder.build());
+        if (name[1] != "")
+            notificationManager.notify((102), builder2.build());
+        if (name[2] != "")
+            notificationManager.notify((103), builder2.build());
+        if (name[3] != "")
+            notificationManager.notify((104), builder2.build());
+        if (name[4] != "")
+            notificationManager.notify((105), builder2.build());
+        if (name[5] != "")
+            notificationManager.notify((106), builder2.build());
+        if (name[6] != "")
+            notificationManager.notify((107), builder2.build());
+        if (name[7] != "")
+            notificationManager.notify((108), builder2.build());
+        if (name[8] != "")
+            notificationManager.notify((109), builder2.build());
+        if (name[9] != "")
+            notificationManager.notify((110), builder2.build());
 
     }
 
 }
+
