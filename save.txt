@@ -14,6 +14,7 @@ public class Notification_receiver extends BroadcastReceiver {
 
     public final String CHANNEL_ID = "Personal Notification";
     private final int NOTIFICATION_ID = 101;
+    public final String CHANNEL_ID2 = "Personal Notification";
 
 
 
@@ -32,7 +33,7 @@ public class Notification_receiver extends BroadcastReceiver {
        // }
         String[] name = new String[10];
         Arrays.fill(name, "");
-        
+
         int k = 0;
         //String firstInterestName =
         for(Interest intr : interestList) {
@@ -192,4 +193,5 @@ public class Notification_receiver extends BroadcastReceiver {
     }
 
 }
+
 
