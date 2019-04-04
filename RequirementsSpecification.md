@@ -68,7 +68,6 @@
 - By clicking the start button, users get a pop-up dialog box, which asks the user to confirm that they want to start the timer for an interest.
    - Ex, for an interest 'homework': "Would you really like to start the timer for Homework? Y/N".
    - This feature prevents users from accidentially starting an interest's timer.
-- If a user has to log an activity more than once per period, it will divide the analog clock display n times.
 - The number of times per period, as well as the length of these times, can be easily customized in each interest’s settings.*
 ## Menu
 - Once the menu button is pressed it will open up the menu, which will contain a list of opions to press.
