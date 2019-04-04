@@ -37,7 +37,7 @@ public class Interest_Fragment extends Fragment {
     private Spinner periodSpanInput;
 
 
-    private String iName;
+    private static String iName;
     Interest thisInterest;
 
     private int aLength, numNotif, pSpanPtr;
@@ -47,9 +47,7 @@ public class Interest_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.interest_page, container, false);
-        TextView mytextview = view.findViewById(R.id.EditInterestName);
-        Interest theInterest = new Interest();
-        mytextview.setText(theInterest.getInterestName());
+        TextView mytextview = view.findViewById(R.id.InterestName);
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
@@ -72,7 +70,8 @@ public class Interest_Fragment extends Fragment {
         numNotifications = view.findViewById(R.id.numNotifications);
 
         // Initializes the interest page with set variables from the MainActivity call.
-        interestName.setText(thisInterest.getInterestName());
+        //interestName.setText(iName);
+        mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
@@ -95,12 +94,11 @@ public class Interest_Fragment extends Fragment {
         //Stuff past here is for deleting an interest
         delete= view.findViewById(R.id.delete);
         //finding the name from the edit interest page
-        delInterestName = view.findViewById(R.id.interestName);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //have to put string declaration in here or else it crashes
-                final String delInterestName1 = delInterestName.getText().toString();
+                final String delInterestName1 = interestName.getText().toString();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {

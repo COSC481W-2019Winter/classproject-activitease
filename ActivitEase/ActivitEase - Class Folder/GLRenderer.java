@@ -20,19 +20,22 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private static boolean timerRunning = false;
     private boolean initialTimerDrawn = false;
     private int n = 0;
-    int activityLengthMillis;
-    //double iterationTime = activityLengthMillis/91;   //Activity length divided by total number of iterations
-    double iterationTime = 6593.41;
-    int millisIterationTime = (int) iterationTime;
-    int nanosIterationTime = (int) iterationTime % 1;
+    private static long activityLengthMillis;
     private timer timer;
+    private static int millisIterationTime;
+    private static int nanosIterationTime;
 
     public static void setTimerRunning(boolean theTimerRunning)
     {
         timerRunning = theTimerRunning;
     }
-    public static void setActivityLength(int activityLength)
+    public static void setActivityLength(long activityLength)
     {
+        activityLengthMillis = activityLength;
+        double iterationTime = activityLengthMillis/91;   //Activity length divided by total number of iterations
+        millisIterationTime = (int) iterationTime;
+        nanosIterationTime = (int) iterationTime % 1;
+
 
     }
 
