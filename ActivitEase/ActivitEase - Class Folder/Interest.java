@@ -34,7 +34,7 @@ public class Interest {
     @ColumnInfo()
     private int streakCt;
     @ColumnInfo()
-    private boolean timerRunning = true;
+    private boolean timerRunning = false;
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
