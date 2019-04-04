@@ -12,15 +12,6 @@ Other names will disorganize the package storage.
           -----(Place between /activity> and /aplication> like the example below)---------
          </activity>
         <receiver android:name=".Notification_receiver"/>
-        <receiver android:name=".Notification_receiver2"/>
-        <receiver android:name=".Notification_receiver3"/>
-        <receiver android:name=".Notification_receiver4"/>
-        <receiver android:name=".Notification_receiver5"/>
-        <receiver android:name=".Notification_receiver6"/>
-        <receiver android:name=".Notification_receiver7"/>
-        <receiver android:name=".Notification_receiver8"/>
-        <receiver android:name=".Notification_receiver9"/>
-        <receiver android:name=".Notification_receiver10"/>
     </application>
     
     - Under 'Gradle Scripts' (Module: app), add in these dependencies in  dependencies {}:
