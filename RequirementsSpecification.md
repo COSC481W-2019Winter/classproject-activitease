@@ -42,7 +42,6 @@
 ## Tracking Interest Activity
 - Logging timed activities is incentivized by a streak-based system. Each interest’s streak will be displayed on the homescreen, and on an interest page.
 - Users can see the total amount of time (in days, hours, and minutes) spent on an interest.
-- On an interest page, the user can see the previous days in the week, and their corresponding activity completion.
 ## Interest Time settings
 - Users can enter how many times per day, week, month, or even year, a user wants to do an action.
 - Users must easily be able to set and change the amount of time they commit to an interest.
