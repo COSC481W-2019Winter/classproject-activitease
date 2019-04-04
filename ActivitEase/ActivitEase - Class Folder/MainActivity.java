@@ -73,85 +73,8 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-        Home_Page_Fragment  hf = new Home_Page_Fragment();
+        // End of added code
 
-        int n1 = hf.getNumN1();
-        int n2 = hf.getNumN2();
-        int n3 = hf.getNumN3();
-        int n4 = hf.getNumN4();
-        int n5 = hf.getNumN5();
-        int n6 = hf.getNumN6();
-        int n7 = hf.getNumN7();
-        int n8 = hf.getNumN8();
-        int n9 = hf.getNumN9();
-        int n10 = hf.getNumN10();
-
-
-
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-
-        c1.set(Calendar.HOUR_OF_DAY, 15);
-        c1.set(Calendar.MINUTE, 45);
-        c1.set(Calendar.SECOND, 00);
-
-        c2.set(Calendar.HOUR_OF_DAY, 15);
-        c2.set(Calendar.MINUTE, 19);
-        c2.set(Calendar.SECOND, 00);
-
-
-
-
-
-        Intent intent = new Intent(getApplicationContext(), Notification_receiver.class);
-        Intent intent2 = new Intent(getApplicationContext(), Notification_receiver2.class);
-        Intent intent3 = new Intent(getApplicationContext(), Notification_receiver3.class);
-        Intent intent4 = new Intent(getApplicationContext(), Notification_receiver4.class);
-        Intent intent5 = new Intent(getApplicationContext(), Notification_receiver5.class);
-        Intent intent6 = new Intent(getApplicationContext(), Notification_receiver6.class);
-        Intent intent7 = new Intent(getApplicationContext(), Notification_receiver7.class);
-        Intent intent8 = new Intent(getApplicationContext(), Notification_receiver8.class);
-        Intent intent9 = new Intent(getApplicationContext(), Notification_receiver9.class);
-        Intent intent10 = new Intent(getApplicationContext(), Notification_receiver10.class);
-
-        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(getApplicationContext(), 101, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(getApplicationContext(), 102, intent2,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(getApplicationContext(), 103, intent3,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(getApplicationContext(), 104, intent4,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(getApplicationContext(), 105, intent5,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent6 = PendingIntent.getBroadcast(getApplicationContext(), 106, intent6,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent7 = PendingIntent.getBroadcast(getApplicationContext(), 107, intent7,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent8 = PendingIntent.getBroadcast(getApplicationContext(), 108, intent8,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent9 = PendingIntent.getBroadcast(getApplicationContext(), 109, intent9,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingIntent10 = PendingIntent.getBroadcast(getApplicationContext(), 110, intent10,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
-        /*if (c1.before(Calendar.getInstance())) {
-            c1.add(Calendar.DATE, 1);
-        }*/
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent1);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent2);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent3);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent4);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent5);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent6);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent7);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent8);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent9);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent10);
-
-        // End of Notification Code
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
