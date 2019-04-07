@@ -98,44 +98,5 @@ public class Home_Page_Fragment extends Fragment {
         return view;
     }
 
-    public int getNumN1() {
-        return this.notification[0];
-
-    }
-    public int getNumN2() {
-        return this.notification[1];
-
-    }
-    public int getNumN3() {
-        return this.notification[2];
-
-    }
-    public int getNumN4() {
-        return this.notification[3];
-
-    }
-    public int getNumN5() {
-        return this.notification[4];
-
-    }
-    public int getNumN6() {
-        return this.notification[5];
-
-    }
-    public int getNumN7() {
-        return this.notification[6];
-
-    }
-    public int getNumN8() {
-        return this.notification[7];
-
-    }
-    public int getNumN9() {
-        return this.notification[8];
-
-    }
-    public int getNumN10() {
-        return this.notification[9];
-
-    }
+    
 }
