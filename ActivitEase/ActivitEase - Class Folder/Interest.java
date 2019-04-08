@@ -35,6 +35,8 @@ public class Interest {
     private int streakCt;
     @ColumnInfo()
     private boolean timerRunning = false;
+    @ColumnInfo()
+    private double totalTimeSpent;
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
@@ -75,6 +77,7 @@ public class Interest {
         this.basePeriodSpan = basePeriodSpan;
         this.activityLength = activityLength;
         this.numNotifications = numNotifications;
+        totalTimeSpent = 0;
     }
 
     public void loadInterest(String interestName, int periodFreq, int basePeriodSpan,
@@ -108,6 +111,10 @@ public class Interest {
 
     public void setTimerRunning(boolean timerRunning )
     { this.timerRunning = timerRunning; }
+
+    public void setTotalTimeSpent(double newTime) {
+        totalTimeSpent = newTime;
+    }
 
     public void setNotifTime1 (double notifTime) {notifTime1 = notifTime; }
     public void setNotifTime2 (double notifTime) {notifTime2= notifTime; }
@@ -213,6 +220,9 @@ public class Interest {
     public int getNumNotifications() { return numNotifications; }
     public int getStreakCt() {return streakCt; }
     public boolean getTimerRunning() { return timerRunning; }
+    public double getTotalTimeSpent() { return totalTimeSpent; }
+
+
     public double getNotifTime1() { return notifTime1; }
     public double getNotifTime2() { return notifTime2; }
     public double getNotifTime3() { return notifTime3; }

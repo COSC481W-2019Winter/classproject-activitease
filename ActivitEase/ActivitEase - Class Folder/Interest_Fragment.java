@@ -31,9 +31,9 @@ public class Interest_Fragment extends Fragment {
     private CountDownTimer countDownTimer;
     private EditText delInterestName;
 
-    Button delete;
+    Button startPause, done, delete;
 
-    private EditText interestName, activityLength, numNotifications;
+    private EditText interestName, activityLength, numNotifications, activityAmount;
     private Spinner periodSpanInput;
 
 
@@ -51,8 +51,11 @@ public class Interest_Fragment extends Fragment {
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
-        Button startStop = view.findViewById(R.id.startStop);
-        startStop.setText(buttonText);
+
+        // Initializes the 'Done' and 'startStop' variables.
+        startPause = view.findViewById(R.id.startPause);
+        startPause.setText(buttonText);
+        done = view.findViewById(R.id.donebtn);
 
         // Builds the period Span Spinner.
         periodSpanInput = view.findViewById(R.id.periodSpanInput);
@@ -65,14 +68,16 @@ public class Interest_Fragment extends Fragment {
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         notificationSpan.setAdapter(adapter1);
 
-        interestName = view.findViewById(R.id.interestName);
+//        interestName = view.findViewById(R.id.interestName);
         activityLength = view.findViewById(R.id.activityLength);
+        activityAmount = view.findViewById(R.id.activityAmount);
         numNotifications = view.findViewById(R.id.numNotifications);
 
         // Initializes the interest page with set variables from the MainActivity call.
         //interestName.setText(iName);
         mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
+        activityAmount.setText(Integer.toString(thisInterest.getPeriodFreq()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
 
@@ -97,8 +102,6 @@ public class Interest_Fragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //have to put string declaration in here or else it crashes
-                final String delInterestName1 = interestName.getText().toString();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -106,7 +109,7 @@ public class Interest_Fragment extends Fragment {
                             @Override
                             public void run() {
                                 // this is where the interest is deleted
-                                MainActivity.myDB.myDao().deleteByInterestName(delInterestName1);
+                                MainActivity.myDB.myDao().deleteByInterestName(thisInterest.getInterestName());
                             }
                         });
                     }
@@ -138,6 +141,16 @@ public class Interest_Fragment extends Fragment {
         textViewCountdown.setText(timeLeftFormatted);
 
     }
+
+    public void setDoneVisibility(String visibility) {
+        if (visibility.equals("visible"))
+            done.setVisibility(View.VISIBLE);
+        else if (visibility.equals("gone"))
+            done.setVisibility(View.GONE);
+        else
+            System.out.println("ope");
+    }
+
     public void startTimer() {
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override

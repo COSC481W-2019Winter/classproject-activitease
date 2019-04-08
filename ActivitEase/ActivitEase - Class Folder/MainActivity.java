@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private final int NOTIFICATION_ID = 001;
 
 
+
     public static MyDB myDB;
 
     @Override
@@ -225,6 +226,15 @@ public class MainActivity extends AppCompatActivity
 
 
     public void startStopTimer(View view) {
+        final View viewV = view;
+        //final Button startPause = view.findViewById(R.id.startPause);
+        //final Button doneBtn = viewV.findViewById(R.id.donebtn);
+
+
+        final Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+        final Interest_Fragment updateInterest = new Interest_Fragment();
+
+
         Button b = (Button)view;
         startStopTimerText = b.getText().toString();
         if(startStopTimerText.equals("Start Activity")) {
@@ -234,13 +244,11 @@ public class MainActivity extends AppCompatActivity
                     .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
-
-                            Interest_Fragment updateInterest = new Interest_Fragment();
                             updateInterest.setTimerRunning(true);
                             FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                             updateInterest.initializeInterest(updatedInterest.getInterestName());
-                            updateInterest.setButtonText("Done");
+                            updateInterest.setButtonText("Pause");
+
 
                             hp.replace(R.id.fragment_container, updateInterest);
                             hp.commit();
@@ -250,18 +258,23 @@ public class MainActivity extends AppCompatActivity
                     .setNegativeButton("no", null)
                     .show();
         }
-        else if(startStopTimerText.equals("Done")) {
+        else if(startStopTimerText.equals("Pause")) {
 
-            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
-            Interest_Fragment updateInterest = new Interest_Fragment();
+//            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+//            Interest_Fragment updateInterest = new Interest_Fragment();
             updateInterest.setTimerRunning(false);
             FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
             updateInterest.initializeInterest(updatedInterest.getInterestName());
-            updateInterest.setButtonText("Start Activity");
+            updateInterest.setButtonText("Resume");
             hp.replace(R.id.fragment_container, updateInterest);
             hp.commit();
 
+            double totalTimeSpent = updatedInterest.getTotalTimeSpent();
+            totalTimeSpent = totalTimeSpent + 1;
             //Update timer. Update DB with new interest data
+        }
+        else if (startStopTimerText.equals("Resume")) {
+            updateInterest.setButtonText("Pause");
         }
 
     }
