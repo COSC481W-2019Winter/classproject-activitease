@@ -55,7 +55,7 @@ public class Interest_Fragment extends Fragment {
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
-        Button startStop = view.findViewById(R.id.startStop);
+        Button startStop = view.findViewById(R.id.startPause);
         startStop.setText(buttonText);
 
         // Builds the period Span Spinner.
@@ -64,7 +64,7 @@ public class Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanInput.setAdapter(adapter);
 
-        doneBTN = view.findViewById(R.id.doneButton);
+        doneBTN = view.findViewById(R.id.donebtn);
         if(isTimerRunning)
             doneBTN.setVisibility(View.VISIBLE);
         else
