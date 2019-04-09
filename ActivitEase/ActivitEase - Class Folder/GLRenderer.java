@@ -43,7 +43,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     {
         numIterations = iterations;
     }
-    public int getNumIterations()
+    public static int getNumIterations()
     {
         return numIterations;
     }

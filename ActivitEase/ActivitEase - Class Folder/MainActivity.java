@@ -1,5 +1,6 @@
 package com.example.activitease;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
@@ -16,12 +17,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -76,8 +80,59 @@ public class MainActivity extends AppCompatActivity
          */
         myDB = Room.databaseBuilder(getApplicationContext(), MyDB.class, "interestdb")
                 .allowMainThreadQueries().build();
+
+        List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
+        int numOfInterest = interestList.size();
+
+        String firstInterestName = interestList.get(0).getInterestName();
+
+        //double[] notificationTimes = notification.getNotificationTimes();
+
+        //for(Interest interest: interestList){
+        popNotification(interestList);
+
+
     }
-    
+
+    public void popNotification(List<Interest> interestList){
+
+        for (int i = 0; i < interestList.size(); i++) {
+
+            String interestName = interestList.get(i).getInterestName();
+            double[] notificationTimes = interestList.get(i).getNotifTimes();
+            int numOfNotification = interestList.get(i).getNumNotifications();
+
+            Log.d(interestName, "----------------------------------------------------------------");
+            for(int j = 0; j < numOfNotification; j++){
+
+                //ArrayList<Notification> _arrayListOfNotification = new ArrayList<Notification>();
+
+                int hour = (int) notificationTimes[j];
+                int minute = (int) (notificationTimes[j] * 60 % 60);
+                int second = (int) (notificationTimes[j] * 60 * 60 % 60);
+
+               // Notification notification = new Notification(hour, minute, second);
+               // _arrayListOfNotification.add(notification);
+                Log.d(interestName,String.valueOf(hour + ":" + minute + ":" + second));
+
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.HOUR_OF_DAY, minute);
+                calendar.set(Calendar.HOUR_OF_DAY, second);
+
+                Intent intent = new Intent(getApplicationContext(), notification_reciever.class);
+
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100*i+j, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+            }
+        }
+    }
+
+
     public void notifyMe(View view) {
         NotificationCompat.Builder builder = new
                 NotificationCompat.Builder(this, CHANNEL_ID)
@@ -213,9 +268,6 @@ public class MainActivity extends AppCompatActivity
         Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
         resetTimer.initializeInterest(updatedInterest.getInterestName());
         resetTimer.setButtonText("Start Activity");
-        GLRenderer.setTimerRunning(false);
-        GLRenderer.setNumIterations(updatedInterest.getNumIterations());
-
 
         hp.replace(R.id.fragment_container, resetTimer);
         hp.commit();
@@ -258,11 +310,9 @@ public class MainActivity extends AppCompatActivity
             updateInterest.setTimerRunning(false);
             updateInterest.initializeInterest(updatedInterest.getInterestName());
             updateInterest.setButtonText("Start Activity");
-            GLRenderer.setNumIterations(updatedInterest.getNumIterations());
-
             hp.replace(R.id.fragment_container, updateInterest);
 
-             hp.commit();
+            hp.commit();
 
             //Update timer. Update DB with new interest data
         }
@@ -271,10 +321,6 @@ public class MainActivity extends AppCompatActivity
 
     public static int getInterestTableSz() {
         return MainActivity.myDB.myDao().getInterests().size();
-    }
-
-    public static void interestComplete(Interest i) {
-        i.setStreakCt(i.getStreakCt() + 1);
     }
 
   /*  public void openContactPage(View view)

@@ -37,7 +37,7 @@ public class Interest_Fragment extends Fragment {
 
     Button delete, editInterestBn, doneBTN;
 
-    private EditText interestName, activityLength, numNotifications, activityAmount;
+    private EditText interestName, activityLength, numNotifications;
     private Spinner periodSpanInput;
 
 
@@ -55,8 +55,9 @@ public class Interest_Fragment extends Fragment {
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
-        Button startStop = view.findViewById(R.id.startPause);
+        Button startStop = view.findViewById(R.id.startStop);
         startStop.setText(buttonText);
+
 
         // Builds the period Span Spinner.
         periodSpanInput = view.findViewById(R.id.periodSpanInput);
@@ -64,11 +65,7 @@ public class Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanInput.setAdapter(adapter);
 
-        doneBTN = view.findViewById(R.id.donebtn);
-        if(isTimerRunning)
-            doneBTN.setVisibility(View.VISIBLE);
-        else
-            doneBTN.setVisibility(View.GONE);
+        doneBTN = view.findViewById(R.id.doneButton);  //Done button layout
 
         Spinner notificationSpan = view.findViewById(R.id.numNotificationSpan);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
@@ -78,12 +75,10 @@ public class Interest_Fragment extends Fragment {
         interestName = view.findViewById(R.id.interestName);
         activityLength = view.findViewById(R.id.activityLength);
         numNotifications = view.findViewById(R.id.numNotifications);
-        activityAmount= view.findViewById(R.id.activityAmount);
 
         // Initializes the interest page with set variables from the MainActivity call.
         mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
-        activityAmount.setText(Integer.toString(thisInterest.getPeriodFreq()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
 
@@ -91,15 +86,17 @@ public class Interest_Fragment extends Fragment {
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
-        if(isTimerRunning)
+        if(isTimerRunning) //Conditions if timer is running
         {
-            GLRenderer.setTimerRunning(true);
-            GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
-            startTimer();
+            doneBTN.setVisibility(View.VISIBLE); //Makes done button visible
+            GLRenderer.setTimerRunning(true); //Sets the animations to active
+
+            startTimer();  //Starts the analog timer
         }
-        if(!isTimerRunning)
+        if(!isTimerRunning)  //If not
         {
-            GLRenderer.setTimerRunning(false);
+            doneBTN.setVisibility(View.GONE);  //Sets done button to invisible
+            GLRenderer.setTimerRunning(false); //Turns off animation
         }
 
         //Stuff past here is for deleting an interest
@@ -208,7 +205,7 @@ public class Interest_Fragment extends Fragment {
         glSurfaceView.onPause();
     }
 
-    private void updateCountDownText() {
+    private void updateCountDownText() {   //Updates analog clock
         int minutes = (int) mTimeLeftInMillis / 1000 / 60;
         int seconds = (int) mTimeLeftInMillis / 1000 % 60;
 
@@ -217,61 +214,59 @@ public class Interest_Fragment extends Fragment {
         textViewCountdown.setText(timeLeftFormatted);
 
     }
-    public void startTimer() {
+    public void startTimer() {  //Starts the timer
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished) { //Called every tick, update data
                 mTimeLeftInMillis = millisUntilFinished;
                 timeRemaining = (float) mTimeLeftInMillis /60000;
                 updateCountDownText();
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish() {  //When analog timer finishes
+
                 timerRunning = false;
 
-                MainActivity.interestComplete(thisInterest);
             }
         }.start();
 
         timerRunning = true;
 
     }
-    public void pauseTimer()
+    public void pauseTimer() //Pauses the timer
     {
+        isTimerRunning = false;
         countDownTimer.cancel();
-        GLRenderer.setTimerRunning(false);
         thisInterest.setTimeRemaining(timeRemaining);
-        GLRenderer renderer = new GLRenderer();
-        numIterations = renderer.getNumIterations();
-        thisInterest.setNumIterations(numIterations);
+        thisInterest.setNumIterations(GLRenderer.getNumIterations());
         MainActivity.myDB.myDao().updateInterest(thisInterest);
 
 
 
     }
-    public void resetTimer()
+    public void resetTimer() //Resets the timer
     {
-        GLRenderer renderer = new GLRenderer();
         countDownTimer.cancel();
         mTimeLeftInMillis = START_TIME_MILLIS;
         isTimerRunning = false;
         thisInterest.setTimeRemaining(thisInterest.getActivityLength());
         thisInterest.setNumIterations(0);
-        renderer.setNumIterations(0);
         MainActivity.myDB.myDao().updateInterest(thisInterest);
 
     }
 
     // Getters and setters for the variables that will inflate the interest page.
-    public void initializeInterest (String iName) {
+    public void initializeInterest (String iName) { //Initializes data specific to interest and draws initial timer on page load.
         this.iName = iName;
         thisInterest = MainActivity.myDB.myDao().loadInterestByName(iName);
+        GLRenderer.setNumIterations(thisInterest.getNumIterations());
+        GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
         START_TIME_MILLIS = Math.round(thisInterest.getTimeRemaining() * 60 * 1000);
         mTimeLeftInMillis = START_TIME_MILLIS;
 
         }
-    public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; }
+    public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; } //Methods that will be deprecated
     public void setTimerRunning(boolean timerRunning) {isTimerRunning = timerRunning; }
     public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
     public void setButtonText(String btnText){buttonText = btnText; }

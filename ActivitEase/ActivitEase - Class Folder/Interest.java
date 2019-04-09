@@ -36,9 +36,7 @@ public class Interest {
     @ColumnInfo()
     private int streakCt;
     @ColumnInfo()
-    private boolean timerRunning = false;
-    @ColumnInfo()
-    private static int numIterations = 0;
+    private int numIterations = 0;
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
@@ -73,17 +71,19 @@ public class Interest {
     and then into the database.
      */
     public Interest(String interestName, int periodFreq, int basePeriodSpan,
-                         int activityLength, double timeRemaining, int numNotifications) {
+                         int activityLength, double timeRemaining, int numNotifications, int streakCt, int numIterations) {
         this.interestName = interestName;
         this.periodFreq = periodFreq;
         this.basePeriodSpan = basePeriodSpan;
         this.activityLength = activityLength;
         this.timeRemaining = timeRemaining;
         this.numNotifications = numNotifications;
+        this.streakCt = streakCt;
+        this.numIterations = numIterations;
     }
 
     public void loadInterest(String interestName, int periodFreq, int basePeriodSpan,
-                             int activityLength, int numNotifications, int streakCt)
+                             int activityLength, int numNotifications, int streakCt, int numIterations)
     {
         this.interestName = interestName;
         this.periodFreq = periodFreq;
@@ -91,6 +91,7 @@ public class Interest {
         this.activityLength = activityLength;
         this.numNotifications = numNotifications;
         this.streakCt = streakCt;
+        this.numIterations = numIterations;
     }
 
     public void setInterestName(String interestName)
@@ -117,8 +118,6 @@ public class Interest {
     public void setStreakCt(int streakCt)
     { this.streakCt = streakCt;  }
 
-    public void setTimerRunning(boolean timerRunning )
-    { this.timerRunning = timerRunning; }
     public void setNumIterations(int iterations)
     {
         this.numIterations = iterations;
@@ -228,7 +227,6 @@ public class Interest {
     public int getNumNotifications() { return numNotifications; }
     public double getTimeRemaining() {return timeRemaining;}
     public int getStreakCt() {return streakCt; }
-    public boolean getTimerRunning() { return timerRunning; }
     public int getNumIterations() { return numIterations; }
     public double getNotifTime1() { return notifTime1; }
     public double getNotifTime2() { return notifTime2; }
