@@ -82,13 +82,7 @@ public class MainActivity extends AppCompatActivity
                 .allowMainThreadQueries().build();
 
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
-        int numOfInterest = interestList.size();
 
-        String firstInterestName = interestList.get(0).getInterestName();
-
-        //double[] notificationTimes = notification.getNotificationTimes();
-
-        //for(Interest interest: interestList){
         popNotification(interestList);
 
 
@@ -230,6 +224,11 @@ public class MainActivity extends AppCompatActivity
          */
         populatedInterest.setButtonText("Start Activity");
         populatedInterest.initializeInterest(thisInterest.getInterestName());
+        /*
+            pSpanPtr is the pointer for the Spinner selection.
+            0 for day (1), 1 for week (7), 2 for month (30), 3 for year(365, or else in this case).
+         */
+
 
         populatedInterest.setNumNotif(thisInterest.getNumNotifications());
 
@@ -264,6 +263,10 @@ public class MainActivity extends AppCompatActivity
         hp.replace(R.id.fragment_container, resetTimer);
         hp.commit();
 
+    }
+
+    public static void interestComplete(Interest i) {
+        i.setStreakCt(i.getStreakCt() + 1);
     }
 
     public void startStopTimer(View view) {
@@ -301,14 +304,18 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
             updateInterest.setTimerRunning(false);
             updateInterest.initializeInterest(updatedInterest.getInterestName());
-            updateInterest.setButtonText("Start Activity");
+            updateInterest.setButtonText("Resume");
             hp.replace(R.id.fragment_container, updateInterest);
 
             hp.commit();
 
-            //Update timer. Update DB with new interest data
+            double totalTimeSpent = updatedInterest.getTotalTimeSpent();
+            totalTimeSpent = totalTimeSpent + 1;
         }
-
+        else if (startStopTimerText.equals("Resume")) {
+            Interest_Fragment updateInterest = new Interest_Fragment();
+            updateInterest.setButtonText("Pause");
+        }
     }
 
     public static int getInterestTableSz() {

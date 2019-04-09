@@ -12,17 +12,41 @@ import android.support.annotation.NonNull;
  */
 @Entity(tableName = "interests")
 public class Interest {
-    // Will be deleted and methods will move to user, see
-    // architecture design
+      /*
+
+        Example of an interest:
+
+        I want to practice 'basketball'(1) for '40 minutes'(2), '5 times'(3) a 'week'(4).
+        I would like to have '2 notifications'(5) for my interest.
+
+
+         These variables are columns of the 'interests' table. I will explain their functions here.
+
+            'interestName' is the name of an interest. (1)
+
+            'activityLength' is how long an activity lasts (2).
+
+            'periodFreq' the number of times the interest is repeated during a period (3).
+
+            'basePeriodSpan' is how often an activity is done, converted to an integer.
+            In the case of the example, the basePeriodSpan will be '7', because this integer
+            represents 7 days. (4)
+
+            'numNotifications' is the number of notifications set for an interest (5).
+
+            'timeRemaining' is a variable for the timer to keep track of the time remaining for an interest.
+
+            'numIterations' is a technical variable for the OpenGL timer.
+
+            'streakCt' is the number of days that an interest has been continuously been fulfilled.
+
+            'totalTimeSpent' is the total minutes spent on an interest over time.
+     */
 
     // This is the primary retrieval column for the 'interests' table.
     @PrimaryKey
     @NonNull
     private String interestName;
-
-    /*
-        The rest are columns of the 'interests' table.
-     */
     @ColumnInfo()
     private int periodFreq;
     @ColumnInfo()
@@ -37,6 +61,9 @@ public class Interest {
     private int streakCt;
     @ColumnInfo()
     private int numIterations = 0;
+    @ColumnInfo()
+    private double totalTimeSpent;
+
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
@@ -80,6 +107,7 @@ public class Interest {
         this.numNotifications = numNotifications;
         this.streakCt = streakCt;
         this.numIterations = numIterations;
+        totalTimeSpent = 0;
     }
 
     public void loadInterest(String interestName, int periodFreq, int basePeriodSpan,
@@ -219,6 +247,10 @@ public class Interest {
         }
     }
 
+    public void setTotalTimeSpent(double newTime) {
+        totalTimeSpent = newTime;
+    }
+
     public String getInterestName() { return this.interestName; }
 
     public int getPeriodFreq() { return periodFreq; }
@@ -227,6 +259,8 @@ public class Interest {
     public int getNumNotifications() { return numNotifications; }
     public double getTimeRemaining() {return timeRemaining;}
     public int getStreakCt() {return streakCt; }
+    public double getTotalTimeSpent() { return totalTimeSpent; }
+
     public int getNumIterations() { return numIterations; }
     public double getNotifTime1() { return notifTime1; }
     public double getNotifTime2() { return notifTime2; }
