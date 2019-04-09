@@ -30,13 +30,15 @@ public class Interest {
     @ColumnInfo()
     private int activityLength;
     @ColumnInfo()
+    private double timeRemaining;
+    @ColumnInfo()
     private int numNotifications;
     @ColumnInfo()
     private int streakCt;
     @ColumnInfo()
     private boolean timerRunning = false;
     @ColumnInfo()
-    private double totalTimeSpent;
+    private static int numIterations = 0;
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
@@ -71,13 +73,13 @@ public class Interest {
     and then into the database.
      */
     public Interest(String interestName, int periodFreq, int basePeriodSpan,
-                         int activityLength, int numNotifications) {
+                         int activityLength, double timeRemaining, int numNotifications) {
         this.interestName = interestName;
         this.periodFreq = periodFreq;
         this.basePeriodSpan = basePeriodSpan;
         this.activityLength = activityLength;
+        this.timeRemaining = timeRemaining;
         this.numNotifications = numNotifications;
-        totalTimeSpent = 0;
     }
 
     public void loadInterest(String interestName, int periodFreq, int basePeriodSpan,
@@ -100,6 +102,12 @@ public class Interest {
     public void setBasePeriodSpan(int basePeriodSpan)
     {  this.basePeriodSpan = basePeriodSpan;  }
 
+    public void setTimeRemaining(double timeRemaining)
+    {
+        this.timeRemaining = timeRemaining;
+    }
+
+
     public void setActivityLength(int activityLength)
     { this.activityLength = activityLength; }
 
@@ -111,9 +119,9 @@ public class Interest {
 
     public void setTimerRunning(boolean timerRunning )
     { this.timerRunning = timerRunning; }
-
-    public void setTotalTimeSpent(double newTime) {
-        totalTimeSpent = newTime;
+    public void setNumIterations(int iterations)
+    {
+        this.numIterations = iterations;
     }
 
     public void setNotifTime1 (double notifTime) {notifTime1 = notifTime; }
@@ -218,11 +226,10 @@ public class Interest {
     public int getBasePeriodSpan() { return basePeriodSpan; }
     public int getActivityLength() { return activityLength; }
     public int getNumNotifications() { return numNotifications; }
+    public double getTimeRemaining() {return timeRemaining;}
     public int getStreakCt() {return streakCt; }
     public boolean getTimerRunning() { return timerRunning; }
-    public double getTotalTimeSpent() { return totalTimeSpent; }
-
-
+    public int getNumIterations() { return numIterations; }
     public double getNotifTime1() { return notifTime1; }
     public double getNotifTime2() { return notifTime2; }
     public double getNotifTime3() { return notifTime3; }

@@ -1,19 +1,12 @@
 package com.example.activitease;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -29,8 +22,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -39,7 +30,6 @@ public class MainActivity extends AppCompatActivity
     String startStopTimerText;
     public final String CHANNEL_ID = "Personal Notification";
     private final int NOTIFICATION_ID = 001;
-
 
 
     public static MyDB myDB;
@@ -55,27 +45,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
         setContentView(R.layout.activity_main);
-        
-        // Code to create notifications for android 8.0+
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
-            CharSequence name = "Personal Notifications";
-            String description = "Include all the personal notifications";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-
-            notificationChannel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(notificationChannel);
-
-
-        }
-        // End of added code
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -157,13 +127,19 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new FAQ_Fragment()).commit();
 
-        } else if (id == R.id.Interest) {
+        }
+//        else if (id == R.id.Interest) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
+//        }
+        else if (id == R.id.About) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
+                    .replace(R.id.fragment_container, new About_Fragment()).commit();
         }
-        else if (id == R.id.Setting) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_Fragment()).commit();
-        }
+       /* else if (id == R.id.Setting) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Settings_Fragment()).commit();
+        } */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -183,6 +159,8 @@ public class MainActivity extends AppCompatActivity
 
         // Name of the interest found from the text of the button.
         String interestName = (String)interestB.getText();
+        // Trims the button text to the interest name, which will be used to trigger db pull.
+        interestName = interestName.substring(0, interestName.indexOf(" "));
         // Loads the interest, using the interest name as the key.
         Interest thisInterest = MainActivity.myDB.myDao().loadInterestByName(interestName);
         currentInterestName = thisInterest.getInterestName();
@@ -224,17 +202,26 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void doneBtn(View view)  //When done button pressed, update interest and reload page.
+    {
+        Button b = (Button) view;
+        Interest_Fragment resetTimer = new Interest_Fragment();
+        resetTimer.resetTimer();
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        resetTimer.setTimerRunning(false);
+        Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+        resetTimer.initializeInterest(updatedInterest.getInterestName());
+        resetTimer.setButtonText("Start Activity");
+        GLRenderer.setTimerRunning(false);
+        GLRenderer.setNumIterations(updatedInterest.getNumIterations());
+
+
+        hp.replace(R.id.fragment_container, resetTimer);
+        hp.commit();
+
+    }
 
     public void startStopTimer(View view) {
-        final View viewV = view;
-        //final Button startPause = view.findViewById(R.id.startPause);
-        //final Button doneBtn = viewV.findViewById(R.id.donebtn);
-
-
-        final Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
-        final Interest_Fragment updateInterest = new Interest_Fragment();
-
-
         Button b = (Button)view;
         startStopTimerText = b.getText().toString();
         if(startStopTimerText.equals("Start Activity")) {
@@ -244,11 +231,14 @@ public class MainActivity extends AppCompatActivity
                     .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+
+                            Interest_Fragment updateInterest = new Interest_Fragment();
                             updateInterest.setTimerRunning(true);
                             FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                             updateInterest.initializeInterest(updatedInterest.getInterestName());
+                            GLRenderer.setNumIterations(updatedInterest.getNumIterations());
                             updateInterest.setButtonText("Pause");
-
 
                             hp.replace(R.id.fragment_container, updateInterest);
                             hp.commit();
@@ -260,21 +250,20 @@ public class MainActivity extends AppCompatActivity
         }
         else if(startStopTimerText.equals("Pause")) {
 
-//            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
-//            Interest_Fragment updateInterest = new Interest_Fragment();
-            updateInterest.setTimerRunning(false);
+            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+            Interest_Fragment updateInterest = new Interest_Fragment();
+            updateInterest.pauseTimer();
             FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+            updateInterest.setTimerRunning(false);
             updateInterest.initializeInterest(updatedInterest.getInterestName());
-            updateInterest.setButtonText("Resume");
-            hp.replace(R.id.fragment_container, updateInterest);
-            hp.commit();
+            updateInterest.setButtonText("Start Activity");
+            GLRenderer.setNumIterations(updatedInterest.getNumIterations());
 
-            double totalTimeSpent = updatedInterest.getTotalTimeSpent();
-            totalTimeSpent = totalTimeSpent + 1;
+            hp.replace(R.id.fragment_container, updateInterest);
+
+             hp.commit();
+
             //Update timer. Update DB with new interest data
-        }
-        else if (startStopTimerText.equals("Resume")) {
-            updateInterest.setButtonText("Pause");
         }
 
     }

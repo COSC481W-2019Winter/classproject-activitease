@@ -19,17 +19,18 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private float[] colors = new float[2920]; // 2190 vertices and 4 color values per vertice.
     private static boolean timerRunning = false;
     private boolean initialTimerDrawn = false;
-    private int n = 0;
-    private static long activityLengthMillis;
+    private static int numIterations;
+    private static double activityLengthMillis;
     private timer timer;
     private static int millisIterationTime;
     private static int nanosIterationTime;
+
 
     public static void setTimerRunning(boolean theTimerRunning)
     {
         timerRunning = theTimerRunning;
     }
-    public static void setActivityLength(long activityLength)
+    public static void setActivityLength(double activityLength)
     {
         activityLengthMillis = activityLength;
         double iterationTime = activityLengthMillis/91;   //Activity length divided by total number of iterations
@@ -38,6 +39,15 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
 
     }
+    public static void setNumIterations(int iterations)
+    {
+        numIterations = iterations;
+    }
+    public int getNumIterations()
+    {
+        return numIterations;
+    }
+
 
 
     public static int loadShader(int type, String shaderCode){
@@ -55,12 +65,12 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-        GLES20.glClearColor(1, 1, 1, 0);
+        GLES20.glClearColor(1, (float)1, (float)1, 0);
 
         timer = new timer((float)1, (float)0.98);
 
         //Code to draw geometry of clock
-        timer.initialTimerDraw(mMVPMatrix);
+        timer.initialTimerDraw(mMVPMatrix, numIterations);
     }
 
     public void onSurfaceChanged(GL10 gl, int width, int height) {
@@ -85,15 +95,15 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
-            timer.initialTimerDraw(mMVPMatrix);
+            timer.initialTimerDraw(mMVPMatrix, numIterations);
             initialTimerDrawn = true;
         }
         //Animation of timer;
-        else if(timerRunning && n < 365 && initialTimerDrawn)
+        else if(timerRunning && numIterations < 365 && initialTimerDrawn)
         {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
-            timer.draw(mMVPMatrix, n);
+            timer.draw(mMVPMatrix, numIterations);
 
             synchronized (this) {
                 try {
@@ -102,7 +112,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                     e.printStackTrace();
 
                 }
-                n += 4;
+                numIterations += 4;
             }
         }
     }
@@ -251,7 +261,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             // Disable vertex array
             GLES20.glDisableVertexAttribArray(positionHandle);
         }
-        public void initialTimerDraw(float[] mvpMatrix) //Draws initial timer without animation parameters
+        public void initialTimerDraw(float[] mvpMatrix, int z) //Draws initial timer without animation parameters
         {
             // Add program to OpenGL ES environment
             GLES20.glUseProgram(mProgram);
@@ -267,7 +277,14 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                     GLES20.GL_FLOAT, false,
                     vertexStride, vertexBuffer);
 
-            for(int x = 0; x < 365; x++) //Draw outer circle
+            for(int x = 0; x < z; x++) //Animation loop
+            {
+                colors[x * 4 + 0] = 1f;
+                colors[x * 4 + 1] = 1f;
+                colors[x * 4  + 2] = 1f;
+                colors[x * 4 + 3] = 1f;
+            }
+            for(int x = numIterations; x < 365; x++) //Draw outer circle
             {
                 colors[(x * 4) + 0] = .251f;
                 colors[(x * 4) + 1] = .879f;

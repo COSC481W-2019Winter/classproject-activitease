@@ -18,7 +18,6 @@ import static java.lang.String.*;
 public class Home_Page_Fragment extends Fragment {
     TextView populateInterests;
     private Button[] interestBtns = new Button[10];
-    public int[] notification = new int [10];
 
 
     @Nullable
@@ -36,10 +35,8 @@ public class Home_Page_Fragment extends Fragment {
         String info = "Interest Name:   Activity Length:    Period Frequency:   base p. span:   notifications: times for notifs: \n";
 
 
-        int k = 0;
         for(Interest intr : interestList) {
             if (intr != null) {
-                notification[k] = intr.getNumNotifications();
                 String interestName = intr.getInterestName();
                 int activityLength = intr.getActivityLength();
                 int periodFreq = intr.getPeriodFreq();
@@ -55,7 +52,6 @@ public class Home_Page_Fragment extends Fragment {
                     info += format("%.2f", tempNotifTimes[i]) + "   ";
                 }
                 info += "\n";
-                k++;
             }
             else
                 break;
@@ -90,13 +86,29 @@ public class Home_Page_Fragment extends Fragment {
              */
         for (int i = 0; i < sz; i++) {
             interestBtns[i].setVisibility(View.VISIBLE);
-            interestBtns[i].setText(interestList.get(i).getInterestName());
+
+            String periodSpan = "";
+
+            if (interestList.get(i).getBasePeriodSpan() == 1)
+                periodSpan = "day";
+            else if (interestList.get(i).getBasePeriodSpan() == 7)
+                periodSpan = "week";
+            else if (interestList.get(i).getBasePeriodSpan() == 30)
+                periodSpan = "month";
+            else
+                periodSpan = "year";
+
+            String buttonText = interestList.get(i).getInterestName() + " \n" +
+                                interestList.get(i).getStreakCt() + " day streak \n" +
+                                interestList.get(i).getPeriodFreq() + " times " +
+                                interestList.get(i).getActivityLength() + " minutes a " +
+                                periodSpan;
+
+            interestBtns[i].setText(buttonText);
         }
         // CODE FOR BUTTON POPULATION ENDS HERE
 
 
         return view;
     }
-
-    
 }

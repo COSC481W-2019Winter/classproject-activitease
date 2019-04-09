@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,31 +15,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 public class Interest_Fragment extends Fragment {
     // EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
     MyGLSurfaceView glSurfaceView;
-    boolean timerRunning;
+    static boolean timerRunning;
     private static boolean isTimerRunning = false;
     private static String buttonText;
 
-    private static long START_TIME_MILLIS;
-    private long mTimeLeftInMillis;
+    private static long START_TIME_MILLIS ;
+    private static long mTimeLeftInMillis;
+    private static double timeRemaining;
+    private static int numIterations;
 
     private TextView textViewCountdown;
-    private CountDownTimer countDownTimer;
-    private EditText delInterestName;
+    private static CountDownTimer countDownTimer;
 
-    Button startPause, done, delete;
 
-    private EditText interestName, activityLength, numNotifications, activityAmount;
+    Button delete, editInterestBn, doneBTN;
+
+    private EditText interestName, activityLength, numNotifications;
     private Spinner periodSpanInput;
 
 
     private static String iName;
-    Interest thisInterest;
+    static Interest thisInterest;
 
     private int aLength, numNotif, pSpanPtr;
 
@@ -51,11 +55,8 @@ public class Interest_Fragment extends Fragment {
         String[] periodSpanTypes =
                 {"Day", "Week", "Month", "Year"};
 
-
-        // Initializes the 'Done' and 'startStop' variables.
-        startPause = view.findViewById(R.id.startPause);
-        startPause.setText(buttonText);
-        done = view.findViewById(R.id.donebtn);
+        Button startStop = view.findViewById(R.id.startStop);
+        startStop.setText(buttonText);
 
         // Builds the period Span Spinner.
         periodSpanInput = view.findViewById(R.id.periodSpanInput);
@@ -63,21 +64,24 @@ public class Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanInput.setAdapter(adapter);
 
+        doneBTN = view.findViewById(R.id.doneButton);
+        if(isTimerRunning)
+            doneBTN.setVisibility(View.VISIBLE);
+        else
+            doneBTN.setVisibility(View.GONE);
+
         Spinner notificationSpan = view.findViewById(R.id.numNotificationSpan);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         notificationSpan.setAdapter(adapter1);
 
-//        interestName = view.findViewById(R.id.interestName);
+        interestName = view.findViewById(R.id.interestName);
         activityLength = view.findViewById(R.id.activityLength);
-        activityAmount = view.findViewById(R.id.activityAmount);
         numNotifications = view.findViewById(R.id.numNotifications);
 
         // Initializes the interest page with set variables from the MainActivity call.
-        //interestName.setText(iName);
         mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
-        activityAmount.setText(Integer.toString(thisInterest.getPeriodFreq()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
 
@@ -88,7 +92,7 @@ public class Interest_Fragment extends Fragment {
         if(isTimerRunning)
         {
             GLRenderer.setTimerRunning(true);
-            GLRenderer.setActivityLength(thisInterest.getActivityLength() * 60 * 1000);
+            GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
             startTimer();
         }
         if(!isTimerRunning)
@@ -97,11 +101,79 @@ public class Interest_Fragment extends Fragment {
         }
 
         //Stuff past here is for deleting an interest
-        delete= view.findViewById(R.id.delete);
+        // Finds the submit button, and an onClick method submits the data into the database.
+        editInterestBn = view.findViewById(R.id.SubmitEditInterest);
+        editInterestBn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Creating an instance of Interest, so that should an error occur our original interest isn't corrupted.
+                Interest updInterest = thisInterest;
+
+                /*
+                 * Finds the raw values of the EditTexts and the Spinner, and saves them in
+                 * int and String variables.
+                 */
+                String newActivityLengthTemp = activityLength.getText().toString();
+                int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
+                int basePeriodSpan = 1;
+
+
+                // Refreshing the Interest with previously and newly set data
+                updInterest.setInterestName(iName);
+                updInterest.setActivityLength(thisInterest.getActivityLength());
+                updInterest.setNumNotifications(thisInterest.getNumNotifications());
+                //updInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+
+                /*
+                 * Temporary values of basePeriodSpan, which will have to be revised for later.
+                 * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                 * and year are.
+                 */
+               /* switch (newPeriodSpan) {
+                    case "Day":
+                        basePeriodSpan = 1;
+                        break;
+                    case "Week":
+                        basePeriodSpan = 7;
+                        break;
+                    case "Month":
+                        basePeriodSpan = 30;
+                        break;
+                    case "Year":
+                        basePeriodSpan = 365;
+                        break;
+                }
+                updInterest.setBasePeriodSpan(basePeriodSpan); */
+
+
+                // The database updates the interest to the interests table.
+                MainActivity.myDB.myDao().updateInterest(updInterest);
+
+                // Announces that an interest was successfully edited.
+                Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
+
+                // Resets the EditInterest form to what is saved in the database.
+                activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
+                numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
+
+            }
+        });
+
+
+
+
+
+
+
+        //Stuff past here is for deleting an interest
+        delete=(Button)view.findViewById(R.id.delete);
         //finding the name from the edit interest page
+//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //have to put string declaration in here or else it crashes
+                final String delInterestName1 = thisInterest.getInterestName();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -109,13 +181,15 @@ public class Interest_Fragment extends Fragment {
                             @Override
                             public void run() {
                                 // this is where the interest is deleted
-                                MainActivity.myDB.myDao().deleteByInterestName(thisInterest.getInterestName());
+                                MainActivity.myDB.myDao().deleteByInterestName(delInterestName1);
                             }
                         });
                     }
                 });
             }
         });
+
+
 
 
 
@@ -141,21 +215,12 @@ public class Interest_Fragment extends Fragment {
         textViewCountdown.setText(timeLeftFormatted);
 
     }
-
-    public void setDoneVisibility(String visibility) {
-        if (visibility.equals("visible"))
-            done.setVisibility(View.VISIBLE);
-        else if (visibility.equals("gone"))
-            done.setVisibility(View.GONE);
-        else
-            System.out.println("ope");
-    }
-
     public void startTimer() {
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
+                timeRemaining = (float) mTimeLeftInMillis /60000;
                 updateCountDownText();
             }
 
@@ -169,23 +234,37 @@ public class Interest_Fragment extends Fragment {
         timerRunning = true;
 
     }
-    private void pauseTimer()
+    public void pauseTimer()
     {
         countDownTimer.cancel();
-        timerRunning = false;
+        GLRenderer.setTimerRunning(false);
+        thisInterest.setTimeRemaining(timeRemaining);
+        GLRenderer renderer = new GLRenderer();
+        numIterations = renderer.getNumIterations();
+        thisInterest.setNumIterations(numIterations);
+        MainActivity.myDB.myDao().updateInterest(thisInterest);
+
+
 
     }
-    private void resetTimer()
+    public void resetTimer()
     {
+        GLRenderer renderer = new GLRenderer();
+        countDownTimer.cancel();
         mTimeLeftInMillis = START_TIME_MILLIS;
-        updateCountDownText();
+        isTimerRunning = false;
+        thisInterest.setTimeRemaining(thisInterest.getActivityLength());
+        thisInterest.setNumIterations(0);
+        renderer.setNumIterations(0);
+        MainActivity.myDB.myDao().updateInterest(thisInterest);
+
     }
 
     // Getters and setters for the variables that will inflate the interest page.
     public void initializeInterest (String iName) {
         this.iName = iName;
         thisInterest = MainActivity.myDB.myDao().loadInterestByName(iName);
-        START_TIME_MILLIS = thisInterest.getActivityLength() * 60 * 1000;
+        START_TIME_MILLIS = Math.round(thisInterest.getTimeRemaining() * 60 * 1000);
         mTimeLeftInMillis = START_TIME_MILLIS;
 
         }
