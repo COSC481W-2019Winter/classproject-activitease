@@ -230,14 +230,6 @@ public class MainActivity extends AppCompatActivity
          */
         populatedInterest.setButtonText("Start Activity");
         populatedInterest.initializeInterest(thisInterest.getInterestName());
-        /*
-            pSpanPtr is the pointer for the Spinner selection.
-            0 for day (1), 1 for week (7), 2 for month (30), 3 for year(365, or else in this case).
-         */
-        if (thisInterest.getBasePeriodSpan() == 1) populatedInterest.setpSpanPtr(0);
-        else if (thisInterest.getBasePeriodSpan() == 7) populatedInterest.setpSpanPtr(1);
-        else if (thisInterest.getBasePeriodSpan() == 30) populatedInterest.setpSpanPtr(2);
-        else populatedInterest.setpSpanPtr(3);
 
         populatedInterest.setNumNotif(thisInterest.getNumNotifications());
 
