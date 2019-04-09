@@ -16,6 +16,7 @@ public class Notification_receiver extends BroadcastReceiver {
     private final int NOTIFICATION_ID = 101;
     public final String CHANNEL_ID2 = "Personal Notification";
     public String[] name;
+    public int rN = (int) System.currentTimeMillis();
 
 
 
@@ -27,13 +28,10 @@ public class Notification_receiver extends BroadcastReceiver {
         Intent repeating_intent = new Intent(context, MainActivity.class);
         repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        //int numOfInterest = interestList.size();
 
-        //for (int i = 0; i < numOfInterest; i++) {
-            //System.out.println(interestList.get(i).getInterestName());
-       // }
         name = new String[10];
         Arrays.fill(name, "");
+        int ll= 0;
 
         int k = 0;
         //String firstInterestName =
@@ -44,14 +42,10 @@ public class Notification_receiver extends BroadcastReceiver {
                 int periodFreq = intr.getPeriodFreq();
                 int basePeriodSpan = intr.getBasePeriodSpan();
                 int numNotifications = intr.getNumNotifications();
+                ll = intr.getNumNotifications();
 
                 double[] tempNotifTimes = intr.getNotifTimes();
 
-
-
-                for (int i = 0; i < numNotifications; i++) {
-                    // info += format("%.2f", tempNotifTimes[i]) + "   ";
-                }
                 k++;
             }
             else
@@ -68,18 +62,19 @@ public class Notification_receiver extends BroadcastReceiver {
                 //.setSmallIcon(android.R.drawable.arrow_up_float)setSmallIcon(icon);
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(name[0])
-                .setContentText("Hey, you! It's time to get this done!")
+                .setContentText("Hey, you! It's time to get this done!" )
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         if (name[0] != "")
-            notificationManager.notify((NOTIFICATION_ID), builder.build());
+            notificationManager.notify((rN), builder.build());
 
 
     }
 
 
 }
+
 
 
