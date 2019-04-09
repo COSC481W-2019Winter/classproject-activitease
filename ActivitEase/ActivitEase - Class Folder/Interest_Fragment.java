@@ -37,7 +37,7 @@ public class Interest_Fragment extends Fragment {
 
     Button delete, editInterestBn, doneBTN;
 
-    private EditText interestName, activityLength, numNotifications;
+    private EditText interestName, activityLength, numNotifications, activityAmount;
     private Spinner periodSpanInput;
 
 
@@ -78,10 +78,12 @@ public class Interest_Fragment extends Fragment {
         interestName = view.findViewById(R.id.interestName);
         activityLength = view.findViewById(R.id.activityLength);
         numNotifications = view.findViewById(R.id.numNotifications);
+        activityAmount= view.findViewById(R.id.activityAmount);
 
         // Initializes the interest page with set variables from the MainActivity call.
         mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
+        activityAmount.setText(Integer.toString(thisInterest.getPeriodFreq()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
 
@@ -228,6 +230,7 @@ public class Interest_Fragment extends Fragment {
             public void onFinish() {
                 timerRunning = false;
 
+                MainActivity.interestComplete(thisInterest);
             }
         }.start();
 

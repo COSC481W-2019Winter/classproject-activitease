@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -270,6 +271,10 @@ public class MainActivity extends AppCompatActivity
 
     public static int getInterestTableSz() {
         return MainActivity.myDB.myDao().getInterests().size();
+    }
+
+    public static void interestComplete(Interest i) {
+        i.setStreakCt(i.getStreakCt() + 1);
     }
 
   /*  public void openContactPage(View view)
