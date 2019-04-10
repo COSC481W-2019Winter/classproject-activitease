@@ -121,15 +121,21 @@ public class Interest_Fragment extends Fragment {
             GLRenderer.setTimerRunning(false); //Turns off animation
         }
 
-        //Stuff past here is for deleting an interest
+        //Stuff past here is for editing an interest
         // Finds the submit button, and an onClick method submits the data into the database.
         editInterestBn = view.findViewById(R.id.SubmitEditInterest);
         editInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Creating an instance of Interest, so that should an error occur our original interest isn't corrupted.
-                Interest updInterest = thisInterest;
+                //oldLength is taken for later use in determining whether or not the timeRemaining will need to update.
+                int oldLength = thisInterest.getActivityLength();
+                int oldNumNotif = thisInterest.getNumNotifications();
 
+
+
+
+
+                //YO ANTHONY YOU REALIZED IF NOTIFICATIONS CHANGE FROM HIGHER TO LOWER, THE HIGHER NOTIFICATIONS ARE STILL SET.
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
                  * int and String variables.
@@ -142,15 +148,20 @@ public class Interest_Fragment extends Fragment {
 
 
                 // Refreshing the Interest with previously and newly set data
-                updInterest.setInterestName(iName);
-                updInterest.setActivityLength(thisInterest.getActivityLength());
-                updInterest.setNumNotifications(thisInterest.getNumNotifications());
-                //updInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
-
+                thisInterest.setInterestName(iName);
                 thisInterest.setActivityLength(newActivityLengthTemp);
                 thisInterest.setPeriodFreq(newPeriodFreqTemp);
                 thisInterest.setNumNotifications(newNumNotifications);
                 thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+
+
+                /*
+                    If the user changes the length they desire, the timeRemaining will be updated to the new Length.
+                        Otherwise, the timer will remain where it was last set.
+                 */
+                if(oldLength != newActivityLengthTemp)
+                    thisInterest.setTimeRemaining(newActivityLengthTemp);
+
 
                 switch (newPeriodSpan) {
                     case "Day":
@@ -174,11 +185,6 @@ public class Interest_Fragment extends Fragment {
 
                 // Announces that an interest was successfully edited.
                 Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
-
-                // Resets the EditInterest form to what is saved in the database.
-                activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
-                numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
-
             }
         });
 
@@ -251,8 +257,8 @@ public class Interest_Fragment extends Fragment {
             public void onFinish() {  //When analog timer finishes
 
                 timerRunning = false;
-
-                MainActivity.interestComplete(thisInterest);
+                if(!thisInterest.getStreakCTBool())
+                    MainActivity.interestComplete(thisInterest);
             }
         }.start();
 
