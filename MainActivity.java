@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,13 +32,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
-    Interest interest = new Interest();
-    Notification_receiver notification = new Notification_receiver();
-    ArrayList<Notification> arrayListOfNotification = new ArrayList<Notification>();
-
+    static String currentInterestName;
     String startStopTimerText;
     public final String CHANNEL_ID = "Personal Notification";
     private final int NOTIFICATION_ID = 001;
+
 
     public static MyDB myDB;
 
@@ -51,9 +49,20 @@ public class MainActivity extends AppCompatActivity
         hp.replace(R.id.fragment_container, new Home_Page_Fragment());
         hp.commit();
 
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        }); */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,6 +73,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         /**
          Initializes the Room database object.
          Database is called 'interestdb'.
@@ -71,21 +82,12 @@ public class MainActivity extends AppCompatActivity
         myDB = Room.databaseBuilder(getApplicationContext(), MyDB.class, "interestdb")
                 .allowMainThreadQueries().build();
 
-        // Globle time
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
-        int numOfInterest = interestList.size();
 
-        String firstInterestName = interestList.get(0).getInterestName();
+        popNotification(interestList);
 
-        double[] notificationTimes = notification.getNotificationTimes();
-
-        //for(Interest interest: interestList){
-            popNotification(interestList);
-        //}
 
     }
-
-
 
     public void popNotification(List<Interest> interestList){
 
@@ -98,14 +100,14 @@ public class MainActivity extends AppCompatActivity
             Log.d(interestName, "----------------------------------------------------------------");
             for(int j = 0; j < numOfNotification; j++){
 
-                ArrayList<Notification> _arrayListOfNotification = new ArrayList<Notification>();
+                //ArrayList<Notification> _arrayListOfNotification = new ArrayList<Notification>();
 
                 int hour = (int) notificationTimes[j];
                 int minute = (int) (notificationTimes[j] * 60 % 60);
                 int second = (int) (notificationTimes[j] * 60 * 60 % 60);
 
-                Notification notification = new Notification(hour, minute, second);
-                _arrayListOfNotification.add(notification);
+               // Notification notification = new Notification(hour, minute, second);
+               // _arrayListOfNotification.add(notification);
                 Log.d(interestName,String.valueOf(hour + ":" + minute + ":" + second));
 
                 Calendar calendar = Calendar.getInstance();
@@ -114,7 +116,9 @@ public class MainActivity extends AppCompatActivity
                 calendar.set(Calendar.HOUR_OF_DAY, minute);
                 calendar.set(Calendar.HOUR_OF_DAY, second);
 
-                Intent intent = new Intent(getApplicationContext(), Notification_receiver.class);
+                Intent intent = new Intent(getApplicationContext(), notification_reciever.class);
+
+
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100*i+j, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
 
     public void notifyMe(View view) {
         NotificationCompat.Builder builder = new
@@ -173,14 +178,19 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new FAQ_Fragment()).commit();
 
-        } else if (id == R.id.Interest) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
-
-        } else if (id == R.id.About) {
+        }
+//        else if (id == R.id.Interest) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.fragment_container, new Interest_Fragment()).commit();
+//        }
+        else if (id == R.id.About) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new About_Fragment()).commit();
         }
+       /* else if (id == R.id.Setting) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Settings_Fragment()).commit();
+        } */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -200,8 +210,11 @@ public class MainActivity extends AppCompatActivity
 
         // Name of the interest found from the text of the button.
         String interestName = (String)interestB.getText();
+        // Trims the button text to the interest name, which will be used to trigger db pull.
+        interestName = interestName.substring(0, interestName.indexOf(" "));
         // Loads the interest, using the interest name as the key.
         Interest thisInterest = MainActivity.myDB.myDao().loadInterestByName(interestName);
+        currentInterestName = thisInterest.getInterestName();
 
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
         Interest_Fragment populatedInterest = new Interest_Fragment();
@@ -210,24 +223,20 @@ public class MainActivity extends AppCompatActivity
             Initializes variables in the Interest_Fragment object, which will then be used
             once the Interest_Fragment's onCreateView method is activated.
          */
-        populatedInterest.setiName(thisInterest.getInterestName());
-        populatedInterest.setaLength(thisInterest.getActivityLength());
-        populatedInterest.setpFreq(thisInterest.getPeriodFreq());
+        populatedInterest.setButtonText("Start Activity");
+        populatedInterest.initializeInterest(thisInterest.getInterestName());
         /*
             pSpanPtr is the pointer for the Spinner selection.
             0 for day (1), 1 for week (7), 2 for month (30), 3 for year(365, or else in this case).
          */
-        if (thisInterest.getBasePeriodSpan() == 1) populatedInterest.setpSpanPtr(0);
-        else if (thisInterest.getBasePeriodSpan() == 7) populatedInterest.setpSpanPtr(1);
-        else if (thisInterest.getBasePeriodSpan() == 30) populatedInterest.setpSpanPtr(2);
-        else populatedInterest.setpSpanPtr(3);
+
 
         populatedInterest.setNumNotif(thisInterest.getNumNotifications());
 
         hp.replace(R.id.fragment_container, populatedInterest);
         hp.commit();
     }
-
+    
     public void openAct1(View view)
     {
 
@@ -241,10 +250,26 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void setButtonText(String buttonText)
+    public void doneBtn(View view)  //When done button pressed, update interest and reload page.
     {
-        Button b = findViewById(R.id.startStop);
-        b.setText(buttonText);
+        Button b = (Button) view;
+        Interest_Fragment resetTimer = new Interest_Fragment();
+        resetTimer.resetTimer();
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        resetTimer.setTimerRunning(false);
+        Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+        resetTimer.initializeInterest(updatedInterest.getInterestName());
+        resetTimer.setButtonText("Start Activity");
+
+        hp.replace(R.id.fragment_container, resetTimer);
+        hp.commit();
+
+    }
+
+    public static void interestComplete(Interest i) {
+        i.setStreakCt(i.getStreakCt() + 1);
+        i.setLastDate(getCurrentDate());
+        myDB.myDao().updateInterest(i);
     }
 
     public void startStopTimer(View view) {
@@ -257,36 +282,59 @@ public class MainActivity extends AppCompatActivity
                     .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startStopTimerText = "Done";
-                            setButtonText(startStopTimerText);
+                            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+
+                            Interest_Fragment updateInterest = new Interest_Fragment();
+                            updateInterest.setTimerRunning(true);
+                            FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+                            updateInterest.initializeInterest(updatedInterest.getInterestName());
+                            GLRenderer.setNumIterations(updatedInterest.getNumIterations());
+                            updateInterest.setButtonText("Pause");
+
+                            hp.replace(R.id.fragment_container, updateInterest);
+                            hp.commit();
                         }
 
                     })
                     .setNegativeButton("no", null)
                     .show();
         }
-        else if(startStopTimerText.equals("Done")) {
-            startStopTimerText = "Start Activity";
-            setButtonText(startStopTimerText);
-            //Update timer. Update DB with new interest data
-        }
+        else if(startStopTimerText.equals("Pause")) {
 
+            Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+            Interest_Fragment updateInterest = new Interest_Fragment();
+            updateInterest.pauseTimer();
+            FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+            updateInterest.setTimerRunning(false);
+            updateInterest.initializeInterest(updatedInterest.getInterestName());
+            updateInterest.setButtonText("Resume");
+            hp.replace(R.id.fragment_container, updateInterest);
+
+            hp.commit();
+
+            double totalTimeSpent = updatedInterest.getTotalTimeSpent();
+            totalTimeSpent = totalTimeSpent + 1;
+        }
+        else if (startStopTimerText.equals("Resume")) {
+            Interest_Fragment updateInterest = new Interest_Fragment();
+            updateInterest.setButtonText("Pause");
+        }
     }
 
     public static int getInterestTableSz() {
         return MainActivity.myDB.myDao().getInterests().size();
     }
 
-    public void openContactPage(View view)
+  /*  public void openContactPage(View view)
     {
         startActivity(new Intent(getApplicationContext(), ContactManager.class));
         //getSupportFragmentManager().beginTransaction().
         // replace(R.id.fragment_container, new Contact()).commit();
-    }
-
-    public void openFAQPage(View view)
-    {
-        startActivity(new Intent(getApplicationContext(), FAQManager.class));
-    }
-
+    } */
+  public static String getCurrentDate(){
+      Calendar calendar = Calendar.getInstance();
+      SimpleDateFormat mdFormat = new SimpleDateFormat("MM/dd/yyyy");
+      String strDate = mdFormat.format(calendar.getTime());
+      return strDate;
+  }
 }
