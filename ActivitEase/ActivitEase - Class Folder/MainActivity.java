@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -267,6 +268,8 @@ public class MainActivity extends AppCompatActivity
 
     public static void interestComplete(Interest i) {
         i.setStreakCt(i.getStreakCt() + 1);
+        i.setLastDate(getCurrentDate());
+        myDB.myDao().updateInterest(i);
     }
 
     public void startStopTimer(View view) {
@@ -328,5 +331,10 @@ public class MainActivity extends AppCompatActivity
         //getSupportFragmentManager().beginTransaction().
         // replace(R.id.fragment_container, new Contact()).commit();
     } */
-
+  public static String getCurrentDate(){
+      Calendar calendar = Calendar.getInstance();
+      SimpleDateFormat mdFormat = new SimpleDateFormat("MM/dd/yyyy");
+      String strDate = mdFormat.format(calendar.getTime());
+      return strDate;
+  }
 }

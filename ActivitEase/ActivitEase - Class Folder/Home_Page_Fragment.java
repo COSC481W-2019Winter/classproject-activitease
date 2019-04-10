@@ -80,6 +80,7 @@ public class Home_Page_Fragment extends Fragment {
         // Finds the current size of the interest table.
         int sz = interestList.size();
 
+
             /*
                 Makes all currently used interest buttons visible, and sets their text to the name
                 of the corresponding interest.
@@ -108,6 +109,14 @@ public class Home_Page_Fragment extends Fragment {
         }
         // CODE FOR BUTTON POPULATION ENDS HERE
 
+        //Sets all interests currentDates to today.
+        String today = MainActivity.getCurrentDate();
+        for(int i = 0; i < sz; i++){
+            String interestName = interestList.get(i).getInterestName();
+            Interest interest = MainActivity.myDB.myDao().loadInterestByName(interestName);
+            interest.setCurrentDate(today);
+            MainActivity.myDB.myDao().updateInterest(interest);
+        }
 
         return view;
     }
