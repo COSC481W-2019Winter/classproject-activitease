@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     String startStopTimerText;
     public final String CHANNEL_ID = "Personal Notification";
     private final int NOTIFICATION_ID = 001;
+    private static String currentDate = getCurrentDate();
 
 
     public static MyDB myDB;
@@ -268,6 +269,7 @@ public class MainActivity extends AppCompatActivity
 
     public static void interestComplete(Interest i) {
         i.setStreakCt(i.getStreakCt() + 1);
+        i.setStreakCTBool(true);
         i.setLastDate(getCurrentDate());
         myDB.myDao().updateInterest(i);
     }
@@ -331,10 +333,49 @@ public class MainActivity extends AppCompatActivity
         //getSupportFragmentManager().beginTransaction().
         // replace(R.id.fragment_container, new Contact()).commit();
     } */
+
+  //Finds the current date in the Month/Day/Year format and returns it.
   public static String getCurrentDate(){
       Calendar calendar = Calendar.getInstance();
       SimpleDateFormat mdFormat = new SimpleDateFormat("MM/dd/yyyy");
       String strDate = mdFormat.format(calendar.getTime());
       return strDate;
+  }
+
+    //Checks to see if the current date is different from the last date the app was opened.
+  public static long getDateDifference(){
+      List<Interest> interestList = myDB.myDao().getInterests();
+
+      //Takes today's date and splits it into month, day, and year.
+       String today [] = getCurrentDate().split("/");
+       int todayMonth = Integer.parseInt(today[0]);
+       int todayDay = Integer.parseInt(today[1]);
+       int todayYear = Integer.parseInt(today[2]);
+
+       //Takes the split date and assigns it to a comparable Calendar variable.
+       Calendar todayDate = Calendar.getInstance();
+       todayDate.set(Calendar.MONTH,todayMonth);
+       todayDate.set(Calendar.DAY_OF_MONTH,todayDay);
+       todayDate.set(Calendar.YEAR, todayYear);
+
+       //Takes the last recorded currentDate and splits it into month, day, and year.
+       String lastDate [] = currentDate.split("/");
+       int lastMonth = Integer.parseInt(lastDate[0]);
+       int lastDay = Integer.parseInt(lastDate[1]);
+       int lastYear = Integer.parseInt(lastDate[2]);
+
+       //Takes the split date and assigns it to a comparable Calendar variable.
+       Calendar lastDateOpened = Calendar.getInstance();
+       lastDateOpened.set(Calendar.MONTH,lastMonth);
+       lastDateOpened.set(Calendar.DAY_OF_MONTH,lastDay);
+       lastDateOpened.set(Calendar.YEAR, lastYear);
+
+       //Finds the difference between both dates and returns it.
+       Long difference = todayDate.getTimeInMillis() - lastDateOpened.getTimeInMillis();
+       return difference;
+  }
+    //Resets the 'currentDate' to today's date.
+  public static void resetCurrentDate(){
+      currentDate = getCurrentDate();
   }
 }
