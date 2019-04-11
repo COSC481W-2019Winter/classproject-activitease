@@ -7,130 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
-    <Button
-        android:id="@+id/activity1"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="68dp"
-        android:visibility="gone"
-        android:text="activity1"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/activity2"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="56dp"
-        android:visibility="gone"
-        android:text="activity2"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity1" />
-    <Button
-        android:id="@+id/activity3"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:visibility="gone"
-        android:text="activity3"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity2" />
-
-
-    <Button
-        android:id="@+id/activity4"
-        android:layout_width="246dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:visibility="gone"
-        android:text="activity4"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity3" />
-
-    <Button
-        android:id="@+id/activity5"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="12dp"
-        android:visibility="gone"
-        android:text="activity5"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity4" />
-
-    <Button
-        android:id="@+id/activity6"
-        android:layout_width="244dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="activity6"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity5" />
-
-    <Button
-        android:id="@+id/activity7"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:visibility="gone"
-        android:text="activity7"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity6" />
-
-    <Button
-        android:id="@+id/activity8"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="activity8"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity7" />
-
-    <Button
-        android:id="@+id/activity9"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:visibility="gone"
-        android:text="activity9"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity8" />
-
-    <Button
-        android:id="@+id/activity10"
-        android:layout_width="244dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="activity10"
-        android:onClick="openInterest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity9" />
 
 
     <Button
@@ -164,6 +40,153 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.427" />
+
+    <ScrollView
+        android:id="@+id/homepageScrollView"
+        android:layout_width="421dp"
+        android:layout_height="604dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/AddInterest"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llhomepage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/activity1"
+                android:text="activity1"
+                android:onClick="openInterest"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/activity2"
+                android:text="activity2"
+                android:onClick="openInterest"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/activity3"
+                android:onClick="openInterest"
+                android:text="activity3"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/activity4"
+                android:onClick="openInterest"
+                android:text="activity4"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity3"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity5"
+                android:onClick="openInterest"
+                android:text="activity5"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity4"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity6"
+                android:onClick="openInterest"
+                android:text="activity6"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity5"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity7"
+                android:onClick="openInterest"
+                android:text="activity7"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity6"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity8"
+                android:onClick="openInterest"
+                android:text="activity8"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity7"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity9"
+                android:onClick="openInterest"
+                android:text="activity9"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity8"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/activity10"
+                android:onClick="openInterest"
+                android:text="activity10"
+
+                android:visibility="gone"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity9"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+        </LinearLayout>
+    </ScrollView>
 
 
 
