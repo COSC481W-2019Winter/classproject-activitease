@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="FAQ" />
         <item
-            android:id="@+id/Interest"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Interest Page" />
-        <item
             android:id="@+id/Setting"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Settings Page" />
