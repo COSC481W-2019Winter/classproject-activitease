@@ -102,8 +102,8 @@ public class Interest_Fragment extends Fragment {
         }
 
         periodSpanInput.setSelection(basePeriodSpan);
-
-
+        
+        
         glSurfaceView = view.findViewById(R.id.openGLView);
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
@@ -127,15 +127,13 @@ public class Interest_Fragment extends Fragment {
         editInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //oldLength is taken for later use in determining whether or not the timeRemaining will need to update.
+                /*
+                    old-values are taken for later use in determining whether or 
+                    not the variable and contingent variables will need to update.
+                 */
                 int oldLength = thisInterest.getActivityLength();
                 int oldNumNotif = thisInterest.getNumNotifications();
-
-
-
-
-
-                //YO ANTHONY YOU REALIZED IF NOTIFICATIONS CHANGE FROM HIGHER TO LOWER, THE HIGHER NOTIFICATIONS ARE STILL SET.
+                
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
                  * int and String variables.
@@ -147,14 +145,28 @@ public class Interest_Fragment extends Fragment {
                 int basePeriodSpan = 1;
 
 
-                // Refreshing the Interest with previously and newly set data
+                // Refreshing the Interest with previous and newly set data
                 thisInterest.setInterestName(iName);
                 thisInterest.setActivityLength(newActivityLengthTemp);
                 thisInterest.setPeriodFreq(newPeriodFreqTemp);
-                thisInterest.setNumNotifications(newNumNotifications);
-                thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
 
+                //Resetting the NotifTimes if the user enters a new notification value
+                if(oldNumNotif != newNumNotifications){
+                    thisInterest.setNotifTime1(0);
+                    thisInterest.setNotifTime2(0);
+                    thisInterest.setNotifTime3(0);
+                    thisInterest.setNotifTime4(0);
+                    thisInterest.setNotifTime5(0);
+                    thisInterest.setNotifTime6(0);
+                    thisInterest.setNotifTime7(0);
+                    thisInterest.setNotifTime8(0);
+                    thisInterest.setNotifTime9(0);
+                    thisInterest.setNotifTime10(0);
 
+                    thisInterest.setNumNotifications(newNumNotifications);
+                    thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+
+                }
                 /*
                     If the user changes the length they desire, the timeRemaining will be updated to the new Length.
                         Otherwise, the timer will remain where it was last set.
@@ -187,17 +199,10 @@ public class Interest_Fragment extends Fragment {
                 Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-
-
-
-
+        
         //Stuff past here is for deleting an interest
         delete=(Button)view.findViewById(R.id.delete);
         //finding the name from the edit interest page
-//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,18 +222,16 @@ public class Interest_Fragment extends Fragment {
                 });
             }
         });
-
-
-
-
-
+        
         return view;
     }
+    
     @Override
     public void onResume() {
         super.onResume();
         glSurfaceView.onResume();
     }
+    
     @Override
     public void onPause(){
         super.onPause();
@@ -244,6 +247,7 @@ public class Interest_Fragment extends Fragment {
         textViewCountdown.setText(timeLeftFormatted);
 
     }
+    
     public void startTimer() {  //Starts the timer
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -265,6 +269,7 @@ public class Interest_Fragment extends Fragment {
         timerRunning = true;
 
     }
+    
     public void pauseTimer() //Pauses the timer
     {
         isTimerRunning = false;
@@ -276,6 +281,7 @@ public class Interest_Fragment extends Fragment {
 
 
     }
+    
     public void resetTimer() //Resets the timer
     {
         countDownTimer.cancel();
@@ -287,7 +293,6 @@ public class Interest_Fragment extends Fragment {
 
     }
 
-    // Getters and setters for the variables that will inflate the interest page.
     public void initializeInterest (String iName) { //Initializes data specific to interest and draws initial timer on page load.
         this.iName = iName;
         thisInterest = MainActivity.myDB.myDao().loadInterestByName(iName);
@@ -297,6 +302,8 @@ public class Interest_Fragment extends Fragment {
         mTimeLeftInMillis = START_TIME_MILLIS;
 
         }
+        
+    // Getters and setters for the variables that will inflate the interest page.
     public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; } //Methods that will be deprecated
     public void setTimerRunning(boolean timerRunning) {isTimerRunning = timerRunning; }
     public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
