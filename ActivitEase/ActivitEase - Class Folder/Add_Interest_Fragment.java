@@ -70,14 +70,22 @@ public class Add_Interest_Fragment extends Fragment {
                 String newPeriodSpan = periodSpan.getSelectedItem().toString();
                 String newNumNotificationsTemp = numNotifications.getText().toString();
 
-                if (newInterestName.equals(""))
-                    interestName.setError("Please enter an interest name");
+                int currentInterestCt = MainActivity.myDB.myDao().getInterestCt();
+
+                if (currentInterestCt >= 10)
+                    interestName.setError("The maximum number of interests is currently 10. " +
+                            "Delete an interest to add another one.");
+                else if (MainActivity.interestNameUsed(newInterestName))
+                    interestName.setError("This interest's name is already used, " +
+                            "please name it something else.");
+                else if (newInterestName.equals(""))
+                    interestName.setError("Please enter an interest name.");
                 else if (newActivityLengthTemp.equals(""))
-                    activityLength.setError("Please enter an activity length");
+                    activityLength.setError("Please enter an activity length.");
                 else if (newPeriodFreqTemp.equals(""))
-                    periodFreq.setError("Please enter a period frequency");
+                    periodFreq.setError("Please enter a period frequency.");
                 else if (newNumNotificationsTemp.equals(""))
-                    numNotifications.setError("Please enter a number of notifications");
+                    numNotifications.setError("Please enter a number of notifications.");
                 else {
                     int basePeriodSpan = 0;
                     int newActivityLength = Integer.parseInt(newActivityLengthTemp);

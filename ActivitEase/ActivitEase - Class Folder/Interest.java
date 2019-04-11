@@ -68,8 +68,10 @@ public class Interest {
     private String currentDate;
     @ColumnInfo()
     private String lastDate;
+
     @ColumnInfo()
     private boolean streakCTBool;
+
 
 
     // Large number of notification times. This system may be altered later.
@@ -170,8 +172,8 @@ public class Interest {
     public void setNotifTime10 (double notifTime) {notifTime10 = notifTime; }
 
     public void setStreakCTBool(Boolean streakCTBool) { this.streakCTBool = streakCTBool;}
-    public void setLastDate(String lastDate) { this.lastDate = lastDate;}
     public void setCurrentDate(String currentDate) { this.currentDate = currentDate;}
+    public void setLastDate(String lastDate) { this.lastDate = lastDate;}
 
     public void setNotifTimes(double[] notifTimes) {
         int sz = notifTimes.length;
@@ -272,8 +274,9 @@ public class Interest {
     public double getTotalTimeSpent() { return totalTimeSpent; }
 
     public boolean getStreakCTBool() { return streakCTBool;}
-    public String getLastDate() { return lastDate;}
     public String getCurrentDate() { return currentDate;}
+    public String getLastDate() { return lastDate;}
+
 
     public int getNumIterations() { return numIterations; }
     public double getNotifTime1() { return notifTime1; }

@@ -27,40 +27,7 @@ public class Home_Page_Fragment extends Fragment {
 
         populateInterests = view.findViewById(R.id.testDBPopulate);
 
-
-        TextView populateInterests = view.findViewById(R.id.testDBPopulate);
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
-
-        // CODE FOR TEMP TABLE VIEW HERE
-        String info = "Interest Name:   Activity Length:    Period Frequency:   base p. span:   notifications: times for notifs: \n";
-
-
-        for(Interest intr : interestList) {
-            if (intr != null) {
-                String interestName = intr.getInterestName();
-                int activityLength = intr.getActivityLength();
-                int periodFreq = intr.getPeriodFreq();
-                int basePeriodSpan = intr.getBasePeriodSpan();
-                int numNotifications = intr.getNumNotifications();
-
-                double[] tempNotifTimes = intr.getNotifTimes();
-
-                info += interestName + "    " + activityLength + "      " + periodFreq + "    " +
-                        basePeriodSpan + "   " + numNotifications + "      ";
-
-                for (int i = 0; i < numNotifications; i++) {
-                    info += format("%.2f", tempNotifTimes[i]) + "   ";
-                }
-                info += "\n";
-            }
-            else
-                break;
-        }
-
-        info += "number of interests: " + MainActivity.getInterestTableSz() + "\n";
-
-        populateInterests.setText(info);
-        // CODE FOR TEMP TABLE VIEW ENDS HERE
 
         //displayButtons(interestList);
         // CODE FOR BUTTON POPULATION BEGINS HERE
@@ -79,7 +46,6 @@ public class Home_Page_Fragment extends Fragment {
 
         // Finds the current size of the interest table.
         int sz = interestList.size();
-
 
             /*
                 Makes all currently used interest buttons visible, and sets their text to the name

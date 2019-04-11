@@ -28,4 +28,6 @@ interface MyDao {
     @Query("DELETE FROM interests where interestName = :interestName")
     abstract void deleteByInterestName(String interestName);
 
+    @Query("SELECT COUNT(interestName) FROM interests")
+    int getInterestCt();
 }

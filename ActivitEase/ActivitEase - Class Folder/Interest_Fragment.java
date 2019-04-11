@@ -35,7 +35,7 @@ public class Interest_Fragment extends Fragment {
     private static CountDownTimer countDownTimer;
 
 
-    Button delete, editInterestBn, doneBTN;
+    Button delete, editInterestBn, startPauseBTN, doneBTN;
 
     private EditText interestName, activityLength, numNotifications, activityAmount;
     private Spinner periodSpanInput;
@@ -65,6 +65,7 @@ public class Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanInput.setAdapter(adapter);
 
+        startPauseBTN = view.findViewById(R.id.startPause);
         doneBTN = view.findViewById(R.id.donebtn);  //Done button layout
 
         Spinner notificationSpan = view.findViewById(R.id.numNotificationSpan);
@@ -102,8 +103,8 @@ public class Interest_Fragment extends Fragment {
         }
 
         periodSpanInput.setSelection(basePeriodSpan);
-        
-        
+
+
         glSurfaceView = view.findViewById(R.id.openGLView);
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
@@ -117,23 +118,23 @@ public class Interest_Fragment extends Fragment {
         }
         if(!isTimerRunning)  //If not
         {
-            doneBTN.setVisibility(View.GONE);  //Sets done button to invisible
+            doneBTN.setVisibility(View.GONE);  // Makes the done button go away
             GLRenderer.setTimerRunning(false); //Turns off animation
         }
 
-        //Stuff past here is for editing an interest
+        //Stuff past here is for deleting an interest
         // Finds the submit button, and an onClick method submits the data into the database.
         editInterestBn = view.findViewById(R.id.SubmitEditInterest);
         editInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*
-                    old-values are taken for later use in determining whether or 
+                    old-values are taken for later use in determining whether or
                     not the variable and contingent variables will need to update.
                  */
                 int oldLength = thisInterest.getActivityLength();
                 int oldNumNotif = thisInterest.getNumNotifications();
-                
+
                 /*
                  * Finds the raw values of the EditTexts and the Spinner, and saves them in
                  * int and String variables.
@@ -167,9 +168,10 @@ public class Interest_Fragment extends Fragment {
                     thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
 
                 }
-                /*
+
+                 /*
                     If the user changes the length they desire, the timeRemaining will be updated to the new Length.
-                        Otherwise, the timer will remain where it was last set.
+                    Otherwise, the timer will remain where it was last set.
                  */
                 if(oldLength != newActivityLengthTemp)
                     thisInterest.setTimeRemaining(newActivityLengthTemp);
@@ -197,12 +199,20 @@ public class Interest_Fragment extends Fragment {
 
                 // Announces that an interest was successfully edited.
                 Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
+
             }
         });
-        
+
+
+
+
+
+
+
         //Stuff past here is for deleting an interest
         delete=(Button)view.findViewById(R.id.delete);
         //finding the name from the edit interest page
+//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,16 +232,18 @@ public class Interest_Fragment extends Fragment {
                 });
             }
         });
-        
+
+
+
+
+
         return view;
     }
-    
     @Override
     public void onResume() {
         super.onResume();
         glSurfaceView.onResume();
     }
-    
     @Override
     public void onPause(){
         super.onPause();
@@ -247,7 +259,6 @@ public class Interest_Fragment extends Fragment {
         textViewCountdown.setText(timeLeftFormatted);
 
     }
-    
     public void startTimer() {  //Starts the timer
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -259,8 +270,10 @@ public class Interest_Fragment extends Fragment {
 
             @Override
             public void onFinish() {  //When analog timer finishes
-
+                doneBTN.setVisibility(View.GONE);  // Makes the done button go away
+                startPauseBTN.setVisibility(View.GONE);  // Makes the start button go away
                 timerRunning = false;
+
                 if(!thisInterest.getStreakCTBool())
                     MainActivity.interestComplete(thisInterest);
             }
@@ -269,7 +282,6 @@ public class Interest_Fragment extends Fragment {
         timerRunning = true;
 
     }
-    
     public void pauseTimer() //Pauses the timer
     {
         isTimerRunning = false;
@@ -281,7 +293,6 @@ public class Interest_Fragment extends Fragment {
 
 
     }
-    
     public void resetTimer() //Resets the timer
     {
         countDownTimer.cancel();
@@ -302,11 +313,11 @@ public class Interest_Fragment extends Fragment {
         mTimeLeftInMillis = START_TIME_MILLIS;
 
         }
-        
+
+
     // Getters and setters for the variables that will inflate the interest page.
     public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; } //Methods that will be deprecated
     public void setTimerRunning(boolean timerRunning) {isTimerRunning = timerRunning; }
     public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
     public void setButtonText(String btnText){buttonText = btnText; }
-
 }

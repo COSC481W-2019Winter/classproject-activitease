@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void openAddInterest(View view)
     {
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity
         // Name of the interest found from the text of the button.
         String interestName = (String)interestB.getText();
         // Trims the button text to the interest name, which will be used to trigger db pull.
-        interestName = interestName.substring(0, interestName.indexOf(" "));
+        interestName = interestName.substring(0, interestName.indexOf("\n") - 1);
         // Loads the interest, using the interest name as the key.
         Interest thisInterest = MainActivity.myDB.myDao().loadInterestByName(interestName);
         currentInterestName = thisInterest.getInterestName();
@@ -322,20 +323,27 @@ public class MainActivity extends AppCompatActivity
             updateInterest.setButtonText("Pause");
         }
     }
+    /*
+        This method checks to make sure that a new interest will not have the same name as
+        an already used one.
+     */
+    public static boolean interestNameUsed(String newInterestName) {
+        List<Interest> interests = myDB.myDao().getInterests();
+
+        // Iterates through all of the interests, to make sure a new name is not yet used.
+        for (int i = 0; i < interests.size(); i++) {
+            if (interests.get(i).getInterestName().equals(newInterestName))
+                return true;
+        }
+        return false;
+    }
 
     public static int getInterestTableSz() {
         return MainActivity.myDB.myDao().getInterests().size();
     }
 
-  /*  public void openContactPage(View view)
-    {
-        startActivity(new Intent(getApplicationContext(), ContactManager.class));
-        //getSupportFragmentManager().beginTransaction().
-        // replace(R.id.fragment_container, new Contact()).commit();
-    } */
-
-  //Finds the current date in the Month/Day/Year format and returns it.
-  public static String getCurrentDate(){
+    //Finds the current date in the Month/Day/Year format and returns it.
+    public static String getCurrentDate(){
       Calendar calendar = Calendar.getInstance();
       SimpleDateFormat mdFormat = new SimpleDateFormat("MM/dd/yyyy");
       String strDate = mdFormat.format(calendar.getTime());
@@ -343,39 +351,39 @@ public class MainActivity extends AppCompatActivity
   }
 
     //Checks to see if the current date is different from the last date the app was opened.
-  public static long getDateDifference(){
-      List<Interest> interestList = myDB.myDao().getInterests();
+    public static long getDateDifference(){
+        List<Interest> interestList = myDB.myDao().getInterests();
 
-      //Takes today's date and splits it into month, day, and year.
-       String today [] = getCurrentDate().split("/");
-       int todayMonth = Integer.parseInt(today[0]);
-       int todayDay = Integer.parseInt(today[1]);
-       int todayYear = Integer.parseInt(today[2]);
+        //Takes today's date and splits it into month, day, and year.
+        String today [] = getCurrentDate().split("/");
+        int todayMonth = Integer.parseInt(today[0]);
+        int todayDay = Integer.parseInt(today[1]);
+        int todayYear = Integer.parseInt(today[2]);
 
-       //Takes the split date and assigns it to a comparable Calendar variable.
-       Calendar todayDate = Calendar.getInstance();
-       todayDate.set(Calendar.MONTH,todayMonth);
-       todayDate.set(Calendar.DAY_OF_MONTH,todayDay);
-       todayDate.set(Calendar.YEAR, todayYear);
+        //Takes the split date and assigns it to a comparable Calendar variable.
+        Calendar todayDate = Calendar.getInstance();
+        todayDate.set(Calendar.MONTH,todayMonth);
+        todayDate.set(Calendar.DAY_OF_MONTH,todayDay);
+        todayDate.set(Calendar.YEAR, todayYear);
 
-       //Takes the last recorded currentDate and splits it into month, day, and year.
-       String lastDate [] = currentDate.split("/");
-       int lastMonth = Integer.parseInt(lastDate[0]);
-       int lastDay = Integer.parseInt(lastDate[1]);
-       int lastYear = Integer.parseInt(lastDate[2]);
+        //Takes the last recorded currentDate and splits it into month, day, and year.
+        String lastDate [] = currentDate.split("/");
+        int lastMonth = Integer.parseInt(lastDate[0]);
+        int lastDay = Integer.parseInt(lastDate[1]);
+        int lastYear = Integer.parseInt(lastDate[2]);
 
-       //Takes the split date and assigns it to a comparable Calendar variable.
-       Calendar lastDateOpened = Calendar.getInstance();
-       lastDateOpened.set(Calendar.MONTH,lastMonth);
-       lastDateOpened.set(Calendar.DAY_OF_MONTH,lastDay);
-       lastDateOpened.set(Calendar.YEAR, lastYear);
+        //Takes the split date and assigns it to a comparable Calendar variable.
+        Calendar lastDateOpened = Calendar.getInstance();
+        lastDateOpened.set(Calendar.MONTH,lastMonth);
+        lastDateOpened.set(Calendar.DAY_OF_MONTH,lastDay);
+        lastDateOpened.set(Calendar.YEAR, lastYear);
 
-       //Finds the difference between both dates and returns it.
-       Long difference = todayDate.getTimeInMillis() - lastDateOpened.getTimeInMillis();
-       return difference;
-  }
+        //Finds the difference between both dates and returns it.
+        Long difference = todayDate.getTimeInMillis() - lastDateOpened.getTimeInMillis();
+        return difference;
+    }
     //Resets the 'currentDate' to today's date.
-  public static void resetCurrentDate(){
-      currentDate = getCurrentDate();
-  }
+    public static void resetCurrentDate(){
+        currentDate = getCurrentDate();
+    }
 }
