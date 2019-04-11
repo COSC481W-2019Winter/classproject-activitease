@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +33,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
-    EditText interestName, periodFrequency, basePeriodSpan, activityLength, numNotifications;
     static String currentInterestName;
     String startStopTimerText;
     public final String CHANNEL_ID = "Personal Notification";
@@ -202,6 +203,94 @@ public class MainActivity extends AppCompatActivity
     {
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
         hp.replace(R.id.fragment_container, new Add_Interest_Fragment());
+        hp.commit();
+    }
+
+    public void onEditInterest(View v) {
+        Interest thisInterest = myDB.myDao().loadInterestByName(currentInterestName);
+
+        EditText activityLength = findViewById(R.id.activityLength);
+        EditText activityAmount = findViewById(R.id.activityAmount);
+        Spinner periodSpanInput = findViewById(R.id.periodSpanInput);
+        EditText numNotifications = findViewById(R.id.numNotifications);
+
+        int oldLength = thisInterest.getActivityLength();
+        int oldNumNotif = thisInterest.getNumNotifications();
+
+        /*
+         * Finds the raw values of the EditTexts and the Spinner, and saves them in
+         * int and String variables.
+         */
+        int newActivityLengthTemp = Integer.parseInt(activityLength.getText().toString());
+        int newPeriodFreqTemp = Integer.parseInt(activityAmount.getText().toString());
+        String newPeriodSpan = periodSpanInput.getSelectedItem().toString();
+        int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
+        int basePeriodSpan = 1;
+
+
+        // Refreshing the Interest with previous and newly set data
+        thisInterest.setActivityLength(newActivityLengthTemp);
+        thisInterest.setPeriodFreq(newPeriodFreqTemp);
+
+        //Resetting the NotifTimes if the user enters a new notification value
+        if(oldNumNotif != newNumNotifications){
+            thisInterest.setNotifTime1(0);
+            thisInterest.setNotifTime2(0);
+            thisInterest.setNotifTime3(0);
+            thisInterest.setNotifTime4(0);
+            thisInterest.setNotifTime5(0);
+            thisInterest.setNotifTime6(0);
+            thisInterest.setNotifTime7(0);
+            thisInterest.setNotifTime8(0);
+            thisInterest.setNotifTime9(0);
+            thisInterest.setNotifTime10(0);
+
+            thisInterest.setNumNotifications(newNumNotifications);
+            thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+
+        }
+
+                 /*
+                    If the user changes the length they desire, the timeRemaining will be updated to the new Length.
+                    Otherwise, the timer will remain where it was last set.
+                 */
+        if(oldLength != newActivityLengthTemp)
+            thisInterest.setTimeRemaining(newActivityLengthTemp);
+
+
+        switch (newPeriodSpan) {
+            case "Day":
+                basePeriodSpan = 1;
+                break;
+            case "Week":
+                basePeriodSpan = 7;
+                break;
+            case "Month":
+                basePeriodSpan = 30;
+                break;
+            case "Year":
+                basePeriodSpan = 365;
+                break;
+        }
+
+        thisInterest.setBasePeriodSpan(basePeriodSpan);
+
+        // The database updates the interest to the interests table.
+        MainActivity.myDB.myDao().updateInterest(thisInterest);
+
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
+        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
+        hp.commit();
+
+    }
+
+    public void onDeleteInterest(View v) {
+        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
+
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
+        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
         hp.commit();
     }
 

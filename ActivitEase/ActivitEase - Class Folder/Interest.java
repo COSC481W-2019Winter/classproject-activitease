@@ -41,6 +41,9 @@ public class Interest {
             'streakCt' is the number of days that an interest has been continuously been fulfilled.
 
             'totalTimeSpent' is the total minutes spent on an interest over time.
+
+            'streakCTBool' keeps track of if an interest's streak has been maintained in the past 24 hours.
+            'streakCTBool' returns true if it has been maintained, and returns false if it hasn't.
      */
 
     // This is the primary retrieval column for the 'interests' table.

@@ -35,7 +35,7 @@ public class Interest_Fragment extends Fragment {
     private static CountDownTimer countDownTimer;
 
 
-    Button delete, editInterestBn, startPauseBTN, doneBTN;
+    Button startPauseBTN, doneBTN;
 
     private EditText interestName, activityLength, numNotifications, activityAmount;
     private Spinner periodSpanInput;
@@ -109,6 +109,22 @@ public class Interest_Fragment extends Fragment {
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
+
+
+        // Prevents the timer from running after an interest streak has already
+        // been maintained.
+        if (thisInterest.getStreakCTBool()) {
+            GLRenderer.setTimerRunning(false);
+            timerRunning = false;
+
+            textViewCountdown.setText("0:00"); // Hardcodes the string clock to 0.
+
+
+            doneBTN.setVisibility(View.GONE);  // Makes the done button go away
+            startPauseBTN.setVisibility(View.GONE);  // Makes the start button go away
+
+        }
+
         if(isTimerRunning) //Conditions if timer is running
         {
             doneBTN.setVisibility(View.VISIBLE); //Makes done button visible
@@ -121,122 +137,6 @@ public class Interest_Fragment extends Fragment {
             doneBTN.setVisibility(View.GONE);  // Makes the done button go away
             GLRenderer.setTimerRunning(false); //Turns off animation
         }
-
-        //Stuff past here is for deleting an interest
-        // Finds the submit button, and an onClick method submits the data into the database.
-        editInterestBn = view.findViewById(R.id.SubmitEditInterest);
-        editInterestBn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*
-                    old-values are taken for later use in determining whether or
-                    not the variable and contingent variables will need to update.
-                 */
-                int oldLength = thisInterest.getActivityLength();
-                int oldNumNotif = thisInterest.getNumNotifications();
-
-                /*
-                 * Finds the raw values of the EditTexts and the Spinner, and saves them in
-                 * int and String variables.
-                 */
-                int newActivityLengthTemp = Integer.parseInt(activityLength.getText().toString());
-                int newPeriodFreqTemp = Integer.parseInt(activityAmount.getText().toString());
-                String newPeriodSpan = periodSpanInput.getSelectedItem().toString();
-                int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
-                int basePeriodSpan = 1;
-
-
-                // Refreshing the Interest with previous and newly set data
-                thisInterest.setInterestName(iName);
-                thisInterest.setActivityLength(newActivityLengthTemp);
-                thisInterest.setPeriodFreq(newPeriodFreqTemp);
-
-                //Resetting the NotifTimes if the user enters a new notification value
-                if(oldNumNotif != newNumNotifications){
-                    thisInterest.setNotifTime1(0);
-                    thisInterest.setNotifTime2(0);
-                    thisInterest.setNotifTime3(0);
-                    thisInterest.setNotifTime4(0);
-                    thisInterest.setNotifTime5(0);
-                    thisInterest.setNotifTime6(0);
-                    thisInterest.setNotifTime7(0);
-                    thisInterest.setNotifTime8(0);
-                    thisInterest.setNotifTime9(0);
-                    thisInterest.setNotifTime10(0);
-
-                    thisInterest.setNumNotifications(newNumNotifications);
-                    thisInterest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
-
-                }
-
-                 /*
-                    If the user changes the length they desire, the timeRemaining will be updated to the new Length.
-                    Otherwise, the timer will remain where it was last set.
-                 */
-                if(oldLength != newActivityLengthTemp)
-                    thisInterest.setTimeRemaining(newActivityLengthTemp);
-
-
-                switch (newPeriodSpan) {
-                    case "Day":
-                        basePeriodSpan = 1;
-                        break;
-                    case "Week":
-                        basePeriodSpan = 7;
-                        break;
-                    case "Month":
-                        basePeriodSpan = 30;
-                        break;
-                    case "Year":
-                        basePeriodSpan = 365;
-                        break;
-                }
-
-                thisInterest.setBasePeriodSpan(basePeriodSpan);
-
-                // The database updates the interest to the interests table.
-                MainActivity.myDB.myDao().updateInterest(thisInterest);
-
-                // Announces that an interest was successfully edited.
-                Toast.makeText(getActivity(), "Interest edited successfully", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-
-
-
-
-
-
-        //Stuff past here is for deleting an interest
-        delete=(Button)view.findViewById(R.id.delete);
-        //finding the name from the edit interest page
-//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //have to put string declaration in here or else it crashes
-                final String delInterestName1 = thisInterest.getInterestName();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                // this is where the interest is deleted
-                                MainActivity.myDB.myDao().deleteByInterestName(delInterestName1);
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-
-
-
-
         return view;
     }
     @Override
@@ -272,6 +172,7 @@ public class Interest_Fragment extends Fragment {
             public void onFinish() {  //When analog timer finishes
                 doneBTN.setVisibility(View.GONE);  // Makes the done button go away
                 startPauseBTN.setVisibility(View.GONE);  // Makes the start button go away
+                GLRenderer.setTimerRunning(false);
                 timerRunning = false;
 
                 if(!thisInterest.getStreakCTBool())
@@ -311,8 +212,7 @@ public class Interest_Fragment extends Fragment {
         GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
         START_TIME_MILLIS = Math.round(thisInterest.getTimeRemaining() * 60 * 1000);
         mTimeLeftInMillis = START_TIME_MILLIS;
-
-        }
+    }
 
 
     // Getters and setters for the variables that will inflate the interest page.
