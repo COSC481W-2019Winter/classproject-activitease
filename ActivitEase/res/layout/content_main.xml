@@ -64,7 +64,7 @@
                 android:visibility="gone"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/homepageScrollView"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp" />
