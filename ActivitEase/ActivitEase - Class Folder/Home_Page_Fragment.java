@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 
 public class Home_Page_Fragment extends Fragment {
@@ -27,7 +27,40 @@ public class Home_Page_Fragment extends Fragment {
 
         populateInterests = view.findViewById(R.id.testDBPopulate);
 
+
+        TextView populateInterests = view.findViewById(R.id.testDBPopulate);
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
+
+        // CODE FOR TEMP TABLE VIEW HERE
+        String info = "Interest Name:   Activity Length:    Period Frequency:   base p. span:   notifications: times for notifs: \n";
+
+
+        for(Interest intr : interestList) {
+            if (intr != null) {
+                String interestName = intr.getInterestName();
+                int activityLength = intr.getActivityLength();
+                int periodFreq = intr.getPeriodFreq();
+                int basePeriodSpan = intr.getBasePeriodSpan();
+                int numNotifications = intr.getNumNotifications();
+
+                double[] tempNotifTimes = intr.getNotifTimes(intr.getNumNotifications());
+
+                info += interestName + "    " + activityLength + "      " + periodFreq + "    " +
+                        basePeriodSpan + "   " + numNotifications + "      ";
+
+                for (int i = 0; i < numNotifications; i++) {
+                    info += format("%.2f", tempNotifTimes[i]) + "   ";
+                }
+                info += "\n";
+            }
+            else
+                break;
+        }
+
+        info += "number of interests: " + getInterestTableSz() + "\n";
+
+        populateInterests.setText(info);
+        // CODE FOR TEMP TABLE VIEW ENDS HERE
 
         //displayButtons(interestList);
         // CODE FOR BUTTON POPULATION BEGINS HERE
@@ -74,7 +107,6 @@ public class Home_Page_Fragment extends Fragment {
             interestBtns[i].setText(buttonText);
         }
         // CODE FOR BUTTON POPULATION ENDS HERE
-
         //Sets all interests currentDates to today.
         String today = MainActivity.getCurrentDate();
         for(int i = 0; i < sz; i++){
@@ -85,5 +117,9 @@ public class Home_Page_Fragment extends Fragment {
         }
 
         return view;
+    }
+
+    public static int getInterestTableSz() {
+        return MainActivity.myDB.myDao().getInterests().size();
     }
 }

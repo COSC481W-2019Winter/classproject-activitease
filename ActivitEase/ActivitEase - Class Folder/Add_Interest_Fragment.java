@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
+import static com.example.activitease.MainActivity.myDB;
+
 
 public class Add_Interest_Fragment extends Fragment {
 
@@ -28,6 +32,7 @@ public class Add_Interest_Fragment extends Fragment {
     private Button addInterestBn;
     private EditText interestName, periodFreq, numNotifications, activityLength;
     private Spinner periodSpan;
+
 
     @Nullable
     @Override
@@ -72,20 +77,24 @@ public class Add_Interest_Fragment extends Fragment {
 
                 int currentInterestCt = MainActivity.myDB.myDao().getInterestCt();
 
+
                 if (currentInterestCt >= 10)
                     interestName.setError("The maximum number of interests is currently 10. " +
                             "Delete an interest to add another one.");
-                else if (MainActivity.interestNameUsed(newInterestName))
+                else if (isUsed(newInterestName))
                     interestName.setError("This interest's name is already used, " +
                             "please name it something else.");
                 else if (newInterestName.equals(""))
                     interestName.setError("Please enter an interest name.");
+
+                else if (newInterestName.equals(""))
+                    interestName.setError("Please enter an interest name");
                 else if (newActivityLengthTemp.equals(""))
-                    activityLength.setError("Please enter an activity length.");
+                    activityLength.setError("Please enter an activity length");
                 else if (newPeriodFreqTemp.equals(""))
-                    periodFreq.setError("Please enter a period frequency.");
+                    periodFreq.setError("Please enter a period frequency");
                 else if (newNumNotificationsTemp.equals(""))
-                    numNotifications.setError("Please enter a number of notifications.");
+                    numNotifications.setError("Please enter a number of notifications");
                 else {
                     int basePeriodSpan = 0;
                     int newActivityLength = Integer.parseInt(newActivityLengthTemp);
@@ -114,10 +123,10 @@ public class Add_Interest_Fragment extends Fragment {
 
                     // Creates a new Interest object of the given int variables.
                     Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
-                            newActivityLength, newActivityLength, newNumNotifications, 0, 0);
+                            newActivityLength, newActivityLength, newNumNotifications, 0, 0, 0);
 
                     // Presets the notification times, given the number of notifications.
-                    interest.setNotifTimes(Interest.presetNotifTimes(newNumNotifications));
+                    interest.setNotifTimes(newNumNotifications);
 
                     // The database adds a new interest to the interests table.
                     MainActivity.myDB.myDao().addInterest(interest);
@@ -135,6 +144,17 @@ public class Add_Interest_Fragment extends Fragment {
         });
 
         return v;
+
+    }
+
+    public boolean isUsed(String interestName)
+    {
+        List<Interest> interests = myDB.myDao().getInterests();
+        for (int i = 0; i < interests.size(); i++) {
+            if (interests.get(i).getInterestName().equals(interestName))
+               return true;
+        }
+        return false;
 
     }
 }
