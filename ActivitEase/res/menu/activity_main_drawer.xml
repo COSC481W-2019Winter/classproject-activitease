@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
@@ -12,14 +13,22 @@
             android:id="@+id/FAQ"
             android:icon="@drawable/ic_menu_gallery"
             android:title="FAQ" />
+        <!--<item-->
+            <!--android:id="@+id/Interest"-->
+            <!--android:icon="@drawable/ic_menu_gallery"-->
+            <!--android:title="Interest Page" />
         <item
             android:id="@+id/Setting"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Settings Page" />
+            android:title="Settings Page" /> -->
         <item
             android:id="@+id/About"
             android:icon="@drawable/ic_menu_gallery"
             android:title="About Us" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Settings" />
     </group>
 
 </menu>
