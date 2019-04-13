@@ -39,7 +39,7 @@ public class notification_reciever extends BroadcastReceiver {
         for (int i = 0; i < numOfInterest; i++) {
             //ArrayList<Notification> arrayListOfNotification_ = setArrayListOfNotification(interestList.get(i));
             String interestName = interestList.get(i).getInterestName();
-            double[] notificationTimes = interestList.get(i).getNotifTimes();
+            
 
             Log.d(interestName, "----------------------------------------------------------------");
             for(int j = 0; j < interestList.get(i).getNumNotifications(); j++){
