@@ -14,7 +14,6 @@ public class Notification_receiver extends BroadcastReceiver {
 
     public final String CHANNEL_ID = "Personal Notification";
     private final int NOTIFICATION_ID = 101;
-    public final String CHANNEL_ID2 = "Personal Notification";
     public String[] name;
     public int rN = (int) System.currentTimeMillis();
 
@@ -38,13 +37,9 @@ public class Notification_receiver extends BroadcastReceiver {
         for(Interest intr : interestList) {
             if (intr != null) {
                 name[k] = intr.getInterestName();
-                int activityLength = intr.getActivityLength();
-                int periodFreq = intr.getPeriodFreq();
-                int basePeriodSpan = intr.getBasePeriodSpan();
-                int numNotifications = intr.getNumNotifications();
-                ll = intr.getNumNotifications();
 
-                double[] tempNotifTimes = intr.getNotifTimes();
+
+
 
                 k++;
             }
@@ -75,6 +70,5 @@ public class Notification_receiver extends BroadcastReceiver {
 
 
 }
-
 
 
