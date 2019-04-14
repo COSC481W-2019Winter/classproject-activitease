@@ -72,11 +72,6 @@ public class Interest_Fragment extends Fragment {
         else
             doneBTN.setVisibility(View.GONE);
 
-        Spinner notificationSpan = view.findViewById(R.id.numNotificationSpan);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
-        adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        notificationSpan.setAdapter(adapter1);
-
         activityAmount = view.findViewById(R.id.activityAmount);
         activityLength = view.findViewById(R.id.activityLength);
         numNotifications = view.findViewById(R.id.numNotifications);
@@ -86,7 +81,18 @@ public class Interest_Fragment extends Fragment {
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
         activityAmount.setText(Integer.toString(thisInterest.getBasePeriodSpan()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
-        periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
+
+        int spanInput;
+        if(thisInterest.getBasePeriodSpan() == 1)
+            spanInput = 0;
+        else if(thisInterest.getBasePeriodSpan() == 7)
+            spanInput = 1;
+        else if(thisInterest.getBasePeriodSpan() == 30)
+            spanInput = 2;
+        else
+            spanInput = 3;
+
+        periodSpanInput.setSelection(spanInput);
 
         glSurfaceView = view.findViewById(R.id.openGLView);
 
@@ -182,8 +188,8 @@ public class Interest_Fragment extends Fragment {
                 if(!thisInterest.getStreakCTBool())
                     //Conditions to check if activity amount is completed.
                     thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
-                    thisInterest.setLastDate(thisInterest.getCurrentDate());
-                    myDB.myDao().updateInterest(thisInterest);
+                thisInterest.setLastDate(thisInterest.getCurrentDate());
+                myDB.myDao().updateInterest(thisInterest);
             }
         }.start();
 
