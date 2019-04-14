@@ -296,10 +296,15 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Interest_Fragment resetTimer = new Interest_Fragment();
+                        Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+                        double doneTime = updatedInterest.getActivityLength()-updatedInterest.getTimeRemaining();
+                        updatedInterest.addTimeSpent(doneTime);
                         resetTimer.resetTimer();
                         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                         resetTimer.setTimerRunning(false);
-                        Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
+
+                        if(!updatedInterest.getStreakCTBool())
+                            interestComplete(updatedInterest);
                         resetTimer.initializeInterest(updatedInterest.getInterestName());
                         resetTimer.setButtonText("Start Activity");
 
@@ -364,14 +369,6 @@ public class MainActivity extends AppCompatActivity
         currentDate = getCurrentDate();
     }
 
-    public void onDeleteInterest(View v) {
-        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
-
-        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
-        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
-        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
-        hp.commit();
-    }
 
     public void onEditInterest(View v) {
         Interest thisInterest = myDB.myDao().loadInterestByName(currentInterestName);
@@ -474,15 +471,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public static boolean swipeLeftInterest(Interest thisIntr) {
-
-
-        return false;
-    }
-
-    public static boolean swipeRightInterest(Interest thisIntr) {
-        return false;
-    }
 
   /*  public void openContactPage(View view)
     {
