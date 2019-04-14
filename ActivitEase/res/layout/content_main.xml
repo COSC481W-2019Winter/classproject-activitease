@@ -200,7 +200,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="28dp"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorPrimaryWhite"
+        android:textColor="@color/colorPrimaryDark"
         android:onClick="openAddInterest"
         android:text="+ Add Interest"
         app:layout_constraintBottom_toBottomOf="parent"
