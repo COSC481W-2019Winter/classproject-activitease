@@ -143,7 +143,7 @@ public class Add_Interest_Fragment extends Fragment {
                 else if (newPeriodFreqTemp.equals(""))
                     periodFreq.setError("Please enter a period frequency");
                 else if (newPeriodSpan.equals("--"))
-                    ((TextView)periodSpan.getSelectedView()).setError("Your Error msg Here");
+                    ((TextView)periodSpan.getSelectedView()).setError("Please select a period span");
                 else if (newNumNotificationsTemp.equals(""))
                     numNotifications.setError("Please enter a number of notifications");
                     // Create an error message if inputted practice period exceeds limit
