@@ -6,13 +6,18 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/FAQ"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Help/FAQ" />
+        <item
+            android:id="@+id/About"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="About This App" />
+        <item
             android:id="@+id/homePage"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Home Page" />
-        <item
-            android:id="@+id/FAQ"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="FAQ" />
+
         <!--<item-->
             <!--android:id="@+id/Interest"-->
             <!--android:icon="@drawable/ic_menu_gallery"-->
@@ -21,10 +26,6 @@
             android:id="@+id/Setting"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Settings Page" /> -->
-        <item
-            android:id="@+id/About"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="About Us" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_menu_gallery"
