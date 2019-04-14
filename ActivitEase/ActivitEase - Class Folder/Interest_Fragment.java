@@ -1,13 +1,12 @@
 package com.example.activitease;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,19 +89,18 @@ public class Interest_Fragment extends Fragment {
         periodSpanInput.setSelection(thisInterest.getBasePeriodSpan());
 
         glSurfaceView = view.findViewById(R.id.openGLView);
-        GLRenderer.setActivityLength(thisInterest.getActivityLength() * 60 * 1000);
 
         textViewCountdown = view.findViewById(R.id.text_view_countdown);
         updateCountDownText();
         if(isTimerRunning)
         {
             GLRenderer.setTimerRunning(true);
+            GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
             startTimer();
         }
         if(!isTimerRunning)
         {
             GLRenderer.setTimerRunning(false);
-
         }
 
         //Stuff past here is for deleting an interest
@@ -131,10 +129,18 @@ public class Interest_Fragment extends Fragment {
                 });
             }
         });
+        /*
+        view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(getActivity(), "Swiped left", Toast.LENGTH_LONG).show();
+            }
 
-
-
-
+            public void onSwipeRight() {
+                Toast.makeText(getActivity(), "Swiped right", Toast.LENGTH_LONG).show();
+            }
+        });
+        */
 
         return view;
     }
@@ -163,44 +169,49 @@ public class Interest_Fragment extends Fragment {
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
-                timeRemaining = (float) mTimeLeftInMillis / 60000;
-                thisInterest.setTimeRemaining(timeRemaining);
-                thisInterest.setNumIterations(GLRenderer.getNumIterations());
-                MainActivity.myDB.myDao().updateInterest(thisInterest);
+                timeRemaining = (float) mTimeLeftInMillis /60000;
                 updateCountDownText();
             }
+
+
             @Override
             public void onFinish() {  //When analog timer finishes
 
                 timerRunning = false;
 
-                if (!thisInterest.getStreakCTBool())
+                if(!thisInterest.getStreakCTBool())
                     //Conditions to check if activity amount is completed.
                     thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
-                thisInterest.setLastDate(thisInterest.getCurrentDate());
-                myDB.myDao().updateInterest(thisInterest);
-                onTimerFin();
-
+                    thisInterest.setLastDate(thisInterest.getCurrentDate());
+                    myDB.myDao().updateInterest(thisInterest);
             }
         }.start();
+
+        timerRunning = true;
+
     }
     public void pauseTimer()
     {
         countDownTimer.cancel();
-        setTimerRunning(false);
         GLRenderer.setTimerRunning(false);
+        thisInterest.setTimeRemaining(timeRemaining);
+        GLRenderer renderer = new GLRenderer();
+        numIterations = renderer.getNumIterations();
+        thisInterest.setNumIterations(numIterations);
+        MainActivity.myDB.myDao().updateInterest(thisInterest);
 
 
 
     }
     public void resetTimer()
     {
+        GLRenderer renderer = new GLRenderer();
         countDownTimer.cancel();
         mTimeLeftInMillis = START_TIME_MILLIS;
         isTimerRunning = false;
         thisInterest.setTimeRemaining(thisInterest.getActivityLength());
         thisInterest.setNumIterations(0);
-        GLRenderer.setNumIterations(0);
+        renderer.setNumIterations(0);
         MainActivity.myDB.myDao().updateInterest(thisInterest);
 
     }
@@ -211,21 +222,7 @@ public class Interest_Fragment extends Fragment {
         thisInterest = MainActivity.myDB.myDao().loadInterestByName(iName);
         START_TIME_MILLIS = Math.round(thisInterest.getTimeRemaining() * 60 * 1000);
         GLRenderer.setNumIterations(thisInterest.getNumIterations());
-        GLRenderer.setActivityLength(thisInterest.getActivityLength()* 60 * 1000);
         mTimeLeftInMillis = START_TIME_MILLIS;
-
-    }
-
-    public void onTimerFin()
-    {
-        Interest_Fragment updateInterest = new Interest_Fragment();
-        updateInterest.setButtonText("Start Activity");
-        updateInterest.initializeInterest(thisInterest.getInterestName());
-        updateInterest.setTimerRunning(false);
-        doneBTN.setVisibility(View.INVISIBLE);
-        FragmentTransaction hp = getFragmentManager().beginTransaction();
-        hp.replace(R.id.fragment_container, updateInterest);
-        hp.commit();
 
     }
     public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; }
