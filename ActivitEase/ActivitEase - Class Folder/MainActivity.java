@@ -296,15 +296,18 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Interest_Fragment resetTimer = new Interest_Fragment();
+
                         Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
                         double doneTime = updatedInterest.getActivityLength()-updatedInterest.getTimeRemaining();
                         updatedInterest.addTimeSpent(doneTime);
+
                         resetTimer.resetTimer();
                         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                         resetTimer.setTimerRunning(false);
 
                         if(!updatedInterest.getStreakCTBool())
                             interestComplete(updatedInterest);
+
                         resetTimer.initializeInterest(updatedInterest.getInterestName());
                         resetTimer.setButtonText("Start Activity");
 
@@ -369,6 +372,14 @@ public class MainActivity extends AppCompatActivity
         currentDate = getCurrentDate();
     }
 
+    public void onDeleteInterest(View v) {
+        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
+
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
+        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
+        hp.commit();
+    }
 
     public void onEditInterest(View v) {
         Interest thisInterest = myDB.myDao().loadInterestByName(currentInterestName);
@@ -419,13 +430,15 @@ public class MainActivity extends AppCompatActivity
         Interest_Fragment updateInterest = new Interest_Fragment();
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
         updateInterest.initializeInterest(thisInterest.getInterestName());
+
         hp.replace(R.id.fragment_container, updateInterest);
+
+        Toast.makeText(this, "Interest updated", Toast.LENGTH_LONG).show();
+
         hp.commit();
 
 
     }
-
-
 
     public void startStopTimer(View v) {
         Button b = (Button) v;
@@ -468,9 +481,58 @@ public class MainActivity extends AppCompatActivity
 
             //Update timer. Update DB with new interest data
         }
-
     }
 
+    /*
+        Finds the numeric position of the interest on the database table. This number is only
+        useful if accompanied by the interest size.
+     */
+    public static int getInterestPos(Interest intr) {
+        List<Interest> interests = myDB.myDao().getInterests();
+
+        int intrPos = 0;
+
+        for(Interest i : interests) {
+            if (i.getInterestName().equals(intr.getInterestName()))
+                break;
+            else
+                intrPos++;
+        }
+
+        return intrPos;
+    }
+
+    public boolean swipeLeftInterest(Interest intr) {
+        int intrPos = getInterestPos(intr);
+
+        // the first interest in the interest table cannot access an earlier interest.
+        if (intrPos == 0) {
+            return false;
+        }
+        else {
+            Interest prevInterest = myDB.myDao().getInterests().get(intrPos-1);
+        }
+
+        return false;
+    }
+
+    public boolean swipeRightInterest(Interest intr, Button b) {
+        int intrPos = getInterestPos(intr);
+
+        // the last interest in the interest table cannot access a later interest.
+        if (intrPos+1 == myDB.myDao().getInterestCt()) {
+            return false;
+        }
+        else {
+            Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
+            b.setText(nextInterest.getInterestName());
+
+            openInterest(b);
+        }
+
+
+        return false;
+    }
 
   /*  public void openContactPage(View view)
     {

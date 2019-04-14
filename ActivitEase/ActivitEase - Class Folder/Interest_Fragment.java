@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,12 +117,57 @@ public class Interest_Fragment extends Fragment {
             @Override
             public void onSwipeLeft() {
                 Toast.makeText(getActivity(), "Swiped left", Toast.LENGTH_LONG).show();
-                MainActivity.swipeLeftInterest(thisInterest);
+
+                int intrPos = MainActivity.getInterestPos(thisInterest);
+
+                // the last interest in the interest table cannot access a later interest.
+                if (intrPos == 0) {
+                    Toast.makeText(getActivity(), "No more interests", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Interest prevInterest = myDB.myDao().getInterests().get(intrPos-1);
+                }
             }
 
             public void onSwipeRight() {
                 Toast.makeText(getActivity(), "Swiped right", Toast.LENGTH_LONG).show();
-                MainActivity.swipeRightInterest(thisInterest);
+                //Button b = new Button(getContext());
+                //MainActivity.swipeRightInterest(thisInterest, b);
+
+
+                int intrPos = MainActivity.getInterestPos(thisInterest);
+
+                // the last interest in the interest table cannot access a later interest.
+                if (intrPos+1 == myDB.myDao().getInterestCt()) {
+                    Toast.makeText(getActivity(), "No more interests", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
+
+                    /*
+
+                    CODE FOR MOVING TO NEXT INTEREST
+
+                    FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+                    Interest_Fragment populatedInterest = new Interest_Fragment();
+
+                    populatedInterest.setButtonText("Start Activity");
+                    populatedInterest.initializeInterest(nextInterest.getInterestName());
+
+                    if (nextInterest.getBasePeriodSpan() == 1) populatedInterest.setpSpanPtr(0);
+                    else if (nextInterest.getBasePeriodSpan() == 7) populatedInterest.setpSpanPtr(1);
+                    else if (nextInterest.getBasePeriodSpan() == 30) populatedInterest.setpSpanPtr(2);
+                    else populatedInterest.setpSpanPtr(3);
+
+                    populatedInterest.setNumNotif(nextInterest.getNumNotifications());
+
+                    hp.replace(R.id.fragment_container, populatedInterest);
+
+                    if (!isFinishing()) {
+                        hp.commit();
+                    }
+                    */
+                }
             }
         });
 

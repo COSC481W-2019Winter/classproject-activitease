@@ -1,6 +1,8 @@
 package com.example.activitease;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -10,7 +12,7 @@ import android.view.View.OnTouchListener;
 /**
  * Detects left and right swipes across a view.
  */
-public class OnSwipeTouchListener implements OnTouchListener {
+public class OnSwipeTouchListener  implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
 
