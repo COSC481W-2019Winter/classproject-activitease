@@ -312,11 +312,6 @@ public class MainActivity extends AppCompatActivity
                 .show();
     }
 
-    public static void interestComplete(Interest i) {
-        i.setStreakCt(i.getStreakCt() + 1);
-        i.setLastDate(getCurrentDate());
-        myDB.myDao().updateInterest(i);
-    }
 
     //Finds the current date in the Month/Day/Year format and returns it.
     public static String getCurrentDate() {
@@ -460,6 +455,7 @@ public class MainActivity extends AppCompatActivity
             hp.replace(R.id.fragment_container, updateInterest);
 
             hp.commit();
+
 
             //Update timer. Update DB with new interest data
         }
