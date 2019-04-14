@@ -126,19 +126,6 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/NumNotificationSpan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Notification Period" />
-
-            <Spinner
-                android:id="@+id/numNotificationSpan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:spinnerMode="dropdown" />
-
-            <TextView
                 android:id="@+id/NumNotificationsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
