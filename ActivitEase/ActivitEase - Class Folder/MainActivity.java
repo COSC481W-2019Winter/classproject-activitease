@@ -6,13 +6,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.renderscript.ScriptGroup;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -31,6 +35,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +55,10 @@ public class MainActivity extends AppCompatActivity
     public final String CHANNEL_ID = "Personal Notification";
     private final String NOTIFICATION_ID = "001";
     private static String currentDate = getCurrentDate();
+    private boolean mShouldUnbind;
+    private notificationService mBoundService;
+
+
 
     public static MyDB myDB;
 
@@ -86,57 +95,81 @@ public class MainActivity extends AppCompatActivity
         myDB = Room.databaseBuilder(getApplicationContext(), MyDB.class, "interestdb")
                 .allowMainThreadQueries().build();
 
-        List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
-
         //double[] notificationTimes = notification.getNotificationTimes();
 
         //for(Interest interest: interestList){
-        popNotification(interestList);
 
+        popNotification();
     }
 
-    public void popNotification(List<Interest> interestList) {
-        Interest theInterest;
-        for (int i = 0; i < interestList.size(); i++) {
+    public void popNotification()
+    {
+        Intent intent = new Intent(getApplicationContext(), notificationService.class);
+        intent.setAction("com.example.activitease.notificationService");
+        startService(intent);
+    }
 
-            String interestName = interestList.get(i).getInterestName();
-            theInterest = myDB.myDao().loadInterestByName(interestName);
-            double[] notificationTimes = theInterest.getNotifTimes(theInterest.getNumNotifications());
-            int numOfNotification = theInterest.getNumNotifications();
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // This is called when the connection with the service has been
+            // established, giving us the service object we can use to
+            // interact with the service.  Because we have bound to a explicit
+            // service that we know is running in our own process, we can
+            // cast its IBinder to a concrete class and directly access it.
+            mBoundService = ((notificationService.LocalBinder)service).getService();
 
-            Log.d(interestName, "----------------------------------------------------------------");
-            for (int j = 0; j < numOfNotification; j++) {
+            // Tell the user about this for our demo.
+            Toast.makeText(MainActivity.this, "Service Connected",
+                    Toast.LENGTH_SHORT).show();
+        }
 
-                //ArrayList<Notification> _arrayListOfNotification = new ArrayList<Notification>();
+        public void onServiceDisconnected(ComponentName className) {
+            // This is called when the connection with the service has been
+            // unexpectedly disconnected -- that is, its process crashed.
+            // Because it is running in our same process, we should never
+            // see this happen.
+            mBoundService = null;
 
-                int hour = (int) notificationTimes[j];
-                int minute = (int) (notificationTimes[j] * 60 % 60);
-                int second = (int) (notificationTimes[j] * 60 * 60 % 60);
+            Toast.makeText(MainActivity.this, "Service Disconnected",
+                    Toast.LENGTH_SHORT).show();
+        }
+    };
 
-                // Notification notification = new Notification(hour, minute, second);
-                // _arrayListOfNotification.add(notification);
-                Log.d(interestName, String.valueOf(hour + ":" + minute + ":" + second));
-
-                Calendar calendar = Calendar.getInstance();
-
-                calendar.set(Calendar.HOUR, hour);
-                calendar.set(Calendar.MINUTE, minute);
-                calendar.set(Calendar.SECOND, second);
-
-                //  Intent intent = new Intent(getApplicationContext(), notification_reciever.class);
-                notification notif = new notification(interestName, this);
-
-                Thread thread = new Thread(notif);
-
-
-
-                ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-               // scheduler.schedule(new notification(interestName, this), , TimeUnit.HOURS);
-
-            }
+    void doBindService() {
+        // Attempts to establish a connection with the service.  We use an
+        // explicit class name because we want a specific service
+        // implementation that we know will be running in our own process
+        // (and thus won't be supporting component replacement by other
+        // applications).
+        if (bindService(new Intent(MainActivity.this, notificationService.class),
+                mConnection, Context.BIND_AUTO_CREATE)) {
+            mShouldUnbind = true;
+        } else {
+            Log.e("MY_APP_TAG", "Error: The requested service doesn't " +
+                    "exist, or this client isn't allowed access to it.");
         }
     }
+    void doUnbindService() {
+        if (mShouldUnbind) {
+            // Release information about the service's state.
+            unbindService(mConnection);
+            mShouldUnbind = false;
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        doUnbindService();
+    }
+
+
+
+
+   /* public void popNotification() {
+        Intent intent = new Intent(this, notificationService.class);
+        doBindService();
+        startService(intent);
+    } */
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -386,6 +419,8 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
+
 
     public void startStopTimer(View v) {
         Button b = (Button) v;
