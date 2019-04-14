@@ -364,6 +364,14 @@ public class MainActivity extends AppCompatActivity
         currentDate = getCurrentDate();
     }
 
+    public void onDeleteInterest(View v) {
+        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
+
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
+        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
+        hp.commit();
+    }
 
     public void onEditInterest(View v) {
         Interest thisInterest = myDB.myDao().loadInterestByName(currentInterestName);
@@ -466,6 +474,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public static boolean swipeLeftInterest(Interest thisIntr) {
+
+
+        return false;
+    }
+
+    public static boolean swipeRightInterest(Interest thisIntr) {
+        return false;
+    }
 
   /*  public void openContactPage(View view)
     {

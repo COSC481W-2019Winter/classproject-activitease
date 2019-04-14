@@ -112,41 +112,18 @@ public class Interest_Fragment extends Fragment {
         //Stuff past here is for deleting an interest
         // Finds the submit button, and an onClick method submits the data into the database.
 
-        //Stuff past here is for deleting an interest
-        delete=(Button)view.findViewById(R.id.delete);
-        //finding the name from the edit interest page
-//        delInterestName = view.findViewById(R.id.interestName);   //Deprecated as interestName is no longer a field of the Interest Page
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //have to put string declaration in here or else it crashes
-                final String delInterestName1 = thisInterest.getInterestName();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                // this is where the interest is deleted
-                                myDB.myDao().deleteByInterestName(delInterestName1);
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        /*
         view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             @Override
             public void onSwipeLeft() {
                 Toast.makeText(getActivity(), "Swiped left", Toast.LENGTH_LONG).show();
+                MainActivity.swipeLeftInterest(thisInterest);
             }
 
             public void onSwipeRight() {
                 Toast.makeText(getActivity(), "Swiped right", Toast.LENGTH_LONG).show();
+                MainActivity.swipeRightInterest(thisInterest);
             }
         });
-        */
 
         return view;
     }
