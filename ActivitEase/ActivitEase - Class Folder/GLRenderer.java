@@ -65,7 +65,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-        GLES20.glClearColor(1, (float)1, (float)1, 0);
+        GLES20.glClearColor((float) 0.98, (float)0.98, (float)0.98, 1);
 
         timer = new timer((float)1, (float)0.98);
 
@@ -213,10 +213,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
             for(int x = 0; x < n; x++) //Animation loop
             {
-                colors[x * 4 + 0] = 1f;
-                colors[x * 4 + 1] = 1f;
-                colors[x * 4  + 2] = 1f;
-                colors[x * 4 + 3] = 1f;
+                colors[x * 4 + 0] = 0.98f;
+                colors[x * 4 + 1] = 0.98f;
+                colors[x * 4  + 2] = 0.98f;
+                colors[x * 4 + 3] = 0.98f;
             }
             for(int x = n; x < 365; x++) //Draw outer circle
             {
@@ -279,10 +279,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
             for(int x = 0; x < z; x++) //Animation loop
             {
-                colors[x * 4 + 0] = 1f;
-                colors[x * 4 + 1] = 1f;
-                colors[x * 4  + 2] = 1f;
-                colors[x * 4 + 3] = 1f;
+                colors[x * 4 + 0] = 0.98f;
+                colors[x * 4 + 1] = 0.98f;
+                colors[x * 4  + 2] = 0.98f;
+                colors[x * 4 + 3] =0.98f;
             }
             for(int x = numIterations; x < 365; x++) //Draw outer circle
             {
@@ -293,10 +293,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             }
             for(int x = 365; x < 730; x++) //Draw inner circle
             {
-                colors[x * 4 + 0] = 1f;
-                colors[x * 4 + 1] = 1f;
-                colors[x * 4  + 2] = 1f;
-                colors[x * 4 + 3] = 1f;
+                colors[x * 4 + 0] = 0.98f;
+                colors[x * 4 + 1] = 0.98f;
+                colors[x * 4  + 2] = 0.98f;
+                colors[x * 4 + 3] = 0.98f;
             }
             // initialize color byte buffer for color values
             ByteBuffer cb = ByteBuffer.allocateDirect(colors.length * 4);
