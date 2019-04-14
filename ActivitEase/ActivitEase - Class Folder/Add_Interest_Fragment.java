@@ -1,5 +1,6 @@
 package com.example.activitease;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -41,12 +43,16 @@ public class Add_Interest_Fragment extends Fragment {
 
         // String array populates the spinner (dropdown menu) for the add_interest_page.xml page.
         String[] periodSpanTypes =
-                {"Day", "Week", "Month", "Year"};
+                {"--", "Day", "Week", "Month", "Year"};
         Spinner periodSpanSpinner = (Spinner) v.findViewById(R.id.periodSpanInput);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, periodSpanTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanSpinner.setAdapter(adapter);
+
+
+
+
 
         /*
          * Copies all of the new interest data. All are EditText, except for period span.
@@ -57,11 +63,14 @@ public class Add_Interest_Fragment extends Fragment {
         periodSpan = v.findViewById(R.id.periodSpanInput);
         numNotifications = v.findViewById(R.id.numNotifications);
 
+
+
         // Finds the submit button, and an onClick method submits the data into the database.
         addInterestBn = v.findViewById(R.id.submitNewInterestButton);
         addInterestBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 // Sets the interestName, which is the key for the database.
                 String newInterestName = interestName.getText().toString();
@@ -74,9 +83,49 @@ public class Add_Interest_Fragment extends Fragment {
                 String newPeriodFreqTemp = periodFreq.getText().toString();
                 String newPeriodSpan = periodSpan.getSelectedItem().toString();
                 String newNumNotificationsTemp = numNotifications.getText().toString();
+                int basePeriodSpan = 0;
+                int newActivityLength = Integer.parseInt(newActivityLengthTemp);
+                int newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
+                int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+
+                /*
+                 * Temporary values of basePeriodSpan, which will have to be revised for later.
+                 * basePeriodSpan serves as a numeric representation of how long a day, week, month,
+                 * and year are.
+                 */
+                switch (newPeriodSpan) {
+                    case "Day":
+                        basePeriodSpan = 1;
+                        break;
+                    case "Week":
+                        basePeriodSpan = 7;
+                        break;
+                    case "Month":
+                        basePeriodSpan = 30;
+                        break;
+                    case "Year":
+                        basePeriodSpan = 365;
+                        break;
+                }
+                // Variable is used to prevent exceeding practicing period
+                int practicePeriod = 0;
+                // Converting base periods to minutes in terms of days
+                if (basePeriodSpan == 1) {
+                    practicePeriod = 24*60;
+                }
+                else if (basePeriodSpan == 7) {
+                    practicePeriod = 168*60;
+                }
+                else if (basePeriodSpan == 30) {
+                    practicePeriod = 720*60;
+                }
+                else if (basePeriodSpan == 365) {
+                    practicePeriod = 8760*60;
+                }
+
+                int inputPracticeP = newActivityLength * newPeriodFreq;
 
                 int currentInterestCt = MainActivity.myDB.myDao().getInterestCt();
-
 
                 if (currentInterestCt >= 10)
                     interestName.setError("The maximum number of interests is currently 10. " +
@@ -93,19 +142,24 @@ public class Add_Interest_Fragment extends Fragment {
                     activityLength.setError("Please enter an activity length");
                 else if (newPeriodFreqTemp.equals(""))
                     periodFreq.setError("Please enter a period frequency");
+                else if (newPeriodSpan.equals("--"))
+                    ((TextView)periodSpan.getSelectedView()).setError("Your Error msg Here");
                 else if (newNumNotificationsTemp.equals(""))
                     numNotifications.setError("Please enter a number of notifications");
-                else {
-                    int basePeriodSpan = 0;
-                    int newActivityLength = Integer.parseInt(newActivityLengthTemp);
-                    int newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
-                    int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+                    // Create an error message if inputted practice period exceeds limit
+                else if (inputPracticeP > practicePeriod) {
+                    activityLength.setError("Inputted values can not exceed the span of practice period." +
+                            "\n For example, 120 mins or (2 hrs) x 13 times > 1440 mins or (24 hrs) for a day's period.");
+                    periodFreq.setError("Inputted values can not exceed the span of practice period." +
+                            "\n For example, 120 mins or (2 hrs) x 13 times > 1440 mins or (24 hrs) for a day's period.");
+                }
 
-                    /*
-                     * Temporary values of basePeriodSpan, which will have to be revised for later.
-                     * basePeriodSpan serves as a numeric representation of how long a day, week, month,
-                     * and year are.
-                     */
+                else {
+                     basePeriodSpan = 0;
+                     newActivityLength = Integer.parseInt(newActivityLengthTemp);
+                     newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
+                     newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+
                     switch (newPeriodSpan) {
                         case "Day":
                             basePeriodSpan = 1;
@@ -120,6 +174,7 @@ public class Add_Interest_Fragment extends Fragment {
                             basePeriodSpan = 365;
                             break;
                     }
+
 
                     // Creates a new Interest object of the given int variables.
                     Interest interest = new Interest(newInterestName, newPeriodFreq, basePeriodSpan,
