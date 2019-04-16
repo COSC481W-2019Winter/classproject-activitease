@@ -67,6 +67,8 @@ public class Interest {
     @ColumnInfo()
     private String lastDate;
 
+    @ColumnInfo()
+    private int periodRemaining;
 
     // Large number of notification times. This system may be altered later.
     @ColumnInfo()
@@ -110,6 +112,9 @@ public class Interest {
         this.numNotifications = numNotifications;
         this.streakCt = streakCt;
         this.numIterations = numIterations;
+
+        periodRemaining = basePeriodSpan;
+
         this.totalTimeSpent = totalTimeSpent;
     }
 
@@ -159,7 +164,7 @@ public class Interest {
     public void setNotifTime9 (double notifTime) {notifTime9 = notifTime; }
     public void setNotifTime10 (double notifTime) {notifTime10 = notifTime; }
 
-
+    public void setPeriodRemaining(int periodRemaining) { this.periodRemaining = periodRemaining; }
 
     public void setNotifTimes(int numNotifications) {
 
@@ -281,6 +286,7 @@ public class Interest {
     public double getNotifTime9() { return notifTime9; }
     public double getNotifTime10() { return notifTime10; }
 
+    public int getPeriodRemaining() { return periodRemaining; }
 
     public double[] getNotifTimes(int numNotifications) {
         double[] notifTimes = new double[numNotifications];

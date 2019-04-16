@@ -213,6 +213,13 @@ public class Interest_Fragment extends Fragment {
                     thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
                 thisInterest.setLastDate(thisInterest.getCurrentDate());
                 myDB.myDao().updateInterest(thisInterest);
+
+                if (thisInterest.getPeriodRemaining() != 0) {
+                    // Updates the number of periods left.
+                    thisInterest.setPeriodRemaining(thisInterest.getPeriodRemaining() - 1);
+                }
+
+
             }
         }.start();
 
@@ -228,10 +235,8 @@ public class Interest_Fragment extends Fragment {
         numIterations = renderer.getNumIterations();
         thisInterest.setNumIterations(numIterations);
         MainActivity.myDB.myDao().updateInterest(thisInterest);
-
-
-
     }
+
     public void resetTimer()
     {
         GLRenderer renderer = new GLRenderer();

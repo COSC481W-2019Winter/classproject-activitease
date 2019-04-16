@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity
                     "exist, or this client isn't allowed access to it.");
         }
     }
+
     void doUnbindService() {
         if (mShouldUnbind) {
             // Release information about the service's state.
@@ -156,14 +157,12 @@ public class MainActivity extends AppCompatActivity
             mShouldUnbind = false;
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         doUnbindService();
     }
-
-
-
 
    /* public void popNotification() {
         Intent intent = new Intent(this, notificationService.class);
@@ -186,7 +185,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -203,7 +201,6 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -272,7 +269,6 @@ public class MainActivity extends AppCompatActivity
         hp.replace(R.id.fragment_container, populatedInterest);
         hp.commit();
     }
-
 
     public void openAct1(View view) {
 
