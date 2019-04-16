@@ -97,12 +97,17 @@ public class Home_Page_Fragment extends Fragment {
                 periodSpan = "month";
             else
                 periodSpan = "year";
+            // Getting minutes for time remaining
+            int mRemaining = (int) interestList.get(i).getTimeRemaining();
+            // Getting seconds for time remaining
+            double sRemaining = (interestList.get(i).getTimeRemaining() - (int) interestList.get(i).getTimeRemaining())*60;
 
             String buttonText = interestList.get(i).getInterestName() + " \n" +
                                 interestList.get(i).getStreakCt() + " day streak \n" +
                                 interestList.get(i).getPeriodFreq() + " times " +
                                 interestList.get(i).getActivityLength() + " minutes a " +
-                                periodSpan;
+                                periodSpan + "\n Time remaining: "  + mRemaining + ":" +
+                                String.format("%.0f", sRemaining);
 
             interestBtns[i].setText(buttonText);
         }
