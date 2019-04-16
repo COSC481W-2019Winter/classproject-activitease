@@ -369,12 +369,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onDeleteInterest(View v) {
-        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
 
-        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
-        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
-        Toast.makeText(this, "Interest deleted successfully", Toast.LENGTH_LONG).show();
-        hp.commit();
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Done")
+                .setMessage("Are you sure you want to delete this interest?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        MainActivity.myDB.myDao().deleteByInterestName(currentInterestName);
+
+                        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+                        hp.replace(R.id.fragment_container, new Home_Page_Fragment());
+                        hp.commit();
+                    }
+
+                })
+                .setNegativeButton("no", null)
+                .show();
+
     }
 
     public void onEditInterest(View v) {

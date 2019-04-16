@@ -146,6 +146,8 @@ public class Interest_Fragment extends Fragment {
 
                     /*
 
+                    onUpdate() method to repopulate this interest fragment.
+
                     CODE FOR MOVING TO NEXT INTEREST
 
                     FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
