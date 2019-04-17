@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity
     private boolean mShouldUnbind;
     private notificationService mBoundService;
 
-
-
     public static MyDB myDB;
 
     @Override
@@ -295,14 +293,17 @@ public class MainActivity extends AppCompatActivity
 
                         Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
                         double doneTime = updatedInterest.getActivityLength()-updatedInterest.getTimeRemaining();
+
                         updatedInterest.addTimeSpent(doneTime);
+                        myDB.myDao().updateInterest(updatedInterest);
+
+                        if(!updatedInterest.getStreakCTBool())
+                            interestComplete(updatedInterest, false);
 
                         resetTimer.resetTimer();
                         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                         resetTimer.setTimerRunning(false);
 
-                        if(!updatedInterest.getStreakCTBool())
-                            interestComplete(updatedInterest);
 
                         resetTimer.initializeInterest(updatedInterest.getInterestName());
                         resetTimer.setButtonText("Start Activity");
@@ -316,8 +317,33 @@ public class MainActivity extends AppCompatActivity
                 .show();
     }
 
-    public static void interestComplete(Interest i) {
-        i.setStreakCt(i.getStreakCt() + 1);
+    /*
+            This method updates database information when an interest is finished.
+
+            Constructor variable @completelyFinished is TRUE if the user finished the activity with the timer,
+            and false if the user finished the activity with the done button.
+     */
+    public void interestComplete(Interest i, boolean completelyFinished) {
+        if(completelyFinished) {
+            // Always add activityLength to totalTime spent, every time an interest has been completely finished.
+            i.addTimeSpent(i.getActivityLength());
+
+            // Updates the current period remaining count.
+            i.setPeriodRemaining(i.getPeriodRemaining() - 1);
+
+            // All of an interest's periods have been completed, so add to the streak count, and set
+            // streakCtBool to true.
+            if (i.getPeriodRemaining() == 0) {
+                i.setStreakCTBool(true);
+                i.setStreakCt(i.getStreakCt()+ 1);
+            }
+        }
+        else // Else block for the done button.
+        {
+            if (!i.getStreakCTBool())
+                i.setStreakCt(i.getStreakCt() + 1);
+            i.setStreakCTBool(true);
+        }
         i.setLastDate(getCurrentDate());
         myDB.myDao().updateInterest(i);
     }
@@ -569,7 +595,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    //converts the Total Time Spent into days, hours, and minutes.
     public static String convertToUnits(Interest thisInterest){
         if(thisInterest.getTotalTimeSpent() == 0)
             return"";
@@ -599,4 +624,5 @@ public class MainActivity extends AppCompatActivity
             return timeSpentString;
         }
     }
+
 }

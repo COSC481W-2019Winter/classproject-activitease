@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import static com.example.activitease.Interest_Fragment.thisInterest;
 import static java.lang.String.format;
 
 
@@ -20,14 +19,12 @@ public class Home_Page_Fragment extends Fragment {
     TextView populateInterests;
     private Button[] interestBtns = new Button[10];
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
 
         populateInterests = view.findViewById(R.id.testDBPopulate);
-
 
         TextView populateInterests = view.findViewById(R.id.testDBPopulate);
         List<Interest> interestList = MainActivity.myDB.myDao().getInterests();
@@ -61,7 +58,6 @@ public class Home_Page_Fragment extends Fragment {
         info += "number of interests: " + getInterestTableSz() + "\n";
 
         populateInterests.setText(info);
-        // CODE FOR TEMP TABLE VIEW ENDS HERE
 
         //displayButtons(interestList);
         // CODE FOR BUTTON POPULATION BEGINS HERE
@@ -87,6 +83,7 @@ public class Home_Page_Fragment extends Fragment {
              */
         for (int i = 0; i < sz; i++) {
             interestBtns[i].setVisibility(View.VISIBLE);
+
             String periodSpan = "";
 
             if (interestList.get(i).getBasePeriodSpan() == 1)
@@ -102,14 +99,12 @@ public class Home_Page_Fragment extends Fragment {
             // Getting seconds for time remaining
             double sRemaining = (interestList.get(i).getTimeRemaining() - (int) interestList.get(i).getTimeRemaining())*60;
 
-
             String timeSpentString = MainActivity.convertToUnits(interestList.get(i));
-
 
             String buttonText = interestList.get(i).getInterestName() + " \n" +
                     interestList.get(i).getStreakCt() + " day streak \n" +
-                    interestList.get(i).getPeriodFreq() + " times " +
-                    interestList.get(i).getActivityLength() + " minutes a " +
+                    interestList.get(i).getPeriodFreq() + " time(s) " +
+                    interestList.get(i).getActivityLength() + " minute(s) a " +
                     periodSpan + "\n Time remaining: "  + mRemaining + ":" +
                     String.format("%.0f", sRemaining) + timeSpentString;
 

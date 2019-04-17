@@ -113,7 +113,8 @@ public class Interest {
         this.streakCt = streakCt;
         this.numIterations = numIterations;
 
-        periodRemaining = basePeriodSpan;
+        periodRemaining = periodFreq;
+        streakCTBool = false;
 
         this.totalTimeSpent = totalTimeSpent;
     }
@@ -165,6 +166,7 @@ public class Interest {
     public void setNotifTime10 (double notifTime) {notifTime10 = notifTime; }
 
     public void setPeriodRemaining(int periodRemaining) { this.periodRemaining = periodRemaining; }
+    public void decPeriodRemaining() { periodRemaining--; }
 
     public void setNotifTimes(int numNotifications) {
 

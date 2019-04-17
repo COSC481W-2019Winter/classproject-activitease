@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import static com.example.activitease.MainActivity.getCurrentDate;
 import static com.example.activitease.MainActivity.myDB;
 
 public class Interest_Fragment extends Fragment {
@@ -97,7 +98,7 @@ public class Interest_Fragment extends Fragment {
 
         periodSpanInput.setSelection(spanInput);
 
-        String streakCountString = "Streak Count: " + Integer.toString(thisInterest.getStreakCt());
+        String streakCountString = "Streak Count: " + thisInterest.getStreakCt();
         streakCount.setText(streakCountString);
 
         glSurfaceView = view.findViewById(R.id.openGLView);
@@ -147,13 +148,11 @@ public class Interest_Fragment extends Fragment {
                     Toast.makeText(getActivity(), "No more interests", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    /*
                     Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
 
-                    /*
 
-                    CODE FOR MOVING TO NEXT INTEREST
 
-                    FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                     Interest_Fragment populatedInterest = new Interest_Fragment();
 
                     populatedInterest.setButtonText("Start Activity");
@@ -166,11 +165,7 @@ public class Interest_Fragment extends Fragment {
 
                     populatedInterest.setNumNotif(nextInterest.getNumNotifications());
 
-                    hp.replace(R.id.fragment_container, populatedInterest);
-
-                    if (!isFinishing()) {
-                        hp.commit();
-                    }
+                    getFragmentManager().beginTransaction().detach(this).attach(populatedInterest).commit();
                     */
                 }
             }
@@ -178,6 +173,7 @@ public class Interest_Fragment extends Fragment {
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -207,30 +203,26 @@ public class Interest_Fragment extends Fragment {
                 updateCountDownText();
             }
 
-
             @Override
             public void onFinish() {  //When analog timer finishes
-
+                pauseTimer();
                 timerRunning = false;
+                resetTimer();
 
-                if(!thisInterest.getStreakCTBool())
-                    //Conditions to check if activity amount is completed.
+                thisInterest.addTimeSpent(thisInterest.getActivityLength());
+                thisInterest.decPeriodRemaining();
+                thisInterest.setLastDate(getCurrentDate());
+
+                if (thisInterest.getPeriodRemaining() == 0) {
+                    thisInterest.setStreakCTBool(true);
                     thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
-                thisInterest.setLastDate(thisInterest.getCurrentDate());
-                myDB.myDao().updateInterest(thisInterest);
-
-                if (thisInterest.getPeriodRemaining() != 0) {
-                    // Updates the number of periods left.
-                    thisInterest.setPeriodRemaining(thisInterest.getPeriodRemaining() - 1);
                 }
-
-
+                MainActivity.myDB.myDao().updateInterest(thisInterest);
             }
         }.start();
-
         timerRunning = true;
-
     }
+
     public void pauseTimer()
     {
         countDownTimer.cancel();
