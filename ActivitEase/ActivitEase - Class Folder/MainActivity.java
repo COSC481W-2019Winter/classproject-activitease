@@ -568,4 +568,35 @@ public class MainActivity extends AppCompatActivity
             b.setBackgroundColor(Color.BLUE);
         }
     }
+
+    //converts the Total Time Spent into days, hours, and minutes.
+    public static String convertToUnits(Interest thisInterest){
+        if(thisInterest.getTotalTimeSpent() == 0)
+            return"";
+
+        else {
+            int tTimeSpent = (int) thisInterest.getTotalTimeSpent();
+            //tTimeSpent below was used for testing purposes
+//            int tTimeSpent = 1500;
+
+            int day = (int) Math.floor(tTimeSpent / 24 / 60);
+
+            tTimeSpent = tTimeSpent - (day * 24 * 60);
+            int hour = (int) Math.floor(tTimeSpent / 60);
+
+            tTimeSpent = tTimeSpent - (hour * 60);
+            int minute = (int) Math.floor(tTimeSpent);
+
+            //Constructing what the button will show
+            String timeSpentString = "\nTime Spent: ";
+            if (day != 0)
+                timeSpentString = timeSpentString + day + " days ";
+            if (hour != 0)
+                timeSpentString = timeSpentString + hour + " hours ";
+            if (minute != 0)
+                timeSpentString = timeSpentString + minute + " minutes";
+
+            return timeSpentString;
+        }
+    }
 }
