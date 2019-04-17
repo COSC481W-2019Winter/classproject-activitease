@@ -202,4 +202,19 @@
         app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toEndOf="@+id/startStop" />
 
+    <TextView
+        android:id="@+id/streakCount"
+        android:layout_width="100dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/startStop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openGLView"
+        app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>
