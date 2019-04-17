@@ -34,7 +34,7 @@ public class Interest_Fragment extends Fragment {
     private static double timeRemaining;
     private static int numIterations;
 
-    private TextView textViewCountdown;
+    private TextView textViewCountdown, streakCount;
     private static CountDownTimer countDownTimer;
 
 
@@ -67,6 +67,8 @@ public class Interest_Fragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         periodSpanInput.setAdapter(adapter);
 
+        streakCount = view.findViewById(R.id.streakCount);
+
         doneBTN = view.findViewById(R.id.doneButton);
         if(isTimerRunning)
             doneBTN.setVisibility(View.VISIBLE);
@@ -94,6 +96,9 @@ public class Interest_Fragment extends Fragment {
             spanInput = 3;
 
         periodSpanInput.setSelection(spanInput);
+
+        String streakCountString = "Streak Count: " + Integer.toString(thisInterest.getStreakCt());
+        streakCount.setText(streakCountString);
 
         glSurfaceView = view.findViewById(R.id.openGLView);
 
@@ -145,8 +150,6 @@ public class Interest_Fragment extends Fragment {
                     Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
 
                     /*
-
-                    onUpdate() method to repopulate this interest fragment.
 
                     CODE FOR MOVING TO NEXT INTEREST
 
