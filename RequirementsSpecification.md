@@ -15,7 +15,8 @@
 - Users can click on an interest from the home page to go to that interest’s page.
 - At the bottom of the home page is an add interest button. This takes the user to an add interest page.
 - The home page has a side menu button.
-- The menu button, as well as the add in- The home page also has a side menu button.terest button, are always viewable if the user is scrolling through interests.
+- The home page also has a side menu button.
+- The menu button, as well as the add interest button, are always viewable if the user is scrolling through interests.
 - The side menu can be toggled on and off by pressing the side menu button.
 ## The Add Interest Page
 - The add interest page will require several critical elements to form an interest, such as:
