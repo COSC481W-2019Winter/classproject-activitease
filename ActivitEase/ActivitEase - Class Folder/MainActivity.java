@@ -267,6 +267,345 @@ public class MainActivity extends AppCompatActivity
         hp.replace(R.id.fragment_container, populatedInterest);
         hp.commit();
     }
+    
+    
+    public void customNotificationBTN(View v)
+    {
+        Button b = (Button) v;
+
+        Custom_Notification_Fragment cust = new Custom_Notification_Fragment();
+        cust.initializeInterest(currentInterestName);
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, cust);
+        hp.commit();
+
+   }
+   
+   public void editNotifications(View v)
+    {
+        TimePicker timePicker1, timePicker2, timePicker3, timePicker4, timePicker5, timePicker6, timePicker7, timePicker8, timePicker9, timePicker10;
+
+        Button b = (Button) v;
+        Interest interest = new Interest();
+        interest = myDB.myDao().loadInterestByName(currentInterestName);
+
+        timePicker1 = findViewById(R.id.timePicker1);
+        timePicker2 = findViewById(R.id.timePicker2);
+        timePicker3 = findViewById(R.id.timePicker3);
+        timePicker4 = findViewById(R.id.timePicker4);
+        timePicker5 = findViewById(R.id.timePicker5);
+        timePicker6 = findViewById(R.id.timePicker6);
+        timePicker7 = findViewById(R.id.timePicker7);
+        timePicker8 = findViewById(R.id.timePicker8);
+        timePicker9 = findViewById(R.id.timePicker9);
+        timePicker10 = findViewById(R.id.timePicker10);
+
+        int hour = 0;
+        timePicker1.getCurrentHour();
+        double minute = 0;
+        double time = 0;
+        switch(interest.getNumNotifications())
+        {
+            case 0:
+                //do nothing
+                break;
+            case 1:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+                break;
+            case 2:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+                break;
+            case 3:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+                break;
+            case 4:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+                break;
+            case 5:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+                break;
+            case 6:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+
+                hour = timePicker6.getCurrentHour();
+                minute = (float) timePicker6.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime6(time);
+                break;
+            case 7:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+
+                hour = timePicker6.getCurrentHour();
+                minute = (float) timePicker6.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime6(time);
+
+                hour = timePicker7.getCurrentHour();
+                minute = (float) timePicker7.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime7(time);
+                break;
+            case 8:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+
+                hour = timePicker6.getCurrentHour();
+                minute = (float) timePicker6.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime6(time);
+
+                hour = timePicker7.getCurrentHour();
+                minute = (float) timePicker7.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime7(time);
+
+                hour = timePicker8.getCurrentHour();
+                minute = (float) timePicker8.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime8(time);
+                break;
+            case 9:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+
+                hour = timePicker6.getCurrentHour();
+                minute = (float) timePicker6.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime6(time);
+
+                hour = timePicker7.getCurrentHour();
+                minute = (float) timePicker7.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime7(time);
+
+                hour = timePicker8.getCurrentHour();
+                minute = (float) timePicker8.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime8(time);
+
+                hour = timePicker9.getCurrentHour();
+                minute = (float) timePicker9.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime9(time);
+                break;
+            case 10:
+                hour = timePicker1.getCurrentHour();
+                minute = (float) timePicker1.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime1(time);
+
+                hour = timePicker2.getCurrentHour();
+                minute = (float) timePicker2.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime2(time);
+
+                hour = timePicker3.getCurrentHour();
+                minute = (float) timePicker3.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime3(time);
+
+                hour = timePicker4.getCurrentHour();
+                minute = (float) timePicker4.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime4(time);
+
+                hour = timePicker5.getCurrentHour();
+                minute = (float) timePicker5.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime5(time);
+
+                hour = timePicker6.getCurrentHour();
+                minute = (float) timePicker6.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime6(time);
+
+                hour = timePicker7.getCurrentHour();
+                minute = (float) timePicker7.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime7(time);
+
+                hour = timePicker8.getCurrentHour();
+                minute = (float) timePicker8.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime8(time);
+
+                hour = timePicker9.getCurrentHour();
+                minute = (float) timePicker9.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime9(time);
+
+                hour = timePicker10.getCurrentHour();
+                minute = (float) timePicker10.getCurrentMinute() / 60;
+                time = hour + minute;
+                interest.setNotifTime10(time);
+                break;
+        }
+        myDB.myDao().updateInterest(interest);
+        popNotification();
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        Interest_Fragment updateInterest = new Interest_Fragment();
+        updateInterest.initializeInterest(interest.getInterestName());
+        hp.replace(R.id.fragment_container, updateInterest);
+        hp.commit();
+
+
+
+    }
 
     public void openAct1(View view) {
         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
