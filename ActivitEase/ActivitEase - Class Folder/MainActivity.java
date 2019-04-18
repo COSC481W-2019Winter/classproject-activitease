@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity
         // Name of the interest found from the text of the button.
         String interestName = (String) interestB.getText();
         // Trims the button text to the interest name, which will be used to trigger db pull.
-        interestName = interestName.substring(0, interestName.indexOf(" "));
+        interestName = interestName.substring(0, interestName.indexOf("\n"));
         // Loads the interest, using the interest name as the key.
         Interest thisInterest = MainActivity.myDB.myDao().loadInterestByName(interestName);
         currentInterestName = thisInterest.getInterestName();
@@ -843,45 +843,6 @@ public class MainActivity extends AppCompatActivity
         return intrPos;
     }
 
-    public boolean swipeLeftInterest(Interest intr) {
-        int intrPos = getInterestPos(intr);
-
-        // the first interest in the interest table cannot access an earlier interest.
-        if (intrPos == 0) {
-            return false;
-        }
-        else {
-            Interest prevInterest = myDB.myDao().getInterests().get(intrPos-1);
-        }
-
-        return false;
-    }
-
-    public boolean swipeRightInterest(Interest intr, Button b) {
-        int intrPos = getInterestPos(intr);
-
-        // the last interest in the interest table cannot access a later interest.
-        if (intrPos+1 == myDB.myDao().getInterestCt()) {
-            return false;
-        }
-        else {
-            Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
-            b.setText(nextInterest.getInterestName());
-
-            openInterest(b);
-        }
-
-
-        return false;
-    }
-
-  /*  public void openContactPage(View view)
-    {
-        startActivity(new Intent(getApplicationContext(), ContactManager.class));
-        //getSupportFragmentManager().beginTransaction().
-        // replace(R.id.fragment_container, new Contact()).commit();
-    } */
-
     public void applyColorChange(View view) {
         Button b = (Button) view;
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -902,7 +863,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static String convertToUnits(Interest thisInterest){
-        if(thisInterest.getTotalTimeSpent() < 59)
+        if(thisInterest.getTotalTimeSpent() == 0)
             return"";
 
         else {

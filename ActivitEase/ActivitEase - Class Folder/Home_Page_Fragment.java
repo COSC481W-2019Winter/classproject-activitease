@@ -101,7 +101,7 @@ public class Home_Page_Fragment extends Fragment {
 
             String timeSpentString = MainActivity.convertToUnits(interestList.get(i));
 
-            String buttonText = interestList.get(i).getInterestName() + " \n" +
+            String buttonText = interestList.get(i).getInterestName() + "\n" +
                     interestList.get(i).getStreakCt() + " day streak \n" +
                     interestList.get(i).getPeriodFreq() + " time(s) " +
                     interestList.get(i).getActivityLength() + " minute(s) a " +
