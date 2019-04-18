@@ -35,6 +35,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -627,18 +628,18 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Interest_Fragment resetTimer = new Interest_Fragment();
-
                         Interest updatedInterest = MainActivity.myDB.myDao().loadInterestByName(currentInterestName);
                         double doneTime = updatedInterest.getActivityLength()-updatedInterest.getTimeRemaining();
+                        resetTimer.resetTimer();
 
                         updatedInterest.addTimeSpent(doneTime);
                         if (!updatedInterest.getStreakCTBool())
                             updatedInterest.setStreakCt(updatedInterest.getStreakCt() + 1);
                         updatedInterest.setStreakCTBool(true);
-
+                        updatedInterest.setTimeRemaining(updatedInterest.getActivityLength());
+                        updatedInterest.setNumIterations(0);
                         MainActivity.myDB.myDao().updateInterest(updatedInterest);
 
-                        resetTimer.resetTimer();
                         FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
                         resetTimer.setTimerRunning(false);
                         resetTimer.initializeInterest(updatedInterest.getInterestName());
@@ -930,4 +931,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void openContactPage(View v) {
+        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
+        hp.replace(R.id.fragment_container, new ContactManager());
+        hp.commit();
+    }
 }

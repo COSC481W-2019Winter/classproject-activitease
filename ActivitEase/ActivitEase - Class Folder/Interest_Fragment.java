@@ -203,6 +203,8 @@ public class Interest_Fragment extends Fragment {
         countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                thisInterest.setTimeRemaining(timeRemaining);
+                MainActivity.myDB.myDao().updateInterest(thisInterest);
                 mTimeLeftInMillis = millisUntilFinished;
                 timeRemaining = (float) mTimeLeftInMillis /60000;
                 updateCountDownText();
