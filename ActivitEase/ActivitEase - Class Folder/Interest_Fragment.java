@@ -215,14 +215,25 @@ public class Interest_Fragment extends Fragment {
                 resetTimer();
 
                 thisInterest.addTimeSpent(thisInterest.getActivityLength());
-                thisInterest.decPeriodRemaining();
                 thisInterest.setLastDate(getCurrentDate());
 
-                if (thisInterest.getPeriodRemaining() == 0) {
-                    thisInterest.setStreakCTBool(true);
-                    thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
+                if (!thisInterest.getStreakCTBool()) {
+                    thisInterest.decPeriodRemaining();
+
+                    if (thisInterest.getPeriodRemaining() == 0) {
+                        thisInterest.setStreakCTBool(true);
+                        thisInterest.setStreakCt(thisInterest.getStreakCt() + 1);
+                    }
                 }
                 MainActivity.myDB.myDao().updateInterest(thisInterest);
+
+                // Resets interest page, and the timer.
+                initializeInterest(thisInterest.getInterestName());
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                setButtonText("Start Activity");
+                fragmentTransaction.detach(Interest_Fragment.this);
+                fragmentTransaction.attach(Interest_Fragment.this);
+                fragmentTransaction.commit();
             }
         }.start();
         timerRunning = true;
