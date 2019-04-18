@@ -863,7 +863,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static String convertToUnits(Interest thisInterest){
-        if(thisInterest.getTotalTimeSpent() == 0)
+        if(thisInterest.getTotalTimeSpent() < 58)
             return"";
 
         else {
