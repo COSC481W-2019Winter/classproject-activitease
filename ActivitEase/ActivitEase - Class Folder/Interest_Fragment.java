@@ -38,17 +38,15 @@ public class Interest_Fragment extends Fragment {
     private TextView textViewCountdown, streakCount;
     private static CountDownTimer countDownTimer;
 
-
     Button delete, editInterestBn, doneBTN;
 
     private EditText activityAmount, activityLength, numNotifications;
     private Spinner periodSpanInput;
 
+    private int pSpanInput, numNotif;
 
     private static String iName;
     static Interest thisInterest;
-
-    private int aLength, numNotif, pSpanPtr;
 
     @Nullable
     @Override
@@ -83,10 +81,10 @@ public class Interest_Fragment extends Fragment {
         // Initializes the interest page with set variables from the MainActivity call.
         mytextview.setText(iName);
         activityLength.setText(Integer.toString(thisInterest.getActivityLength()));
-        activityAmount.setText(Integer.toString(thisInterest.getBasePeriodSpan()));
+        activityAmount.setText(Integer.toString(thisInterest.getPeriodFreq()));
         numNotifications.setText(Integer.toString(thisInterest.getNumNotifications()));
 
-        int spanInput;
+        final int spanInput;
         if(thisInterest.getBasePeriodSpan() == 1)
             spanInput = 0;
         else if(thisInterest.getBasePeriodSpan() == 7)
@@ -118,7 +116,6 @@ public class Interest_Fragment extends Fragment {
 
         //Stuff past here is for deleting an interest
         // Finds the submit button, and an onClick method submits the data into the database.
-
         view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             @Override
             public void onSwipeLeft() {
@@ -132,14 +129,12 @@ public class Interest_Fragment extends Fragment {
                 }
                 else {
                     Interest prevInterest = myDB.myDao().getInterests().get(intrPos-1);
+                    swipeNextInterest(prevInterest);
                 }
             }
 
             public void onSwipeRight() {
                 Toast.makeText(getActivity(), "Swiped right", Toast.LENGTH_LONG).show();
-                //Button b = new Button(getContext());
-                //MainActivity.swipeRightInterest(thisInterest, b);
-
 
                 int intrPos = MainActivity.getInterestPos(thisInterest);
 
@@ -148,30 +143,40 @@ public class Interest_Fragment extends Fragment {
                     Toast.makeText(getActivity(), "No more interests", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    /*
                     Interest nextInterest = myDB.myDao().getInterests().get(intrPos+1);
-
-
-
-                    Interest_Fragment populatedInterest = new Interest_Fragment();
-
-                    populatedInterest.setButtonText("Start Activity");
-                    populatedInterest.initializeInterest(nextInterest.getInterestName());
-
-                    if (nextInterest.getBasePeriodSpan() == 1) populatedInterest.setpSpanPtr(0);
-                    else if (nextInterest.getBasePeriodSpan() == 7) populatedInterest.setpSpanPtr(1);
-                    else if (nextInterest.getBasePeriodSpan() == 30) populatedInterest.setpSpanPtr(2);
-                    else populatedInterest.setpSpanPtr(3);
-
-                    populatedInterest.setNumNotif(nextInterest.getNumNotifications());
-
-                    getFragmentManager().beginTransaction().detach(this).attach(populatedInterest).commit();
-                    */
+                    swipeNextInterest(nextInterest);
                 }
             }
         });
-
         return view;
+    }
+
+    public void swipeNextInterest(Interest nextInterest) {
+        setButtonText("Start Activity");
+        initializeInterest(nextInterest.getInterestName());
+
+        activityLength.setText(Integer.toString(nextInterest.getActivityLength()));
+        activityAmount.setText(Integer.toString(nextInterest.getPeriodFreq()));
+        numNotifications.setText(Integer.toString(nextInterest.getNumNotifications()));
+
+        int currSpanInput;
+        if(nextInterest.getBasePeriodSpan() == 1)
+            currSpanInput = 0;
+        else if(nextInterest.getBasePeriodSpan() == 7)
+            currSpanInput = 1;
+        else if(nextInterest.getBasePeriodSpan() == 30)
+            currSpanInput = 2;
+        else
+            currSpanInput = 3;
+
+        periodSpanInput.setSelection(currSpanInput);
+
+        MainActivity.currentInterestName = nextInterest.getInterestName();
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.detach(Interest_Fragment.this);
+        fragmentTransaction.attach(Interest_Fragment.this);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -254,11 +259,10 @@ public class Interest_Fragment extends Fragment {
         START_TIME_MILLIS = Math.round(thisInterest.getTimeRemaining() * 60 * 1000);
         GLRenderer.setNumIterations(thisInterest.getNumIterations());
         mTimeLeftInMillis = START_TIME_MILLIS;
-
     }
-    public void setpSpanPtr (int pSpanPtr) { this.pSpanPtr = pSpanPtr; }
-    public void setTimerRunning(boolean timerRunning) {isTimerRunning = timerRunning; }
-    public void setNumNotif (int numNotif) { this.numNotif = numNotif; }
-    public void setButtonText(String btnText){buttonText = btnText; }
 
+    public void setTimerRunning(boolean timerRunning) {isTimerRunning = timerRunning; }
+    public void setButtonText(String btnText){buttonText = btnText; }
+    public void setpSpanPtr(int pSpanPtr) { this.pSpanInput = pSpanPtr; }
+    public void setNumNotif(int numNotif) { this.numNotif = numNotif; }
 }
