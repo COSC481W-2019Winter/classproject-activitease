@@ -84,9 +84,19 @@ public class Add_Interest_Fragment extends Fragment {
                 String newPeriodSpan = periodSpan.getSelectedItem().toString();
                 String newNumNotificationsTemp = numNotifications.getText().toString();
                 int basePeriodSpan = 0;
-                int newActivityLength = Integer.parseInt(newActivityLengthTemp);
-                int newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
-                int newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+                int newActivityLength;
+                int newPeriodFreq;
+                int newNumNotifications;
+                int inputPracticeP=0;
+
+                if((!newActivityLengthTemp.equals("")) && (!newPeriodFreqTemp.equals("")) &&
+                (!newNumNotificationsTemp.equals(""))) {
+                    newActivityLength = Integer.parseInt(newActivityLengthTemp);
+                    newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
+                    newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+                    inputPracticeP = newActivityLength * newPeriodFreq;
+                }
+
 
                 /*
                  * Temporary values of basePeriodSpan, which will have to be revised for later.
@@ -123,7 +133,7 @@ public class Add_Interest_Fragment extends Fragment {
                     practicePeriod = 8760*60;
                 }
 
-                int inputPracticeP = newActivityLength * newPeriodFreq;
+
 
                 int currentInterestCt = MainActivity.myDB.myDao().getInterestCt();
 
@@ -135,8 +145,10 @@ public class Add_Interest_Fragment extends Fragment {
                             "please name it something else.");
                 else if (newInterestName.equals(""))
                     interestName.setError("Please enter an interest name.");
-                else if (newPeriodFreq <= 0 || newActivityLength <= 0)
-                    interestName.setError("Please enter a number greater than 0.");
+                else if (Integer.parseInt(newPeriodFreqTemp) <= 0 || Integer.parseInt(newPeriodFreqTemp) <= 0){
+
+                    activityLength.setError("Please enter a number greater than 0.");
+                }
                 else if (newInterestName.equals(""))
                     interestName.setError("Please enter an interest name");
                 else if (newActivityLengthTemp.equals(""))
@@ -156,10 +168,10 @@ public class Add_Interest_Fragment extends Fragment {
                 }
 
                 else {
-                     basePeriodSpan = 0;
-                     newActivityLength = Integer.parseInt(newActivityLengthTemp);
-                     newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
-                     newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
+                    basePeriodSpan = 0;
+                    newActivityLength = Integer.parseInt(newActivityLengthTemp);
+                    newPeriodFreq = Integer.parseInt(newPeriodFreqTemp);
+                    newNumNotifications = Integer.parseInt(newNumNotificationsTemp);
 
                     switch (newPeriodSpan) {
                         case "Day":
@@ -208,7 +220,7 @@ public class Add_Interest_Fragment extends Fragment {
         List<Interest> interests = myDB.myDao().getInterests();
         for (int i = 0; i < interests.size(); i++) {
             if (interests.get(i).getInterestName().equals(interestName))
-               return true;
+                return true;
         }
         return false;
 
