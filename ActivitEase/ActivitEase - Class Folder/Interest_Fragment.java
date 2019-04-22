@@ -106,7 +106,7 @@ public class Interest_Fragment extends Fragment {
         if(isTimerRunning)
         {
             GLRenderer.setTimerRunning(true);
-            GLRenderer.setActivityLength(thisInterest.getTimeRemaining() * 60 * 1000);
+            GLRenderer.setActivityLength(thisInterest.getActivityLength() * 60 * 1000);
             startTimer();
         }
         if(!isTimerRunning)
@@ -245,9 +245,8 @@ public class Interest_Fragment extends Fragment {
     {
         countDownTimer.cancel();
         GLRenderer.setTimerRunning(false);
+        numIterations = GLRenderer.getNumIterations();
         thisInterest.setTimeRemaining(timeRemaining);
-        GLRenderer renderer = new GLRenderer();
-        numIterations = renderer.getNumIterations();
         thisInterest.setNumIterations(numIterations);
         MainActivity.myDB.myDao().updateInterest(thisInterest);
     }

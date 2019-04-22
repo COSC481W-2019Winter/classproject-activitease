@@ -33,7 +33,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     public static void setActivityLength(double activityLength)
     {
         activityLengthMillis = activityLength;
-        double iterationTime = activityLengthMillis/91;   //Activity length divided by total number of iterations
+        double iterationTime = (float) (activityLengthMillis/91) / 4.00;   //Activity length divided by total number of iterations
         millisIterationTime = (int) iterationTime;
         nanosIterationTime = (int) iterationTime % 1;
 
@@ -112,7 +112,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                     e.printStackTrace();
 
                 }
-                numIterations += 4;
+                numIterations += 1;
             }
         }
     }
