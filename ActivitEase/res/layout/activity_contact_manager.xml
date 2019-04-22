@@ -84,8 +84,8 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="249dp"
-        android:layout_height="54dp"
+        android:layout_width="228dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -93,13 +93,13 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:autoLink="all"
-        android:text="https://www.youtube.com/watch?v=t3UAxjAKyjk"
+        android:text="https://www.youtube.com/watch?v=Hw1fPqEarQY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638" />
+        app:layout_constraintVertical_bias="0.641" />
 
     <EditText
         android:id="@+id/editText3"
@@ -121,8 +121,8 @@
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="78dp"
-        android:layout_height="45dp"
+        android:layout_width="143dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -131,12 +131,12 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Youtube"
+        android:text="Youtube Tutorial"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.619" />
+        app:layout_constraintVertical_bias="0.641" />
 
 </android.support.constraint.ConstraintLayout>
