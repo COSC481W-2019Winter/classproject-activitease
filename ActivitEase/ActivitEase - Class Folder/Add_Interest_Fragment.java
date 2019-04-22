@@ -145,7 +145,8 @@ public class Add_Interest_Fragment extends Fragment {
                             "please name it something else.");
                 else if (newInterestName.equals(""))
                     interestName.setError("Please enter an interest name.");
-                else if (Integer.parseInt(newPeriodFreqTemp) <= 0 || Integer.parseInt(newPeriodFreqTemp) <= 0){
+                else if ( (!newPeriodFreqTemp.equals("") && Integer.parseInt(newPeriodFreqTemp) <= 0) ||
+                        (!newActivityLengthTemp.equals("") && Integer.parseInt(newActivityLengthTemp) <= 0)){
 
                     activityLength.setError("Please enter a number greater than 0.");
                 }
