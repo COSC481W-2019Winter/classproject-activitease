@@ -16,40 +16,24 @@
         app:layout_constraintVertical_bias="0.294">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="395dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Using ActivitEase: A Guide"
+
                 android:textSize="30sp"
-                app:layout_constraintBottom_toTopOf="@+id/head2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.120000005"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/head2"
-                android:layout_width="392dp"
-                android:layout_height="242dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="ActivitEase is a lightweight and customizable activity manager, that is intended to keep users continuously working on their interests. You can enter in how often you work on an interest, and how long, and ActivitEase will send notifications to make sure you do so. ActivitEase has it's own built in timer, which you use to keep track of your activity progress. ActivitEase keeps track of how many days you have kept a streak going, which is a metric for your progress on an Interest. Here's an example."
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -61,14 +45,8 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="383dp"
-                android:layout_height="67dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Example use of ActivitEase: Meditation Tracker"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/head4"
@@ -79,13 +57,10 @@
 
             <TextView
                 android:id="@+id/head4"
-                android:layout_width="394dp"
-                android:layout_height="110dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginBottom="28dp"
-                android:text="In this example, I've decided that I want to meditate 5 times a week for 8 minutes. I'd like a notification once a day to remind me to meditate, and keep me on track. From knowing this, I can click 'Add Interest' on the homepage and initialize my interest."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=
+                "Let's say I wanted to use ActivitEase to maintain a meditation schedule.\n On the homepage, I can click the 'Add Interest' button to create a new interest. I'll name my interest 'Meditation'. The activity length specifies how long I'll be working on an interest. In my case, I'm going to start off short, with only 8 minutes. 'Activity frequency' allows me to specify how many times I'd like to meditate, given a 'Period Length'. Here, I'd like to meditate 5 times a week. I will also have to enter the number of notifications I'd like.\n From here, I've created an interest accessible on the home page that will help me track my Meditation, which currently will be tuned for me to meditate for 8 minutes, 5 times a week. This is how simple yet effective ActivitEase can be."
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -95,13 +70,7 @@
             <Button
                 android:id="@+id/btnContact"
                 android:layout_width="141dp"
-                android:layout_height="51dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginLeft="135dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="135dp"
-                android:layout_marginRight="135dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="match_parent"
                 android:onClick="openContactPage"
                 android:text="Contact"
                 app:layout_constraintEnd_toEndOf="parent"
