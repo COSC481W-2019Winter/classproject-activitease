@@ -125,8 +125,22 @@ public class Interest {
     public void setPeriodFreq(int periodFreq)
     { this.periodFreq = periodFreq; }
 
-    public void setBasePeriodSpan(int basePeriodSpan)
-    {  this.basePeriodSpan = basePeriodSpan;  }
+    public void setBasePeriodSpan(String periodSpanStr) {
+        switch (periodSpanStr) {
+            case "Day":
+                basePeriodSpan = 1;
+                break;
+            case "Week":
+                basePeriodSpan = 7;
+                break;
+            case "Month":
+                basePeriodSpan = 30;
+                break;
+            case "Year":
+                basePeriodSpan = 365;
+                break;
+        }
+    }
 
     public void setTimeRemaining(double timeRemaining)
     {

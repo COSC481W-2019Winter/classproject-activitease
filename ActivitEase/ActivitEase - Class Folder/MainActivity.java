@@ -608,16 +608,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void openAct1(View view) {
-        FragmentTransaction hp = getSupportFragmentManager().beginTransaction();
-        hp.replace(R.id.fragment_container, new Interest_Fragment());
-        hp.commit();
-
-        //myAwesomeTextView = (TextView)findViewById(R.id.actText);
-        //myAwesomeTextView.setText("50 Push-Ups");
-
-    }
-
     public void doneBtn(View view)  //When done button pressed, update interest and reload page.
     {
         Button b = (Button) view;
@@ -739,8 +729,8 @@ public class MainActivity extends AppCompatActivity
          */
         int newActivityLengthTemp = Integer.parseInt(activityLength.getText().toString());
         int newPeriodFreqTemp = Integer.parseInt(activityAmount.getText().toString());
+        String basePeriodSpan = periodSpanInput.getSelectedItem().toString();
         int newNumNotifications = Integer.parseInt(numNotifications.getText().toString());
-        int basePeriodSpan = Integer.parseInt(activityAmount.getText().toString());
 
 
         // Refreshing the Interest with previous and newly set data
