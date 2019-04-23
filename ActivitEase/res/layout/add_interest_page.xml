@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:stretchColumns="2"
     android:padding="10dp"
@@ -16,6 +16,7 @@
 
         <EditText
             android:id="@+id/interestName"
+            android:layout_height="50dp"
             />
     </TableRow>
 
@@ -29,6 +30,7 @@
         <EditText
             android:id="@+id/activityLength"
             android:inputType="number"
+            android:layout_height="50dp"
             />
         <TextView
             android:text="(minutes)"
@@ -46,10 +48,13 @@
         <EditText
             android:id="@+id/periodFreq"
             android:inputType="number"
+            android:layout_height="50dp"
             />
+
         <TextView
-            android:text="(times)"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(times)" />
     </TableRow>
 
     <TableRow
@@ -61,6 +66,7 @@
         <Spinner
             android:id="@+id/periodSpanInput"
             android:spinnerMode="dropdown"
+            android:layout_height="50dp"
             >
         </Spinner>
     </TableRow>
@@ -74,14 +80,16 @@
         <EditText
             android:id="@+id/numNotifications"
             android:inputType="number"
+            android:layout_height="50dp"
             />
     </TableRow>
     <TableRow
         android:layout_weight="2">
+
         <Button
-            android:layout_column="1"
             android:id="@+id/submitNewInterestButton"
-            android:text="Submit Interest"
-            />
+            android:layout_width="96dp"
+            android:layout_column="1"
+            android:text="Submit Interest" />
     </TableRow>
 </TableLayout>

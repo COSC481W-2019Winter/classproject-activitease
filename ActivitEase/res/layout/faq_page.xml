@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -21,14 +21,14 @@
                 android:id="@+id/textView3"
                 android:layout_width="383dp"
                 android:layout_height="32dp"
-                android:text="  Question: Why we use ActivitEase?"
+                android:text="  Question: Why should I use ActivitEase?"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="93dp" />
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="378dp"
+                android:layout_width="wrap_content"
                 android:layout_height="93dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -36,7 +36,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="ActivitEase Helps you to manage hobbies and reminds you to work on them."
+                android:text="ActivitEase Helps you to manage your hobbies, and reminds you to work on them."
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.187" />
 
@@ -45,14 +45,14 @@
                 android:id="@+id/head2"
                 android:layout_width="379dp"
                 android:layout_height="37dp"
-                android:text="  Question: How to use the timer?"
+                android:text="  Question: How do I use the timer?"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.297" />
 
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="378dp"
+                android:layout_width="wrap_content"
                 android:layout_height="93dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -79,13 +79,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Question: How to add in interests?"
+                android:text="Question: How do I add an interest?"
                 android:textSize="18sp"
                 />
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="376dp"
+                android:layout_width="wrap_content"
                 android:layout_height="109dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -93,7 +93,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="On the home page, you can add an interest with the 'Add Interest' button. Enter your user information for your interest, and start tracking your hobby immediately."
+                android:text="On the home page, you can add an interest with the 'Add Interest' button. Enter your user information for your interest, and start tracking your hobby."
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,20 +105,20 @@
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="376dp"
-                android:layout_height="33dp"
+                android:layout_height="55dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Question: How to customize notifications?"
+                android:text="Question: How do I customize an interest's notifications?"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.719" />
 
             <TextView
                 android:id="@+id/textView16"
-                android:layout_width="375dp"
+                android:layout_width="wrap_content"
                 android:layout_height="113dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -126,21 +126,21 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="On the upper right hand corner of the interest page, users can fully customize when notifications go off for their app, so they can set exact times that work for them and their schedule. "
+                android:text="On the upper right hand corner of the interest page, users can fully customize when notifications go off for each interest, so they can set exact times that work for their schedule. "
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.892" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_height="53dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Question: Where was ActivitEase developed "
+                android:text="Question: Where was ActivitEase developed?"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.719" />
 
@@ -154,14 +154,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="ActivitEase is a capstone project for Eastern Michigan University computer science students"
+                android:text="ActivitEase is a capstone project, made by Eastern Michigan University Computer Science students."
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.63" />
 
             <TextView
                 android:id="@+id/textView23"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_height="47dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -182,7 +182,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="The timer is built from scratch using openGL."
+                android:text="The timer is built from scratch, using openGL."
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.63" />
 
@@ -210,21 +210,21 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="So that the developers could pass college"
+                android:text="So that the developers could pass college!"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.63" />
 
             <TextView
                 android:id="@+id/textView28"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_height="56dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Question: Can activitease help me get better at x?"
+                android:text="Question: Can Activitease help me get better at anything?"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.719" />
 
@@ -238,7 +238,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="ActivitEase can help you plan doing x and record your progress but thats on you. "
+                android:text="ActivitEase can help you plan doing anything, but your progress is all on you. "
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.63" />
 

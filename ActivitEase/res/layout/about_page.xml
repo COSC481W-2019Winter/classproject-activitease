@@ -2,13 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <ScrollView
-        android:layout_width="401dp"
-        android:layout_height="510dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,18 +24,17 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Using ActivitEase: A Guide"
-
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/head2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="ActivitEase is a lightweight and customizable activity manager, that is intended to keep users continuously working on their interests. You can enter in how often you work on an interest, and how long, and ActivitEase will send notifications to make sure you do so. ActivitEase has it's own built in timer, which you use to keep track of your activity progress. ActivitEase keeps track of how many days you have kept a streak going, which is a metric for your progress on an Interest. Here's an example."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ActivitEase is a lightweight and customizable activity manager, that is intended to keep users continuously working on their interests. You can enter in how often you work on an interest, and how long, and ActivitEase will send notifications to make sure you do so.\n\n ActivitEase has it's own built in timer, which you use to keep track of your activity progress. ActivitEase keeps track of how many days you have kept a streak going, which is a metric for your progress on an Interest. Here's an example.\n"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +45,8 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Example use of ActivitEase: Meditation Tracker"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/head4"
@@ -57,10 +57,10 @@
 
             <TextView
                 android:id="@+id/head4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text=
-                "Let's say I wanted to use ActivitEase to maintain a meditation schedule.\n On the homepage, I can click the 'Add Interest' button to create a new interest. I'll name my interest 'Meditation'. The activity length specifies how long I'll be working on an interest. In my case, I'm going to start off short, with only 8 minutes. 'Activity frequency' allows me to specify how many times I'd like to meditate, given a 'Period Length'. Here, I'd like to meditate 5 times a week. I will also have to enter the number of notifications I'd like.\n From here, I've created an interest accessible on the home page that will help me track my Meditation, which currently will be tuned for me to meditate for 8 minutes, 5 times a week. This is how simple yet effective ActivitEase can be."
+                "Let's say I wanted to use ActivitEase to maintain a meditation schedule.\n\n On the homepage, I can click the 'Add Interest' button to create a new interest. I'll name my interest 'Meditation'. The activity length specifies how long I'll be working on an interest. In my case, I'm going to start off short, with only 8 minutes. 'Activity frequency' allows me to specify how many times I'd like to meditate, given a 'Period Length'. Here, I'd like to meditate 5 times a week. I will also have to enter the number of notifications I'd like.\n\n From here, I've created an interest accessible on the home page that will help me track my Meditation, which currently will be tuned for me to meditate for 8 minutes, 5 times a week. This is how simple yet effective ActivitEase can be."
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/devNames"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dev Names: Jon Woodring, Matthew Coon, Anthony Bean, Drew Scotton" />
 
