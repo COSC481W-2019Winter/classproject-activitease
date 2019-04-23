@@ -1,8 +1,10 @@
 package com.example.activitease;
 
 import android.opengl.GLES20;
+import static android.opengl.GLES20.glFlush;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+
 import android.util.Log;
 
 import java.nio.ByteBuffer;
